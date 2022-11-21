@@ -1,0 +1,24 @@
+#spring.application.name=bsgl
+#spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+#spring.datasource.name=signagedb
+#spring.datasource.url=jdbc:mysql://localhost:3306/blue?serverTimezone=UTC
+#spring.datasource.username=root
+#spring.datasource.password=root
+#server.port=8080
+server:
+  port: 8484
+
+spring:
+  application:
+    name: bsgl
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/signagedb?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true&allowMultiQueries=true
+    username: root
+    password: root
+    hikari:
+      max-lifetime: 500000
+      # ?????????????????10
+      minimum-idle: 10
+      # ?????????????????10
+      maximum-pool-size: 100
