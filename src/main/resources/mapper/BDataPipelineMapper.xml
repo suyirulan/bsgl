@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bs.bsgl.mapper.BDataPipelineMapper">
+
+    <resultMap id="Result" type="com.bs.bsgl.pojo.BDataPipeline">
+        <id column="PIPNO" property="pipNo"/>
+        <result column="PIPNAME" property="pipName"/>
+        <result column="MEDIUM" property="medium"/>
+        <result column="FLOW_TO" property="flowTo"/>
+        <result column="PIPE_DIAMETER" property="pipeDiameter"/>
+        <result column="EAT_PRESERVATION" property="eatPreservation"/>
+        <result column="HANG_LENGTH" property="hangLength"/>
+        <result column="WORKSHOP" property="workShop"/>
+        <result column="AZIMUTH_SYMBOLIC" property="azimuthSymbolic"/>
+        <result column="AZIMUTH_LATELY" property="azimuthLately"/>
+        <result column="LUPTIME" property="lupTime"/>
+        <result column="EDITUSER" property="editUser"/>
+    </resultMap>
+
+    <select id="getDataPipelineAll" parameterType="com.bs.bsgl.pojo.BDataPipeline" resultMap="Result">
+        select * from jnpc_bsgl_b_data_pipeline
+        <where>
+            <if test="pipName != null and pipName!=''">and PIPNAME like concat('%', #{pipName},'%') </if>
+            <if test="medium != null and medium!=''">and MEDIUM like concat('%', #{medium},'%') </if>
+        </where>
+        order by PIPNO desc
+    </select>
+
+    <select id="getDataPipelineById" resultMap="Result">
+        select * from jnpc_bsgl_b_data_pipeline where PIPNO = #{pipNo}
+    </select>
+
+    <insert id="addBDataPipeline" parameterType="com.bs.bsgl.pojo.BDataPipeline">
+        insert into jnpc_bsgl_b_data_pipeline (PIPNO, PIPNAME, MEDIUM, FLOW_TO, PIPE_DIAMETER, EAT_PRESERVATION, HANG_LENGTH, WORKSHOP, AZIMUTH_SYMBOLIC, AZIMUTH_LATELY, LUPTIME, EDITUSER)
+        values(#{pipNo}, #{pipName},#{medium},#{flowTo},#{pipeDiameter},#{eatPreservation},#{hangLength}, #{workShop}, #{azimuthSymbolic},#{azimuthLately}, #{lupTime}, #{editUser})
+    </insert>
+
+    <update id="updateBDataPipelineById" parameterType="com.bs.bsgl.pojo.BDataPipeline">
+        update jnpc_bsgl_b_data_pipeline
+        <set>
+            <if test="pipName != null and pipName!=''">PIPNAME = #{pipName},</if>
+            <if test="medium != null and medium!=''">MEDIUM = #{medium},</if>
+            <if test="flowTo != null">FLOW_TO = #{flowTo},</if>
+            <if test="pipeDiameter != null">PIPE_DIAMETER = #{pipeDiameter},</if>
+            <if test="eatPreservation != null and eatPreservation!=''">EAT_PRESERVATION = #{eatPreservation},</if>
+            <if test="hangLength != null">HANG_LENGTH = #{hangLength},</if>
+            <if test="workShop != null and workShop!=''">WORKSHOP = #{workShop},</if>
+            <if test="azimuthSymbolic != null and azimuthSymbolic!=''">AZIMUTH_SYMBOLIC = #{azimuthSymbolic},</if>
+            <if test="azimuthLately != null and azimuthLately!=''">AZIMUTH_LATELY = #{azimuthLately},</if>
+            <if test="lupTime != null">LUPTIME = #{lupTime},</if>
+            <if test="editUser != null and editUser!=''">EDITUSER = #{editUser},</if>
+        </set>
+        where PIPNO = #{pipNo}
+    </update>
+
+    <delete id="deleteById">
+        delete from jnpc_bsgl_b_data_pipeline where PIPNO = #{pipNo}
+    </delete>
+
+</mapper>

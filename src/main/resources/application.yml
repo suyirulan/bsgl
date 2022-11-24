@@ -13,10 +13,14 @@ spring:
     name: bsgl
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://121.229.4.16:3306/signagedb?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true&allowMultiQueries=true
+    url: jdbc:mysql://121.229.4.16:3306/signage?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true&allowMultiQueries=true
     username: dcom
     password: Dcom123456
     hikari:
       max-lifetime: 500000
       minimum-idle: 10
       maximum-pool-size: 100
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

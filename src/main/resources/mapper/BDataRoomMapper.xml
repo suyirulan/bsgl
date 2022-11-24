@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bs.bsgl.mapper.BDataRoomMapper">
+
+    <resultMap id="Result" type="com.bs.bsgl.pojo.BDataRoom">
+        <id column="ROOMNO" property="roomNo"/>
+        <result column="ROOMDIS" property="roomDis"/>
+        <result column="ROOMNAME" property="roomName"/>
+        <result column="DUTY_AREA" property="dutyArea"/>
+        <result column="LUPTIME" property="lupTime"/>
+        <result column="EDITUSER" property="editUser"/>
+    </resultMap>
+
+    <select id="getDataRoomAll" parameterType="com.bs.bsgl.pojo.BDataRoom" resultMap="Result">
+        select * from jnpc_bsgl_b_data_room
+        <where>
+            <if test="roomName != null and roomName!=''">and ROOMNAME like concat('%', #{roomDis},'%') </if>
+            <if test="dutyArea != null and dutyArea!=''">and DUTY_AREA like concat('%', #{dutyArea},'%') </if>
+        </where>
+        order by ROOMNO desc
+    </select>
+
+    <select id="getDataRoomById" resultMap="Result">
+        select * from jnpc_bsgl_b_data_room where ROOMNO = #{roomNo}
+    </select>
+
+    <insert id="addBDataRoom" parameterType="com.bs.bsgl.pojo.BDataRoom">
+        insert into jnpc_bsgl_b_data_room (ROOMNO, ROOMDIS, ROOMNAME, DUTY_AREA, LUPTIME, EDITUSER)
+        values(#{roomNo}, #{roomDis}, #{roomName}, #{dutyArea}, #{lupTime}, #{editUser})
+    </insert>
+
+    <update id="updateBDataRoomById" parameterType="com.bs.bsgl.pojo.BDataRoom">
+        update jnpc_bsgl_b_data_room
+        <set>
+            <if test="roomName != null and roomName!=''">ROOMNAME = #{roomName},</if>
+            <if test="dutyArea != null and dutyArea!=''">DUTY_AREA = #{dutyArea},</if>
+            <if test="lupTime != null">LUPTIME = #{lupTime},</if>
+            <if test="editUser != null and editUser!=''">EDITUSER = #{editUser},</if>
+        </set>
+        where ROOMNO = #{roomNo}
+    </update>
+
+    <delete id="deleteById">
+        delete from jnpc_bsgl_b_data_room where ROOMNO = #{roomNo}
+    </delete>
+
+</mapper>

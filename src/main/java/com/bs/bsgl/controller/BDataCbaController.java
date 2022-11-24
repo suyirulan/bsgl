@@ -1,17 +1,12 @@
 package com.bs.bsgl.controller;
 
 import com.bs.bsgl.core.domain.AjaxResult;
-import com.bs.bsgl.pojo.BDataCba;
+import com.bs.bsgl.pojo.BDataRoom;
 import com.bs.bsgl.service.BDataCbaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 
 @RestController
@@ -28,8 +23,14 @@ public class BDataCbaController {
      */
 
     @GetMapping("list")
-    public AjaxResult getBDataCbaList(BDataCba dataCba){
-        return AjaxResult.success(bDataCbaService.getBDataCbaList(dataCba));
+    public AjaxResult getBDataRoomList(BDataRoom dataRoom){
+        return AjaxResult.success(bDataCbaService.getBDataRoomList(dataRoom));
+    }
+
+
+    @GetMapping("save")
+    public AjaxResult addDataRoom(BDataRoom dataRoom){
+        return AjaxResult.success(bDataCbaService.addDataRoom(dataRoom));
     }
 
 
