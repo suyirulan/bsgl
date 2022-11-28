@@ -3,11 +3,12 @@ package com.bs.bsgl.pojo;
 
 
 
+import com.bs.bsgl.core.domain.poi.Excel;
+import lombok.Data;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
-
-
-
+import java.util.Date;
 
 
 /**
@@ -15,103 +16,46 @@ import java.sql.Timestamp;
  * @author yunqingtan
  *
  */
+@Data
 public class BDataCba {
 
     private static final long serialVersionUID = 1L;
-    
-  
+
+    @Excel(name = "id")
     private String gid;
     /**
      * KKS码
      */
+    @Excel(name = "KKS码")
     private String kksno;
     /**
      * 中文名称
      */
+    @Excel(name = "中文名称")
     private String dtname;
     /**
      * 房间位置
      */
+    @Excel(name = "房间位置")
     private String postion;
     /**
      * 备注
      */
+    @Excel(name = "备注")
     private String remark;
     /**
      * 最后修改时间
      */
-    private Timestamp luptime;
+    @Excel(name = "最后修改时间",dateFormat = "yyyy-MM-dd HH:mm:ss")
+    private Date luptime;
     /**
      * 最后修改人
      */
+    @Excel(name = "最后修改人")
     private String edituser;
-        
 
+    private Integer pageSize;
 
-	public String getGid() {
-        return gid;
-    }
+    private Integer pageNum;
 
-    public void setGid(String gid) {
-        this.gid = gid;
-    }
-
-    public String getKksno() {
-        return kksno;
-    }
-
-    public void setKksno(String kksno) {
-        this.kksno = kksno;
-    }
-    
-    
-    public String getDtname() {
-        return dtname;
-    }
-
-    public void setDtname(String dtname) {
-        this.dtname = dtname;
-    }
-
-    public String getPostion() {
-        return postion;
-    }
-
-    public void setPostion(String postion) {
-        this.postion = postion;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
- 
-    public Timestamp getLuptime() {
-        return luptime;
-    }
-
-    public void setLuptime(Timestamp luptime) {
-        this.luptime = luptime;
-    }
-
-    public String getEdituser() {
-        return edituser;
-    }
-
-    public void setEdituser(String edituser) {
-        this.edituser = edituser;
-    }
-
-    protected Serializable pkVal() {
-        return this.gid;
-    }
-
-	@Override
-	public String toString() {
-		return "BDataCba [gid=" + gid + ", kksno=" + kksno + ", dtname=" + dtname + ", postion=" + postion + ", remark="
-				+ remark + ", luptime=" + luptime + ", edituser=" + edituser +  "]";
-	}
 }

@@ -3,13 +3,85 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bs.bsgl.mapper.BDataCbaMapper">
+    <resultMap id="BaseResultMap" type="com.bs.bsgl.pojo.BDataCba">
+        <id column="GID" property="gid"/>
+        <result column="KKSNO" property="kksno"/>
+        <result column="DTNAME" property="dtname"/>
+        <result column="POSTION" property="postion"/>
+        <result column="REMARK" property="remark"/>
+        <result column="LUPTIME" property="luptime"/>
+        <result column="EDITUSER" property="edituser"/>
+    </resultMap>
+    <update id="updateDataCba" parameterType="com.bs.bsgl.pojo.BDataCba">
+        update jnpc_bsgl_b_data_cba
+        <set>
+            <trim suffixOverrides=",">
+                <if test="kksno != null and kksno !=''">KKSNO = #{kksno},</if>
+                <if test="dtname != null and dtname !=''">DTNAME = #{dtname},</if>
+                <if test="postion != null and postion !=''">POSTION = #{postion},</if>
+                <if test="remark != null and remark !=''">REMARK = #{remark},</if>
+                <if test="luptime != null">LUPTIME = #{luptime},</if>
+                <if test="edituser != null and edituser !=''">EDITUSER = #{edituser} </if>
+            </trim>
+
+        </set>
+        where GID = #{gid}
+    </update>
+    <delete id="deleteByGids" parameterType="Long">
+        delete from jnpc_bsgl_b_data_cba where GID in
+        <foreach collection="array" item="gid" open="(" separator="," close=")">
+            #{gid}
+        </foreach>
+    </delete>
+
 
     <select id="getDataCbaAll">
 
     </select>
+    <select id="selectBDataCbaList" resultMap="BaseResultMap">
+        SELECT GID,KKSNO,DTNAME,POSTION,REMARK,LUPTIME,EDITUSER FROM jnpc_bsgl_b_data_cba
+        <where>
+            <if test="dtname != null and dtname != ''">
+                and DTNAME like concat('%', #{dtname}, '%')
+            </if>
+        </where>
 
-    <insert id="bDataCbaAdd">
-        insert into
+    </select>
+    <select id="selectByKjsno" resultType="com.bs.bsgl.pojo.BDataCba">
+        select * from jnpc_bsgl_b_data_cba where KKSNO =#{kksno}
+    </select>
+    <select id="getBDataCbaById" resultMap="BaseResultMap">
+        select GID,KKSNO,DTNAME,POSTION,REMARK,LUPTIME,EDITUSER from jnpc_bsgl_b_data_cba where GID = #{gid}
+    </select>
+    <select id="selectAllByGidAfter" resultType="com.bs.bsgl.pojo.BDataCba">
+        select * from jnpc_bsgl_b_data_cba where GID =#{gid}
+    </select>
+
+    <insert id="addDataCba" parameterType="com.bs.bsgl.pojo.BDataCba">
+        insert into jnpc_bsgl_b_data_cba(
+        <trim suffixOverrides=",">
+            <if test="gid != null and gid !=''">GID,</if>
+            <if test="kksno != null and kksno !=''">KKSNO,</if>
+            <if test="dtname != null and dtname !=''">DTNAME,</if>
+            <if test="postion != null and postion !=''">POSTION,</if>
+            <if test="remark != null and remark !=''">REMARK,</if>
+            <if test="luptime != null">LUPTIME,</if>
+            <if test="edituser != null and edituser !=''">EDITUSER</if>
+        </trim>
+        )values(
+        <trim suffixOverrides=",">
+            <if test="gid != null and gid !=''">#{gid},</if>
+            <if test="kksno != null and kksno !=''">#{kksno},</if>
+            <if test="dtname != null and dtname !=''">#{dtname},</if>
+            <if test="postion != null and postion !=''">#{postion},</if>
+            <if test="remark != null and remark !=''">#{remark},</if>
+            <if test="luptime != null">#{luptime},</if>
+            <if test="edituser != null and edituser !=''">#{edituser}</if>
+        </trim>
+
+        )
+
     </insert>
+
 
 </mapper>

@@ -1,12 +1,16 @@
 package com.bs.bsgl.controller;
 
 import com.bs.bsgl.core.domain.AjaxResult;
+import com.bs.bsgl.core.domain.poi.ExcelUtil;
+import com.bs.bsgl.pojo.BDataCba;
 import com.bs.bsgl.pojo.BDataRoom;
 import com.bs.bsgl.service.BDataCbaService;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 
 @RestController
@@ -22,15 +26,46 @@ public class BDataCbaController {
      * @return room.jsp
      */
 
-    @GetMapping("list")
-    public AjaxResult getBDataRoomList(BDataRoom dataRoom){
-        return AjaxResult.success(bDataCbaService.getBDataRoomList(dataRoom));
+    @GetMapping("/list")
+    public PageInfo getBDataCbaList(BDataCba dataCba){
+
+        return bDataCbaService.getBDataCbaList(dataCba);
     }
 
 
-    @GetMapping("save")
-    public AjaxResult addDataRoom(BDataRoom dataRoom){
-        return AjaxResult.success(bDataCbaService.addDataRoom(dataRoom));
+    @PostMapping("/save")
+    public AjaxResult addDataCba(@RequestBody BDataCba dataCba){
+        return bDataCbaService.addDataCba(dataCba);
+    }
+
+    @PutMapping("/update")
+    public AjaxResult updateDataCba(@RequestBody BDataCba dataCba){
+        return bDataCbaService.updateDataCba(dataCba);
+    }
+
+    @GetMapping("/getById/{gid}")
+    public AjaxResult getBDataCbaById(@PathVariable String gid){
+
+        return bDataCbaService.getBDataCbaById(gid);
+    }
+
+    @DeleteMapping("/delete/{gids}")
+    public AjaxResult remove(@PathVariable String[] gids)
+    {
+        int i = bDataCbaService.deleteUserByIds(gids);
+        if (i>0){
+            return AjaxResult.success("删除成功");
+        }else {
+            return AjaxResult.error("删除失败");
+        }
+    }
+
+    @PostMapping("/export")
+    public void downloadUser(HttpServletResponse response, BDataCba dataCba){
+        //获取导出数据
+        List<BDataCba> list = bDataCbaService.getList(dataCba);
+        ExcelUtil<BDataCba> util = new ExcelUtil<BDataCba>(BDataCba.class);
+        util.exportExcel(response, list, "用户数据");
     }
 
 
