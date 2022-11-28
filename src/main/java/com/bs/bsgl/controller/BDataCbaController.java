@@ -56,6 +56,7 @@ public class BDataCbaController {
         if (i>0){
             return AjaxResult.success("删除成功");
         }else {
+
             return AjaxResult.error("删除失败");
         }
     }
