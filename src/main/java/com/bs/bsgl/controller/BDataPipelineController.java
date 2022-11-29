@@ -4,17 +4,23 @@ import com.bs.bsgl.core.domain.AjaxResult;
 import com.bs.bsgl.pojo.BDataPipeline;
 import com.bs.bsgl.service.BDataPipelineService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
-@RequestMapping("pipeline")
+@Controller
+@RequestMapping("/sys/pipeline")
 public class BDataPipelineController {
 
     @Autowired
     BDataPipelineService pipelineService;
 
+    @RequestMapping("index")
+    public String index() {
+        return "/sys/pipeline/index";
+    }
 
     @GetMapping("list")
+    @ResponseBody
     public AjaxResult getBDataRoomList(BDataPipeline dataRoom) {
         return AjaxResult.success(pipelineService.getBDataPipelineList(dataRoom));
     }

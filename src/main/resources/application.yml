@@ -7,8 +7,15 @@
 #server.port=8080
 server:
   port: 8484
-
 spring:
+  resources:
+    chain:
+      cache: true
+    static-locations: classpath:/static/**
+  thymeleaf:
+    prefix: classpath:/templates
+    suffix: .html
+    cache: false
   application:
     name: bsgl
   datasource:
@@ -20,6 +27,10 @@ spring:
       max-lifetime: 500000
       minimum-idle: 10
       maximum-pool-size: 100
+  mvc:
+    view:
+      prefix: /
+      suffix: .html
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
   configuration:
