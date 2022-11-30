@@ -155,7 +155,6 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h3 class="panel-title">
-                                    ${ ServiceUrl }
                                 </h3>
                             </div>
                             <div class="panel-body">
@@ -295,7 +294,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="workshop" class="control-label">厂房：</label>
-                                <input type="text" class="form-control" id="workshop" placeholder="厂房">
+                                <input type="text" class="form-control" name="workshop" placeholder="厂房">
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -393,8 +392,8 @@
             "ajax": "/sys/pipeline/list",
             "columnDefs": [{"defaultContent": "", "targets": "_all"}],
             "columns": [
-                { "data": "pipNo", "width": "5%" },
-                { "data": "pipName", "width": "8%" },
+                { "data": "pipno", "width": "5%" },
+                { "data": "pipname", "width": "8%" },
                 { "data": "medium", "width": "8%"},
                 { "data": "flowTo", "width": "8%" ,
                     render: function (data, type, row) {
@@ -444,16 +443,18 @@
                         }
                         return html;
                     } },
-                { "data": "workShop", "width": "10%" },
+                { "data": "workshop", "width": "10%" },
                 { "data": "azimuthSymbolic", "width": "10%" },
                 { "data": "azimuthLately", "width": "10%" },
                 {
                     "data": "gid", "width": "15%",
                     render: function (data, type, row) {
+                        console.log("row===",row)
+                        let newRow = JSON.stringify(row)
                         if (type === 'display') {
                             var html = "";
-                            html += '<button type="button" onclick="Edit(\'' + data + '\')" class="btn-primary btn-custom waves-effect waves-light btn-xs m-b-5"  data-target="#con-close-modal"  data-toggle="modal"><i class="fa fa-edit"></i>&nbsp;修改数据</button>&nbsp;&nbsp;'
-                            html += '<button type="button" onclick="Delete(\'' + data + '\')"  class="btn-primary btn-custom waves-effect waves-light btn-xs m-b-5" ><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</button>'
+                            html += `<button type="button" onclick='Edit(${newRow})' class="btn-primary btn-custom waves-effect waves-light btn-xs m-b-5"  data-target="#con-close-modal"  data-toggle="modal"><i class="fa fa-edit"></i>修改数据</button>&nbsp;&nbsp;`
+                            html += `<button type="button" onclick='Delete(${newRow})'  class="btn-primary btn-custom waves-effect waves-light btn-xs m-b-5" ><i class="glyphicon glyphicon-trash"></i>删除</button>`
                             return html;
                         }
                     }
@@ -486,7 +487,22 @@
 
 
         $("#btn_add").click(function () {
-
+            $("input:radio[name='heatPreservation']").each( (i, item) => {
+                $(item).prop("checked", false)
+            })
+            $("input[name=gid]").val("");
+            $("input[name=pipno]").val("");   //编号
+            $("input[name=pipname]").val("");   //管道名称
+            $("select[name=medium]").val("");   //介质
+            $("select[name=flowTo]").val("1");   //流向 1-左，2-右，3-上，4-下
+            $("input[name=pipeDiameter]").val("");   //管径（mm）
+            $("input[name=hangLength]").val("");   //可挂长度
+            $("input[name='heatPreservation'][value='1']").prop("checked",true);   //有无保温（1—有；0—无）
+            $("input[name=workshop]").val("");   //厂房
+            $("input[name=azimuthSymbolic]").val("");   //标志性设备方位
+            $("input[name=azimuthLately]").val("");   //最近设备方位
+            $("input[name=luptime]").val("");   //最后修改时间
+            $("input[name=edituser]").val("");   //最后修改人
         });
 
 
@@ -495,62 +511,41 @@
     function Delete(gid) {
 
         //$("#RoomForm").clearForm();
-        $.post("/sys/pipeline/delete", { id: gid }, function (result) {
+        console.log(gid)
+        $.post("/sys/pipeline/delete/"+gid.pipno, function (result) {
+            if (result.code == "200") {
 
-            var json;
-            if(typeof(result)==="object" )
-            {
-                json=result;
-            }else
-            {
-                json=eval("("+result+")");
-            }
-
-            console.log(result);
-            console.log(json);
-
-            if (json.data) {
-                $.Notification.notify(
-                    'success',
-                    'top left',
-                    '系统消息',
-                    json.Message
-                );
+                alert("删除成功")
             }
             else {
-                $.Notification.notify(
-                    'error',
-                    'top left',
-                    '系统消息',
-                    json.Message
-                );
-
+                alert("删除失败")
             }
+            window.location.reload()
         })
 
 
     }
 
     function Edit(gid) {
-        $("#RoomForm").clearForm();
-        $.post("/sys/pipeline/selectById/"+gid, { GID: gid }, function (result) {
-            var jsond=eval("("+result+")");
-            var json={data:jsond.bDataPipeline}
-            console.log(result);
-            debugger;
-            $("input[name=gid]").val(json.data.gid);
-            $("input[name=pipno]").val(json.data.pipno);   //编号
-            $("input[name=pipname]").val(json.data.pipname);   //管道名称
-            $("select[name=medium]").val(json.data.medium);   //介质
-            $("select[name=flowTo]").val(json.data.flowTo);   //流向 1-左，2-右，3-上，4-下
-            $("input[name=pipeDiameter]").val(json.data.pipeDiameter);   //管径（mm）
-            $("input[name=hangLength]").val(json.data.hangLength);   //可挂长度
-            $("input[name=heatPreservation]").val(json.data.heatPreservation);   //有无保温（1—有；0—无）
-            $("input[name=workshop]").val(json.data.workshop);   //厂房
-            $("input[name=azimuthSymbolic]").val(json.data.azimuthSymbolic);   //标志性设备方位
-            $("input[name=azimuthLately]").val(json.data.azimuthLately);   //最近设备方位
-            $("input[name=luptime]").val(json.data.luptime);   //最后修改时间
-            $("input[name=edituser]").val(json.data.edituser);   //最后修改人   	    
+
+        $("input:radio[name='heatPreservation']").each( (i, item) => {
+            $(item).prop("checked", false)
+        })
+        $.post("/sys/pipeline/selectById/"+gid.pipno, function (result) {
+            $("input[name=gid]").val(result.data.gid);
+            $("input[name=pipno]").val(result.data.pipno);   //编号
+            $("input[name=pipname]").val(result.data.pipname);   //管道名称
+            $("select[name=medium]").val(result.data.medium);   //介质
+            $("select[name=flowTo]").val(result.data.flowTo);   //流向 1-左，2-右，3-上，4-下
+            $("input[name=pipeDiameter]").val(result.data.pipeDiameter);   //管径（mm）
+            $("input[name=hangLength]").val(result.data.hangLength);   //可挂长度
+            // $("input[name=heatPreservation]").val(result.data.heatPreservation);   //有无保温（1—有；0—无）
+            $("input[name='heatPreservation'][value="+result.data.heatPreservation+"]").prop("checked",true);
+            $("input[name=workshop]").val(result.data.workshop);   //厂房
+            $("input[name=azimuthSymbolic]").val(result.data.azimuthSymbolic);   //标志性设备方位
+            $("input[name=azimuthLately]").val(result.data.azimuthLately);   //最近设备方位
+            $("input[name=luptime]").val(result.data.luptime);   //最后修改时间
+            $("input[name=edituser]").val(result.data.edituser);   //最后修改人
 
         });
     }
@@ -568,7 +563,7 @@
             flowTo:$("select[name=flowTo]").val(),   //流向 1-左，2-右，3-上，4-下
             pipeDiameter:$("input[name=pipeDiameter]").val(),   //管径（mm）
             hangLength:$("input[name=hangLength]").val(),   //可挂长度
-            heatPreservation:$("input[name=heatPreservation]").val(),   //有无保温（1—有；0—无）
+            heatPreservation:$("input[name=heatPreservation]:checked").val(),   //有无保温（1—有；0—无）
             workshop:$("input[name=workshop]").val(),   //厂房
             azimuthSymbolic:$("input[name=azimuthSymbolic]").val(),   //标志性设备方位
             azimuthLately:$("input[name=azimuthLately]").val(),   //最近设备方位
@@ -577,30 +572,17 @@
 
         };
 
-        var actrul = "${pageContext.request.contextPath}/sys/pipeline/Add";
+        var actrul = "/sys/pipeline/Add";
 
-        if (model.gid != "") {
-            actrul = "${pageContext.request.contextPath}/sys/pipeline/Update";
-        }
         $.post(actrul, model, function (result) {
-            var json=eval("("+result+")");
-            if (json.data) {
-                $.Notification.notify(
-                    'success',
-                    'top left',
-                    '系统消息',
-                    json.Message
-                );
-                setTimeout(function(){window.location.reload();},1000);
+            if (result.code == "200") {
+
+                alert("保存成功")
             }
             else {
-                $.Notification.notify(
-                    'error',
-                    'top left',
-                    '系统消息',
-                    json.Message
-                );
+                alert("保存失败")
             }
+            window.location.reload()
 
 
         })

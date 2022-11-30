@@ -5,14 +5,14 @@
 <mapper namespace="com.bs.bsgl.mapper.BDataPipelineMapper">
 
     <resultMap id="Result" type="com.bs.bsgl.pojo.BDataPipeline">
-        <id column="PIPNO" property="pipNo"/>
-        <result column="PIPNAME" property="pipName"/>
+        <id column="PIPNO" property="pipno"/>
+        <result column="PIPNAME" property="pipname"/>
         <result column="MEDIUM" property="medium"/>
         <result column="FLOW_TO" property="flowTo"/>
         <result column="PIPE_DIAMETER" property="pipeDiameter"/>
-        <result column="EAT_PRESERVATION" property="eatPreservation"/>
+        <result column="EAT_PRESERVATION" property="heatPreservation"/>
         <result column="HANG_LENGTH" property="hangLength"/>
-        <result column="WORKSHOP" property="workShop"/>
+        <result column="WORKSHOP" property="workshop"/>
         <result column="AZIMUTH_SYMBOLIC" property="azimuthSymbolic"/>
         <result column="AZIMUTH_LATELY" property="azimuthLately"/>
         <result column="LUPTIME" property="lupTime"/>
@@ -22,41 +22,41 @@
     <select id="getDataPipelineAll" parameterType="com.bs.bsgl.pojo.BDataPipeline" resultMap="Result">
         select * from jnpc_bsgl_b_data_pipeline
         <where>
-            <if test="pipName != null and pipName!=''">and PIPNAME like concat('%', #{pipName},'%') </if>
+            <if test="pipname != null and pipname!=''">and PIPNAME like concat('%', #{pipname},'%') </if>
             <if test="medium != null and medium!=''">and MEDIUM like concat('%', #{medium},'%') </if>
         </where>
         order by PIPNO desc
     </select>
 
     <select id="getDataPipelineById" resultMap="Result">
-        select * from jnpc_bsgl_b_data_pipeline where PIPNO = #{pipNo}
+        select * from jnpc_bsgl_b_data_pipeline where PIPNO = #{pipno}
     </select>
 
     <insert id="addBDataPipeline" parameterType="com.bs.bsgl.pojo.BDataPipeline">
         insert into jnpc_bsgl_b_data_pipeline (PIPNO, PIPNAME, MEDIUM, FLOW_TO, PIPE_DIAMETER, EAT_PRESERVATION, HANG_LENGTH, WORKSHOP, AZIMUTH_SYMBOLIC, AZIMUTH_LATELY, LUPTIME, EDITUSER)
-        values(#{pipNo}, #{pipName},#{medium},#{flowTo},#{pipeDiameter},#{eatPreservation},#{hangLength}, #{workShop}, #{azimuthSymbolic},#{azimuthLately}, #{lupTime}, #{editUser})
+        values(#{pipno}, #{pipname},#{medium},#{flowTo},#{pipeDiameter},#{heatPreservation},#{hangLength}, #{workshop}, #{azimuthSymbolic},#{azimuthLately}, #{lupTime}, #{editUser})
     </insert>
 
     <update id="updateBDataPipelineById" parameterType="com.bs.bsgl.pojo.BDataPipeline">
         update jnpc_bsgl_b_data_pipeline
         <set>
-            <if test="pipName != null and pipName!=''">PIPNAME = #{pipName},</if>
+            <if test="pipname != null and pipname!=''">PIPNAME = #{pipname},</if>
             <if test="medium != null and medium!=''">MEDIUM = #{medium},</if>
             <if test="flowTo != null">FLOW_TO = #{flowTo},</if>
             <if test="pipeDiameter != null">PIPE_DIAMETER = #{pipeDiameter},</if>
-            <if test="eatPreservation != null and eatPreservation!=''">EAT_PRESERVATION = #{eatPreservation},</if>
+            <if test="heatPreservation != null and heatPreservation!=''">EAT_PRESERVATION = #{heatPreservation},</if>
             <if test="hangLength != null">HANG_LENGTH = #{hangLength},</if>
-            <if test="workShop != null and workShop!=''">WORKSHOP = #{workShop},</if>
+            <if test="workshop != null and workshop!=''">WORKSHOP = #{workshop},</if>
             <if test="azimuthSymbolic != null and azimuthSymbolic!=''">AZIMUTH_SYMBOLIC = #{azimuthSymbolic},</if>
             <if test="azimuthLately != null and azimuthLately!=''">AZIMUTH_LATELY = #{azimuthLately},</if>
             <if test="lupTime != null">LUPTIME = #{lupTime},</if>
             <if test="editUser != null and editUser!=''">EDITUSER = #{editUser},</if>
         </set>
-        where PIPNO = #{pipNo}
+        where PIPNO = #{pipno}
     </update>
 
     <delete id="deleteById">
-        delete from jnpc_bsgl_b_data_pipeline where PIPNO = #{pipNo}
+        delete from jnpc_bsgl_b_data_pipeline where PIPNO = #{pipno}
     </delete>
 
 </mapper>

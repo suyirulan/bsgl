@@ -5,11 +5,11 @@
 <mapper namespace="com.bs.bsgl.mapper.BDataIsolationCardMapper">
 
     <resultMap id="Result" type="com.bs.bsgl.pojo.BDataIsolationCard">
-        <id column="GID" property="gId"/>
+        <id column="GID" property="gid"/>
         <result column="ISOLATION_TYPE" property="isolationType"/>
         <result column="UNIT_NO" property="unitNo"/>
         <result column="C_TYPE" property="cType"/>
-        <result column="KKSNO" property="kksNo"/>
+        <result column="KKSNO" property="kksno"/>
         <result column="POSTION" property="postion"/>
         <result column="I_STATE" property="iState"/>
         <result column="DEVICE_NAME" property="deviceName"/>
@@ -21,7 +21,7 @@
     <select id="getDataIsolationCardAll"  parameterType="com.bs.bsgl.pojo.BDataIsolationCard" resultMap="Result">
         select * from jnpc_bsgl_b_data_isolation_card
         <where>
-            <if test="kksNo != null and kksNo!=''">and KKSNO like concat('%', #{pipName},'%') </if>
+            <if test="kksno != null and kksno!=''">and KKSNO like concat('%', #{kksno},'%') </if>
             <if test="unitNo != null and unitNo!=''">and UNIT_NO like concat('%', #{unitNo},'%') </if>
             <if test="cType != null and cType!=''">and C_TYPE = #{cType} </if>
             <if test="isolationType != null and isolationType!=''">and ISOLATION_TYPE  = #{isolationType} </if>
@@ -30,12 +30,12 @@
     </select>
 
     <select id="getIsolationCardById" resultMap="Result">
-        select * from jnpc_bsgl_b_data_isolation_card where GID = #{gId}
+        select * from jnpc_bsgl_b_data_isolation_card where GID = #{gid}
     </select>
 
     <insert id="addBDataIsolationCard" parameterType="com.bs.bsgl.pojo.BDataIsolationCard">
         insert into jnpc_bsgl_b_data_isolation_card (GID, ISOLATION_TYPE, UNIT_NO, C_TYPE, KKSNO, POSTION, I_STATE, DEVICE_NAME, DUTY_AREA, LUPTIME, EDITUSER)
-        values(#{gId}, #{isolationType},#{unitNo},#{cType},#{kksNo},#{postion},#{iState}, #{deviceName}, #{dutyArea}, #{lupTime}, #{editUser})
+        values(#{gid}, #{isolationType},#{unitNo},#{cType},#{kksno},#{postion},#{iState}, #{deviceName}, #{dutyArea}, #{lupTime}, #{editUser})
     </insert>
 
     <update id="updateBDataIsolationCardById" parameterType="com.bs.bsgl.pojo.BDataIsolationCard">
@@ -44,7 +44,7 @@
             <if test="isolationType != null and isolationType!=''">ISOLATION_TYPE = #{isolationType},</if>
             <if test="unitNo != null and unitNo!=''">UNIT_NO = #{unitNo},</if>
             <if test="cType != null and cType!=''">C_TYPE = #{cType},</if>
-            <if test="kksNo != null and kksNo!=''">KKSNO = #{kksNo},</if>
+            <if test="kksno != null and kksno!=''">KKSNO = #{kksno},</if>
             <if test="postion != null and postion!=''">POSTION = #{postion},</if>
             <if test="iState != null and iState!=''">I_STATE = #{iState},</if>
             <if test="deviceName != null and deviceName!=''">DEVICE_NAME = #{deviceName},</if>
@@ -52,11 +52,11 @@
             <if test="lupTime != null">LUPTIME = #{lupTime},</if>
             <if test="editUser != null and editUser!=''">EDITUSER = #{editUser},</if>
         </set>
-        where GID = #{gId}
+        where GID = #{gid}
     </update>
 
     <delete id="deleteById">
-        delete from jnpc_bsgl_b_data_isolation_card where GID = #{gId}
+        delete from jnpc_bsgl_b_data_isolation_card where GID = #{gid}
     </delete>
 
 </mapper>

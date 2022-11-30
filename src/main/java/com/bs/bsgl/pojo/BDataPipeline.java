@@ -9,9 +9,9 @@ public class BDataPipeline {
 
     private static final long serialVersionUID = 1L;
 
-    private String pipNo;
+    private String pipno;
 
-    private String pipName;
+    private String pipname;
 
     private String medium;
 
@@ -19,11 +19,11 @@ public class BDataPipeline {
 
     private Integer pipeDiameter;
 
-    private String eatPreservation;
+    private String heatPreservation;
 
     private Integer hangLength;
 
-    private String workShop;
+    private String workshop;
 
     private String azimuthSymbolic;
 
@@ -36,20 +36,28 @@ public class BDataPipeline {
     private String editUser;
 
 
-    public String getPipNo() {
-        return pipNo;
+    public String getPipno() {
+        return pipno;
     }
 
-    public void setPipNo(String pipNo) {
-        this.pipNo = pipNo;
+    public void setPipno(String pipno) {
+        this.pipno = pipno;
     }
 
-    public String getPipName() {
-        return pipName;
+    public String getPipname() {
+        return pipname;
     }
 
-    public void setPipName(String pipName) {
-        this.pipName = pipName;
+    public void setPipname(String pipname) {
+        this.pipname = pipname;
+    }
+
+    public String getHeatPreservation() {
+        return heatPreservation;
+    }
+
+    public void setHeatPreservation(String heatPreservation) {
+        this.heatPreservation = heatPreservation;
     }
 
     public String getMedium() {
@@ -76,14 +84,6 @@ public class BDataPipeline {
         this.pipeDiameter = pipeDiameter;
     }
 
-    public String getEatPreservation() {
-        return eatPreservation;
-    }
-
-    public void setEatPreservation(String eatPreservation) {
-        this.eatPreservation = eatPreservation;
-    }
-
     public Integer getHangLength() {
         return hangLength;
     }
@@ -92,12 +92,12 @@ public class BDataPipeline {
         this.hangLength = hangLength;
     }
 
-    public String getWorkShop() {
-        return workShop;
+    public String getWorkshop() {
+        return workshop;
     }
 
-    public void setWorkShop(String workShop) {
-        this.workShop = workShop;
+    public void setWorkshop(String workshop) {
+        this.workshop = workshop;
     }
 
     public String getAzimuthSymbolic() {
@@ -135,14 +135,14 @@ public class BDataPipeline {
     @Override
     public String toString() {
         return "BDataPipeline[" +
-                "pipNo='" + pipNo + '\'' +
-                ", pipName='" + pipName + '\'' +
+                "pipNo='" + pipno + '\'' +
+                ", pipName='" + pipname + '\'' +
                 ", medium='" + medium + '\'' +
                 ", flowTo=" + flowTo +
                 ", pipeDiameter=" + pipeDiameter +
-                ", eatPreservation='" + eatPreservation + '\'' +
+                ", eatPreservation='" + heatPreservation + '\'' +
                 ", hangLength=" + hangLength +
-                ", workShop='" + workShop + '\'' +
+                ", workShop='" + workshop + '\'' +
                 ", azimuthSymbolic='" + azimuthSymbolic + '\'' +
                 ", azimuthLately='" + azimuthLately + '\'' +
                 ", lupTime=" + lupTime +

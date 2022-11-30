@@ -8,7 +8,7 @@ import java.util.Date;
 public class BDataIsolationCard {
     private static final long serialVersionUID = 1L;
 
-    private String gId;
+    private String gid;
 
     private String isolationType;
 
@@ -16,7 +16,7 @@ public class BDataIsolationCard {
 
     private String cType;
 
-    private String kksNo;
+    private String kksno;
 
     private String postion;
 
@@ -32,12 +32,12 @@ public class BDataIsolationCard {
 
     private String editUser;
 
-    public String getgId() {
-        return gId;
+    public String getGid() {
+        return gid;
     }
 
-    public void setgId(String gId) {
-        this.gId = gId;
+    public void setGid(String gid) {
+        this.gid = gid;
     }
 
     public String getIsolationType() {
@@ -64,12 +64,12 @@ public class BDataIsolationCard {
         this.cType = cType;
     }
 
-    public String getKksNo() {
-        return kksNo;
+    public String getKksno() {
+        return kksno;
     }
 
-    public void setKksNo(String kksNo) {
-        this.kksNo = kksNo;
+    public void setKksno(String kksno) {
+        this.kksno = kksno;
     }
 
     public String getPostion() {
@@ -123,11 +123,11 @@ public class BDataIsolationCard {
     @Override
     public String toString() {
         return "BDataIsolationCard[" +
-                "gId='" + gId + '\'' +
+                "gId='" + gid + '\'' +
                 ", isolationType='" + isolationType + '\'' +
                 ", unitNo='" + unitNo + '\'' +
                 ", cType='" + cType + '\'' +
-                ", kksNo='" + kksNo + '\'' +
+                ", kksNo='" + kksno + '\'' +
                 ", postion='" + postion + '\'' +
                 ", iState='" + iState + '\'' +
                 ", deviceName='" + deviceName + '\'' +

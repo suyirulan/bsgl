@@ -26,12 +26,12 @@ public class BDataRoomServiceImpl implements BDataRoomService {
 
     @Override
     public AjaxResult addDataRoom(BDataRoom dataRoom) {
-        if (StringUtils.isEmpty(dataRoom.getRoomNo())) {
+        if (StringUtils.isEmpty(dataRoom.getRoomno())) {
             return AjaxResult.error("请添加房间编号");
         }
-        BDataRoom dataDataRoomById = roomMapper.getDataRoomById(dataRoom.getRoomNo());
+        BDataRoom dataDataRoomById = roomMapper.getDataRoomById(dataRoom.getRoomno());
         if (dataDataRoomById != null) {
-            return AjaxResult.error("房间编号已存在");
+            return updateDataRoom(dataRoom);
         }
         dataRoom.setLupTime(new Date());
         return AjaxResult.success(roomMapper.addBDataRoom(dataRoom));
@@ -39,10 +39,10 @@ public class BDataRoomServiceImpl implements BDataRoomService {
 
     @Override
     public AjaxResult updateDataRoom(BDataRoom dataRoom) {
-        if (dataRoom == null || StringUtils.isEmpty(dataRoom.getRoomNo())) {
+        if (dataRoom == null || StringUtils.isEmpty(dataRoom.getRoomno())) {
             return AjaxResult.error("请选择房间编号");
         }
-        BDataRoom dataDataRoomById = roomMapper.getDataRoomById(dataRoom.getRoomNo());
+        BDataRoom dataDataRoomById = roomMapper.getDataRoomById(dataRoom.getRoomno());
         if (dataDataRoomById == null) {
             return AjaxResult.error("房间编号不存在");
         }
