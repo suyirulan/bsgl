@@ -15,8 +15,7 @@ public class BsglApplication extends WebMvcConfigurationSupport {
 
     @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/assets/css/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX + "/static/assets/css/");
-        registry.addResourceHandler("/static/assets/js/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX + "/static/assets/js/");
+        registry.addResourceHandler("/static/assets/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX + "/static/assets/");
         super.addResourceHandlers(registry);
     }
 

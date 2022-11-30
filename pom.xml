@@ -8,6 +8,7 @@
     <name>bsgl</name>
     <description>bsgl</description>
 
+
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -93,7 +94,46 @@
     </dependencyManagement>
 
     <build>
+        <resources>
+            <resource>
+                <directory>static</directory>
+                <filtering>true</filtering>
+                <excludes>
+                    <exclude>**/*.ttc</exclude>
+                    <exclude>**/*.ttf</exclude>
+                    <exclude>**/*.woff</exclude>
+                    <exclude>**/*.woff2</exclude>
+                    <exclude>**/*.svg</exclude>
+                    <exclude>**/*.eot</exclude>
+                    <exclude>**/*.ico</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>static</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>**/*.ttc</include>
+                    <include>**/*.ttf</include>
+                    <include>**/*.woff</include>
+                    <include>**/*.woff2</include>
+                    <include>**/*.svg</include>
+                    <include>**/*.eot</include>
+                    <include>**/*.ico</include>
+                </includes>
+            </resource>
+        </resources>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <nonFilteredFileExtensions>
+                        <nonFilteredFileExtension>ttf</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>woff</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>woff2</nonFilteredFileExtension>
+                    </nonFilteredFileExtensions>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -122,5 +162,6 @@
             </plugin>
         </plugins>
     </build>
+
 
 </project>
