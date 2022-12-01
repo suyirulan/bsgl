@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
     <meta name="author" content="Coderthemes">
-    
+
 
     <link rel="shortcut icon" href="/static/assets/images/favicon_1.ico">
 
@@ -204,7 +204,57 @@
 </div>
 
 
-<%@ include file="add.jsp" %>
+<div id="con-close-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+     style="display: none" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">CBA-数据维护</h4>
+            </div>
+            <form action="" method="POST" id="CbaForm">
+                <input type="hidden" id="GID" name="gid" value="" />
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="kksno" class="control-label">KKS码：</label>
+                                <input type="text" class="form-control" name="kksno" placeholder="KKS码">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="dtname" class="control-label">中文名称：</label>
+                                <input type="text" class="form-control" name="dtname" placeholder="中文名称">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="postion" class="control-label">房间位置：</label>
+                                <input type="text" class="form-control" name="postion" placeholder="房间位置">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group no-margin">
+                                <label for="remark" class="control-label">备注</label>
+                                <textarea class="form-control autogrow" name="remark" placeholder="Write something about yourself"
+                                          style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 104px"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-info waves-effect waves-light" onclick="Save()">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 </body>
 
@@ -224,40 +274,42 @@
 <script src="/static/assets/js/jquery.scrollTo.min.js"></script>
 
 <!-- Datatables-->
-<script src="/static/assets/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="/static/assets/plugins/datatables/dataTables.bootstrap.js"></script>
-<script src="/static/assets/plugins/datatables/dataTables.buttons.min.js"></script>
-<script src="/static/assets/plugins/datatables/buttons.bootstrap.min.js"></script>
-<script src="/static/assets/plugins/datatables/jszip.min.js"></script>
-<script src="/static/assets/plugins/datatables/pdfmake.min.js"></script>
-<script src="/static/assets/plugins/datatables/vfs_fonts.js"></script>
-<script src="/static/assets/plugins/datatables/buttons.html5.min.js"></script>
-<script src="/static/assets/plugins/datatables/buttons.print.min.js"></script>
-<script src="/static/assets/plugins/datatables/dataTables.fixedHeader.min.js"></script>
-<script src="/static/assets/plugins/datatables/dataTables.keyTable.min.js"></script>
-<script src="/static/assets/plugins/datatables/dataTables.responsive.min.js"></script>
-<script src="/static/assets/plugins/datatables/responsive.bootstrap.min.js"></script>
-<script src="/static/assets/plugins/datatables/dataTables.scroller.min.js"></script>
+<script src="/static/assets/js/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/static/assets/js/plugins/datatables/dataTables.bootstrap.js"></script>
+<script src="/static/assets/js/plugins/datatables/dataTables.buttons.min.js"></script>
+<script src="/static/assets/js/plugins/datatables/buttons.bootstrap.min.js"></script>
+<script src="/static/assets/js/plugins/datatables/jszip.min.js"></script>
+<script src="/static/assets/js/plugins/datatables/pdfmake.min.js"></script>
+<script src="/static/assets/js/plugins/datatables/vfs_fonts.js"></script>
+<script src="/static/assets/js/plugins/datatables/buttons.html5.min.js"></script>
+<script src="/static/assets/js/plugins/datatables/buttons.print.min.js"></script>
+<script src="/static/assets/js/plugins/datatables/dataTables.fixedHeader.min.js"></script>
+<script src="/static/assets/js/plugins/datatables/dataTables.keyTable.min.js"></script>
+<script src="/static/assets/js/plugins/datatables/dataTables.responsive.min.js"></script>
+<script src="/static/assets/js/plugins/datatables/responsive.bootstrap.min.js"></script>
+<script src="/static/assets/js/plugins/datatables/dataTables.scroller.min.js"></script>
 
 <!-- Modal-Effect -->
-<script src="/static/assets/plugins/modal-effect/js/classie.js"></script>
-<script src="/static/assets/plugins/modal-effect/js/modalEffects.js"></script>
+<script src="/static/assets/js/plugins/modal-effect/js/classie.js"></script>
+<script src="/static/assets/js/plugins/modal-effect/js/modalEffects.js"></script>
 
 <!-- Datatable init js -->
 <script src="/static/assets/pages/datatables.init.js"></script>
 <script src="/static/assets/js/jquery.app.js"></script>
 
-<script src="../../../js/jquery-form.js"></script>
+<script src="static/assets/js/jquery-form.js"></script>
+
+<script src="/static/assets/js/plugins/notifyjs/dist/notify.min.js"></script>
+<script src="/static/assets/js/plugins/notifications/notify-metro.js"></script>
+<script src="/static/assets/js/plugins/notifications/notifications.js"></script>
 <script type="text/javascript">
     jQuery(document).ready(function ($) {
 
-        $.fn.dataTable.ext.errMode='none';
+        // $.fn.dataTable.ext.errMode='none';
 
 
         t = $('#datatable-buttons').DataTable({
-            "processing":true,
-            "serverSide":true,
-            "ajax": "${pageContext.request.contextPath}/sys/cba/list",
+            "ajax": "/sys/cba/list",
             "columnDefs": [{"defaultContent": "", "targets": "_all"}],
             "columns": [
                 { "data": "kksno", "width": "10%" },
@@ -269,8 +321,8 @@
                     render: function (data, type, row) {
                         if (type === 'display') {
                             var html = "";
-                            html += '<button type="button" onclick="Edit(\'' + data + '\')" class="btn-primary btn-custom waves-effect waves-light btn-xs m-b-5"  data-target="#con-close-modal"  data-toggle="modal"><i class="fa fa-edit"></i>&nbsp;修改数据</button>&nbsp;&nbsp;'
-                            html += '<button type="button" onclick="Delete(\'' + data + '\')"  class="btn-primary btn-custom waves-effect waves-light btn-xs m-b-5" ><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</button>'
+                            html += '<button type="button" onclick=" Edit(\'' + data + '\')" class="btn-primary btn-custom waves-effect waves-light btn-xs m-b-5"  data-target="#con-close-modal"  data-toggle="modal"><i class="fa fa-edit"></i>&nbsp;修改数据</button>&nbsp;&nbsp;'
+                            html += '<button type="button" onclick=" Delete(\'' + data + '\')"  class="btn-primary btn-custom waves-effect waves-light btn-xs m-b-5" ><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</button>'
                             return html;
                         }
                     }
@@ -310,9 +362,9 @@
     });
 
     function Delete(gid) {
-
+        console.log(gid)
         //$("#RoomForm").clearForm();
-        $.post("${pageContext.request.contextPath}/sys/cba/Delete", { GID: gid }, function (json) {
+        $.post("/sys/cba/delete/"+gid, { GID: gid }, function (json) {
             if (json.data) {
                 $.Notification.notify(
                     'success',
@@ -331,28 +383,32 @@
 
             }
         })
+        $(location).attr('href', 'http://localhost:8484/sys/cba/index');
 
 
     }
 
     function Edit(gid) {
+        $.ajax({
+            type: "get",
+            url: "getById/" + gid,
+            dateType: "json",
+            contentType: 'application/json',
+            success: function (result) {
 
-        //$("#RoomForm").clearForm();
-        $.post("${pageContext.request.contextPath}/sys/cba/getModel", { GID: gid }, function (result) {
-            var jsond=eval("("+result+")");
-            var json={ data: jsond.bDataCba }
-            debugger;
-            $("#kksno").val(json.data.DUTY_AREA);
-            $("#dtname").val(json.data.ROOMDIS);
-            $("#postion").val(json.data.EDITUSER);
-            $("#EDITUSER").val(json.data.ROOMNAME);
-            $("#GID").val(json.data.GID);
-            $("#ROOMNO").val(json.data.ROOMNO);
-            $("#EDITUSER").val(json.data.ROOMNAME);
-            $("#GID").val(json.data.GID);
-            $("#ROOMNO").val(json.data.ROOMNO);
+                console.log(result )
+                debugger
+                //var json = eval("(" + result + ")");
+
+                $("input[name=kksno]").val(result.data.kksno);
+                $("input[name=dtname]").val(result.data.dtname);
+                $("input[name=postion]").val(result.data.postion);
+                $("input[name=remark]").val(result.data.remark);
+                $("input[name=gid]").val(result.data.gid);
+            }
         });
     }
+
 
 
 
@@ -360,39 +416,62 @@
 
 
         var model = {
-            kksno: $("#DUTY_AREA").val(),
-            dtname: $("#ROOMDIS").val(),
-            EDITUSER: $("#EDITUSER").val(),
-            postion: $("#ROOMNAME").val(),
-            GID: $("#GID").val(),
-            ROOMNO: $("#ROOMNO").val()
+            kksno: $("input[name=kksno]").val(),
+            dtname: $("input[name=dtname]").val(),
+            // remark: $("input[name=remark]").val(),
+            postion: $("input[name=postion]").val(),
+            gid: $("input[name=gid]").val()
         };
 
-        var actrul = "${pageContext.request.contextPath}/sys/cba/Add";
+        var actrul = "/sys/cba/save";
 
-        if (model.GID != "") {
-            actrul = "${pageContext.request.contextPath}/sys/cba/Update";
+        if (model.gid != "") {
+            actrul = "/sys/cba/update";
         }
-        $.post(actrul, model, function (json) {
-            if (json.data) {
-                $.Notification.notify(
-                    'success',
-                    'top left',
-                    '系统消息',
-                    json.Message
-                );
+        $.ajax({
+            type: "post",
+            url: actrul,
+            dateType: "json",
+            contentType: 'application/json',
+            data:JSON.stringify(model),
+            success: function (result) {
+                alert("成功")
+                // var json = eval("(" + result + ")");
+                // debugger;
+                // $("input[name=kksno]").val(json.data.kksno);
+                // $("input[name=dtname]").val(json.data.dtname);
+                // $("input[name=postion]").val(json.data.postion);
+                // $("input[name=remark]").val(json.data.remark);
+                // $("input[name=gid]").val(json.data.gid);
             }
-            else {
-                $.Notification.notify(
-                    'error',
-                    'top left',
-                    '系统消息',
-                    json.Message
-                );
-            }
+        });
 
 
-        })
+
+
+        // $.post(actrul, model, function (result) {
+        //
+        //     var json=eval("("+result.toString()+")");
+        //     if (json.data) {
+        //         $.Notification.notify(
+        //             'success',
+        //             'top left',
+        //             '系统消息',
+        //             result.Message
+        //         );
+        //         setTimeout(function(){window.location.reload();},1000);
+        //     }
+        //     else {
+        //         $.Notification.notify(
+        //             'error',
+        //             'top left',
+        //             '系统消息',
+        //             result.Message
+        //         );
+        //     }
+        //
+        //
+        // })
     }
 </script>
 

@@ -7,13 +7,14 @@ import com.bs.bsgl.pojo.BDataRoom;
 import com.bs.bsgl.service.BDataCbaService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 
-@RestController
+@Controller
 @RequestMapping(value = "/sys/cba")
 public class BDataCbaController {
 
@@ -25,31 +26,44 @@ public class BDataCbaController {
      *
      * @return room.jsp
      */
+    @RequestMapping("index")
+    public String index() {
+        return "/sys/cba/index";
+    }
 
-    @GetMapping("/list")
+    /*@GetMapping("/list")
     public PageInfo getBDataCbaList(BDataCba dataCba){
 
         return bDataCbaService.getBDataCbaList(dataCba);
+    }*/
+
+    @GetMapping("/list")
+    @ResponseBody
+    public AjaxResult getBDataCbaList(BDataCba dataCba){
+
+        return AjaxResult.success(bDataCbaService.getBDataCbaList(dataCba));
     }
 
 
-    @PostMapping("/save")
+    @PostMapping("save")
     public AjaxResult addDataCba(@RequestBody BDataCba dataCba){
         return bDataCbaService.addDataCba(dataCba);
     }
 
-    @PutMapping("/update")
+    @PostMapping("update")
     public AjaxResult updateDataCba(@RequestBody BDataCba dataCba){
         return bDataCbaService.updateDataCba(dataCba);
     }
 
     @GetMapping("/getById/{gid}")
+    @ResponseBody
     public AjaxResult getBDataCbaById(@PathVariable String gid){
 
         return bDataCbaService.getBDataCbaById(gid);
     }
 
-    @DeleteMapping("/delete/{gids}")
+    /*@DeleteMapping("/delete/{gids}")
+    @ResponseBody
     public AjaxResult remove(@PathVariable String[] gids)
     {
         int i = bDataCbaService.deleteUserByIds(gids);
@@ -59,7 +73,32 @@ public class BDataCbaController {
 
             return AjaxResult.error("删除失败");
         }
+    }*/
+
+    @PostMapping("/delete/{gid}")
+    @ResponseBody
+    public AjaxResult remove(@PathVariable String gid)
+    {
+        int i = bDataCbaService.deleteUserByIds(gid);
+        if (i>0){
+            return AjaxResult.success("删除成功");
+        }else {
+
+            return AjaxResult.error("删除失败");
+        }
     }
+
+/*    @PostMapping("/delete/{gid}")
+    public AjaxResult remove(@PathVariable String gid)
+    {
+        int i = bDataCbaService.deleteUserByIds(gid);
+        if (i>0){
+            return AjaxResult.success("删除成功");
+        }else {
+
+            return AjaxResult.error("删除失败");
+        }
+    }*/
 
     @PostMapping("/export")
     public void downloadUser(HttpServletResponse response, BDataCba dataCba){

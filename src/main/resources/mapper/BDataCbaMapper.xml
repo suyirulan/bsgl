@@ -27,11 +27,11 @@
         </set>
         where GID = #{gid}
     </update>
-    <delete id="deleteByGids" parameterType="Long">
-        delete from jnpc_bsgl_b_data_cba where GID in
-        <foreach collection="array" item="gid" open="(" separator="," close=")">
+    <delete id="deleteByGids" >
+        delete from jnpc_bsgl_b_data_cba where GID =
+
             #{gid}
-        </foreach>
+
     </delete>
 
 
