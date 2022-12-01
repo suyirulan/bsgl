@@ -159,7 +159,6 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h3 class="panel-title">
-                                    ${ ServiceUrl }
                                 </h3>
                             </div>
                             <div class="panel-body">
@@ -213,19 +212,19 @@
                 <h4 class="modal-title">CBA-数据维护</h4>
             </div>
             <form action="" method="POST" id="CbaForm">
-                <input type="hidden" id="GID" name="gid" value="" />
+                <input type="hidden" id="gid"  value="" />
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="kksno" class="control-label">KKS码：</label>
-                                <input type="text" class="form-control" name="kksno" placeholder="KKS码">
+                                <input type="text" class="form-control" id="kksno" placeholder="KKS码">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="dtname" class="control-label">中文名称：</label>
-                                <input type="text" class="form-control" name="dtname" placeholder="中文名称">
+                                <input type="text" class="form-control" id="dtname" placeholder="中文名称">
                             </div>
                         </div>
                     </div>
@@ -233,7 +232,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="postion" class="control-label">房间位置：</label>
-                                <input type="text" class="form-control" name="postion" placeholder="房间位置">
+                                <input type="text" class="form-control" id="postion" placeholder="房间位置">
                             </div>
                         </div>
                     </div>
@@ -241,7 +240,7 @@
                         <div class="col-md-12">
                             <div class="form-group no-margin">
                                 <label for="remark" class="control-label">备注</label>
-                                <textarea class="form-control autogrow" name="remark" placeholder="Write something about yourself"
+                                <textarea class="form-control autogrow" id="remark" placeholder="Write something about yourself"
                                           style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 104px"></textarea>
                             </div>
                         </div>
@@ -322,7 +321,7 @@
                         if (type === 'display') {
                             var html = "";
                             html += '<button type="button" onclick=" Edit(\'' + data + '\')" class="btn-primary btn-custom waves-effect waves-light btn-xs m-b-5"  data-target="#con-close-modal"  data-toggle="modal"><i class="fa fa-edit"></i>&nbsp;修改数据</button>&nbsp;&nbsp;'
-                            html += '<button type="button" onclick=" Delete(\'' + data + '\')"  class="btn-primary btn-custom waves-effect waves-light btn-xs m-b-5" ><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</button>'
+                            html += '<button type="button" onclick=" Delete(\'' + data + '\')"  class="btn-primary btn-custom waves-effect waves-light btn-xs m-b-5"  ><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</button>'
                             return html;
                         }
                     }
@@ -364,26 +363,16 @@
     function Delete(gid) {
         console.log(gid)
         //$("#RoomForm").clearForm();
-        $.post("/sys/cba/delete/"+gid, { GID: gid }, function (json) {
-            if (json.data) {
-                $.Notification.notify(
-                    'success',
-                    'top left',
-                    '系统消息',
-                    json.Message
-                );
+            $.post("delete/"+gid, function (json) {
+            if (json.code == "200") {
+
+                alert("删除成功")
             }
             else {
-                $.Notification.notify(
-                    'error',
-                    'top left',
-                    '系统消息',
-                    json.Message
-                );
-
+                alert("删除失败")
             }
+            window.location.reload()
         })
-        $(location).attr('href', 'http://localhost:8484/sys/cba/index');
 
 
     }
@@ -397,14 +386,13 @@
             success: function (result) {
 
                 console.log(result )
-                debugger
                 //var json = eval("(" + result + ")");
 
-                $("input[name=kksno]").val(result.data.kksno);
-                $("input[name=dtname]").val(result.data.dtname);
-                $("input[name=postion]").val(result.data.postion);
-                $("input[name=remark]").val(result.data.remark);
-                $("input[name=gid]").val(result.data.gid);
+                $("#kksno").val(result.data.kksno);
+                $("#dtname").val(result.data.dtname);
+                $("#postion").val(result.data.postion);
+                $("#remark").val(result.data.remark);
+                $("#gid").val(result.data.gid);
             }
         });
     }
@@ -416,62 +404,32 @@
 
 
         var model = {
-            kksno: $("input[name=kksno]").val(),
-            dtname: $("input[name=dtname]").val(),
-            // remark: $("input[name=remark]").val(),
-            postion: $("input[name=postion]").val(),
-            gid: $("input[name=gid]").val()
+            kksno: $("#kksno").val(),
+            dtname: $("#dtname").val(),
+            remark: $("#remark").val(),
+            postion: $("#postion").val(),
+            gid: $("#gid").val()
         };
-
-        var actrul = "/sys/cba/save";
-
+debugger
+        var actrul = "save";
+        debugger
         if (model.gid != "") {
-            actrul = "/sys/cba/update";
+            actrul = "update";
         }
-        $.ajax({
-            type: "post",
-            url: actrul,
-            dateType: "json",
-            contentType: 'application/json',
-            data:JSON.stringify(model),
-            success: function (result) {
-                alert("成功")
-                // var json = eval("(" + result + ")");
-                // debugger;
-                // $("input[name=kksno]").val(json.data.kksno);
-                // $("input[name=dtname]").val(json.data.dtname);
-                // $("input[name=postion]").val(json.data.postion);
-                // $("input[name=remark]").val(json.data.remark);
-                // $("input[name=gid]").val(json.data.gid);
+        $.post(actrul,model,function (result) {
+            if (result.code == "200") {
+
+                alert("保存成功")
+            }else if (result.msg=""){
+
             }
-        });
+            else {
+                alert("保存失败")
+            }
+            window.location.reload()
+        })
 
 
-
-
-        // $.post(actrul, model, function (result) {
-        //
-        //     var json=eval("("+result.toString()+")");
-        //     if (json.data) {
-        //         $.Notification.notify(
-        //             'success',
-        //             'top left',
-        //             '系统消息',
-        //             result.Message
-        //         );
-        //         setTimeout(function(){window.location.reload();},1000);
-        //     }
-        //     else {
-        //         $.Notification.notify(
-        //             'error',
-        //             'top left',
-        //             '系统消息',
-        //             result.Message
-        //         );
-        //     }
-        //
-        //
-        // })
     }
 </script>
 

@@ -38,9 +38,9 @@ public class BDataCbaServiceImpl implements BDataCbaService {
             return  AjaxResult.error("请输入KKS码");
         }
         BDataCba bDataCba = bDataCbaMapper.selectByKjsno(dataCba.getKksno());
-        if (bDataCba!= null){
+        /*if (bDataCba!= null){
             return  AjaxResult.error("KKS码已存在");
-        }
+        }*/
         String uuid = IdUtils.simpleUUID();
         dataCba.setGid(uuid);
         dataCba.setLuptime(new Date());

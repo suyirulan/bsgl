@@ -46,12 +46,14 @@ public class BDataCbaController {
 
 
     @PostMapping("save")
-    public AjaxResult addDataCba(@RequestBody BDataCba dataCba){
+    @ResponseBody
+    public AjaxResult addDataCba( BDataCba dataCba){
         return bDataCbaService.addDataCba(dataCba);
     }
 
     @PostMapping("update")
-    public AjaxResult updateDataCba(@RequestBody BDataCba dataCba){
+    @ResponseBody
+    public AjaxResult updateDataCba( BDataCba dataCba){
         return bDataCbaService.updateDataCba(dataCba);
     }
 
