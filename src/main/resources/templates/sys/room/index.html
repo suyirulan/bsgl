@@ -38,7 +38,7 @@
 <!-- Begin page -->
 <div id="wrapper">
     <!-- Top Bar Start -->
-<!--    <%@ include file="../../Shared/TopLayout.jsp" %>-->
+    <!--    <%@ include file="../../Shared/TopLayout.jsp" %>-->
     <div class="topbar">
         <!-- LOGO -->
         <div class="topbar-left">
@@ -200,8 +200,76 @@
     </div>
 </div>
 
-
-<%@ include file="add.jsp" %>
+<div id="con-close-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+     style="display: none" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">标准化巡检分区-数据维护</h4>
+            </div>
+            <form action="" method="POST" id="RoomForm">
+                <input type="hidden" id="GID" value=""/>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="ROOMNO" class="control-label">分区编号：</label>
+                                <input type="text" class="form-control" id="ROOMNO" placeholder="分区编号">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="ROOMNAME" class="control-label">分区名称：</label>
+                                <input type="text" class="form-control" id="ROOMNAME" placeholder="分区名称">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="" class="control-label">所属责任区：</label>
+                                <select id="DUTY_AREA" class="form-control">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="EDITUSER" class="control-label">修改人：</label>
+                                <input type="text" class="form-control" readonly="readonly" id="EDITUSER" placeholder="修改人">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="luptime" class="control-label">修改时间：</label>
+                                <input type="text" class="form-control" readonly="readonly" id="luptime" placeholder="修改时间">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group no-margin">
+                                <label for="ROOMDIS" class="control-label">分区描述</label>
+                                <textarea class="form-control autogrow" id="ROOMDIS" placeholder="Write something about yourself"
+                                          style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 104px">                                                        </textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-info waves-effect waves-light" onclick="Save()">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div><!-- /.modal -->
 
 </body>
 
@@ -261,13 +329,13 @@
     jQuery(document).ready(function ($) {
         $.fn.dataTable.ext.errMode='none';
 
-        t = $('#datatable-buttons').DataTable({
+        var t = $('#datatable-buttons').DataTable({
             "ajax": "/sys/room/list",
             "columnDefs": [{"defaultContent": "", "targets": "_all"}],
             "columns": [
-                { "data": "roomNo", "width": "10%" },
-                { "data": "roomName", "width": "20%" },
-                { "data": "roomDis", "width": "20%" },
+                { "data": "roomno", "width": "10%" },
+                { "data": "roomname", "width": "20%" },
+                { "data": "roomdis", "width": "20%" },
                 { "data": "dutyArea", "width": "10%" },
                 { "data": "lupTime", "width": "20%" },
                 {
@@ -294,12 +362,7 @@
                 paginate: { "first": "首页 ", "last": "末页", "next": "下一页", "previous": "上一页" }
             },
             dom: "Bfrtip",
-            buttons: [
-                { extend: "copy", className: "btn-sm" },
-                { extend: "csv", className: "btn-sm" },
-                { extend: "excel", className: "btn-sm", filename: "标准化巡检分区数据.xlsx" },
-                { extend: "pdf", className: "btn-sm" },
-                { extend: "print", className: "btn-sm" }]
+            buttons: []
 
         });
 
@@ -311,61 +374,64 @@
 
 
         $("#btn_add").click(function () {
-            $("#RoomForm").clearForm();
+            $("#DUTY_AREA").val("1");
+            $("#ROOMDIS").val("");
+            $("#EDITUSER").val("");
+            $("#ROOMNAME").val("");
+            $("#GID").val("");
+            $("#ROOMNO").val("");
+            $("#luptime").val("");
+        });
+        t.on('draw', function () {
+            var html = "";
+
+            html += '<a href="javascript:void(0)" id="ToExcelBtn" class="btn green"><i class="icon-download-alt"></i> Excel导出</a>';
+
+            $(".dt-buttons").html(html);
+
+            $("#ToExcelBtn").on("click", function () {
+                window.open("export")
+            })
         });
 
 
     });
 
     function Delete(gid) {
-        var rommnn = gid.roomNo
-        $.post("delete?id=" + rommnn,function (result) {
-                var json=eval("("+result+")");
-                debugger;
-                if (json.data) {
-                    $.Notification.notify(
-                        'success',
-                        'top right',
-                        '系统消息',
-                        json.Message
-                    );
+        var rommnn = gid.roomno
+        $.post("delete/" + rommnn,function (result) {
+                if (result.code == "200") {
+
+                    alert("删除成功")
                 }
                 else {
-                    $.Notification.notify(
-                        'error',
-                        'top right',
-                        '系统消息',
-                        json.Message
-                    );
-
+                    alert("删除失败")
                 }
-                t.ajax.url("${pageContext.request.contextPath}/sys/room/getrooms").load();
+                window.location.reload()
             }
         );
     }
 
     function Edit(gid) {
-        console.log("fangfaliroom=================",gid.roomNo)
-        var rommnn = gid.roomNo
+        console.log("fangfaliroom=================",gid.roomno)
+        var rommno = gid.roomno
         // return
         $.ajax({
             type: "get",
-            url: "update?GID=" + rommnn,
+            url: "selectById/" + rommno,
             dateType: "json",
             contentType: 'application/json',
             success: function (result) {
-                var json=eval("("+result+")");
-                debugger;
                 //这个地方尤其要注意一定要指定contentType的值为『"application/json"』 ，因为此处@RequestBody接受的是一个通过json转换的对象
                 //如果不设置，默认为text/html,那么是支持该种类型的，会报415错误
 
-                $("#DUTY_AREA").val(json.data.dutyArea);
-                $("#ROOMDIS").val(json.data.roomdis);
-                $("#EDITUSER").val(json.data.edituser || "周技");
-                $("#ROOMNAME").val(json.data.roomname);
-                $("#GID").val(json.data.gid);
-                $("#ROOMNO").val(json.data.roomno);
-                $("#luptime").val(json.data.luptime);
+                $("#DUTY_AREA").val(result.data.dutyArea);
+                $("#ROOMDIS").val(result.data.roomdis);
+                $("#EDITUSER").val(result.data.edituser || "周技");
+                $("#ROOMNAME").val(result.data.roomname);
+                $("#GID").val(result.data.gid);
+                $("#ROOMNO").val(result.data.roomno);
+                $("#luptime").val(result.data.luptime);
             }
         });
     }
@@ -392,25 +458,14 @@
         }
 
         $.post(actrul,model,function (result) {
-            var json=eval("("+result+")");
-            debugger;
-            if (json.data) {
-                $.Notification.notify(
-                    'success',
-                    'top right',
-                    '系统消息',
-                    json.Message
-                );
+            if (result.code == "200") {
+
+                alert("保存成功")
             }
             else {
-                $.Notification.notify(
-                    'error',
-                    'top right',
-                    '系统消息',
-                    json.Message
-                );
+                alert("保存失败")
             }
-            t.ajax.url("${pageContext.request.contextPath}/sys/room/getrooms").load();
+            window.location.reload()
         })
 
 

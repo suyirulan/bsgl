@@ -1,5 +1,6 @@
 package com.bs.bsgl.pojo;
 
+import com.bs.bsgl.core.domain.poi.Excel;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -7,29 +8,30 @@ import java.util.Date;
 
 public class BDataIsolationCard {
     private static final long serialVersionUID = 1L;
-
+    @Excel(name = "id")
     private String gid;
-
+    @Excel(name = "隔离类型")
     private String isolationType;
-
+    @Excel(name = "机组号")
     private String unitNo;
-
+    @Excel(name = "类型")
     private String cType;
-
+    @Excel(name = "KKS码")
     private String kksno;
-
+    @Excel(name = "位置")
     private String postion;
-
+    @Excel(name = "状态")
     private String iState;
-
+    @Excel(name = "设备名称")
     private String deviceName;
-
+    @Excel(name = "所属责任区")
     private String dutyArea;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+08:00")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Excel(name = "最后修改时间",dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date lupTime;
-
+    @Excel(name = "最后修改人")
     private String editUser;
 
     public String getGid() {

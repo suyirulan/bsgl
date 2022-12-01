@@ -378,7 +378,7 @@
     jQuery(document).ready(function ($) {
         // $.fn.dataTable.ext.errMode='none';
 
-        t = $('#datatable-buttons').DataTable({
+        var t = $('#datatable-buttons').DataTable({
             "ajax": "/sys/isolationCard/list",
             "columnDefs": [{"defaultContent": "", "targets": "_all"}],
             "columns": [
@@ -414,12 +414,7 @@
                 paginate: { "first": "首页 ", "last": "末页", "next": "下一页", "previous": "上一页" }
             },
             dom: "Bfrtip",
-            buttons: [
-                { extend: "copy", className: "btn-sm" },
-                { extend: "csv", className: "btn-sm" },
-                { extend: "excel", className: "btn-sm", filename: "运行行政隔离牌数据.xlsx" },
-                { extend: "pdf", className: "btn-sm" },
-                { extend: "print", className: "btn-sm" }]
+            buttons: []
 
         });
 
@@ -443,7 +438,17 @@
             $("input[name=deviceName]").val(""); //设备名称
             $("#dutyArea").val("1") //所属责任区
         });
+        t.on('draw', function () {
+            var html = "";
 
+            html += '<a href="javascript:void(0)" id="ToExcelBtn" class="btn green"><i class="icon-download-alt"></i> Excel导出</a>';
+
+            $(".dt-buttons").html(html);
+
+            $("#ToExcelBtn").on("click", function () {
+                window.open("export")
+            })
+        });
     });
 
     function Delete(gid) {

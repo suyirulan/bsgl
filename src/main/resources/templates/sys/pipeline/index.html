@@ -388,7 +388,7 @@
     jQuery(document).ready(function ($) {
         $.fn.dataTable.ext.errMode='none';
 
-        t = $('#datatable-buttons').DataTable({
+        var t = $('#datatable-buttons').DataTable({
             "ajax": "/sys/pipeline/list",
             "columnDefs": [{"defaultContent": "", "targets": "_all"}],
             "columns": [
@@ -470,12 +470,7 @@
                 paginate: { "first": "首页 ", "last": "末页", "next": "下一页", "previous": "上一页" }
             },
             dom: "Bfrtip",
-            buttons: [
-                { extend: "copy", className: "btn-sm" },
-                { extend: "csv", className: "btn-sm" },
-                { extend: "excel", className: "btn-sm", filename: "管道标识数据.xlsx" },
-                { extend: "pdf", className: "btn-sm" },
-                { extend: "print", className: "btn-sm" }]
+            buttons: []
 
         });
 
@@ -504,7 +499,17 @@
             $("input[name=luptime]").val("");   //最后修改时间
             $("input[name=edituser]").val("");   //最后修改人
         });
+        t.on('draw', function () {
+            var html = "";
 
+            html += '<a href="javascript:void(0)" id="ToExcelBtn" class="btn green"><i class="icon-download-alt"></i> Excel导出</a>';
+
+            $(".dt-buttons").html(html);
+
+            $("#ToExcelBtn").on("click", function () {
+                window.open("export")
+            })
+        });
 
     });
 

@@ -102,12 +102,12 @@ public class BDataCbaController {
         }
     }*/
 
-    @PostMapping("/export")
+    @GetMapping("/export")
     public void downloadUser(HttpServletResponse response, BDataCba dataCba){
         //获取导出数据
         List<BDataCba> list = bDataCbaService.getList(dataCba);
         ExcelUtil<BDataCba> util = new ExcelUtil<BDataCba>(BDataCba.class);
-        util.exportExcel(response, list, "用户数据");
+        util.exportExcel(response, list, "kks标识基础数据");
     }
 
 
