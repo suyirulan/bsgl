@@ -1,6 +1,7 @@
 package com.bs.bsgl.service.impl;
 
 import com.bs.bsgl.core.domain.AjaxResult;
+import com.bs.bsgl.core.domain.UUID;
 import com.bs.bsgl.mapper.BDataIsolationCardMapper;
 import com.bs.bsgl.pojo.BDataIsolationCard;
 import com.bs.bsgl.service.BDataIsolationCardService;
@@ -32,23 +33,17 @@ public class BDataIsolationCardServiceImpl implements BDataIsolationCardService 
 
     @Override
     public AjaxResult addCard(BDataIsolationCard card) {
-        if (card==null || StringUtils.isEmpty(card.getgId())) {
-            return AjaxResult.error("请添加隔离牌编号");
-        }
-        BDataIsolationCard isolationCardById = cardMapper.getIsolationCardById(card.getgId());
-        if (isolationCardById != null) {
-            return AjaxResult.error("隔离牌编号已存在");
-        }
+        card.setGid(UUID.randomUUID().toString().substring(0, 32));
         card.setLupTime(new Date());
         return AjaxResult.success(cardMapper.addBDataIsolationCard(card));
     }
 
     @Override
     public AjaxResult updateCard(BDataIsolationCard card) {
-        if (card==null || StringUtils.isEmpty(card.getgId())) {
+        if (card==null || StringUtils.isEmpty(card.getGid())) {
             return AjaxResult.error("请选择隔离牌编号");
         }
-        BDataIsolationCard isolationCardById = cardMapper.getIsolationCardById(card.getgId());
+        BDataIsolationCard isolationCardById = cardMapper.getIsolationCardById(card.getGid());
         if (isolationCardById == null) {
             return AjaxResult.error("隔离牌编号不存在");
         }

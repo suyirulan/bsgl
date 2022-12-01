@@ -26,12 +26,14 @@ public class BDataRoomController {
     }
 
     @GetMapping("selectById/{id}")
+    @ResponseBody
     public AjaxResult selectById(@PathVariable String id){
         return roomService.selectById(id);
     }
 
-    @PostMapping("save")
-    public AjaxResult addDataRoom(@RequestBody BDataRoom dataRoom){
+    @PostMapping("Add")
+    @ResponseBody
+    public AjaxResult addDataRoom(BDataRoom dataRoom){
         return roomService.addDataRoom(dataRoom);
     }
 
@@ -41,6 +43,7 @@ public class BDataRoomController {
     }
 
     @PostMapping("delete/{id}")
+    @ResponseBody
     public AjaxResult delete(@PathVariable(name = "id") String id){
         return roomService.delete(id);
     }

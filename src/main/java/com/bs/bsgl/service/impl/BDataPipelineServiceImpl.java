@@ -25,12 +25,12 @@ public class BDataPipelineServiceImpl implements BDataPipelineService {
 
     @Override
     public AjaxResult addDataPipeline(BDataPipeline data) {
-        if (data == null || StringUtils.isEmpty(data.getPipNo())) {
+        if (data == null || StringUtils.isEmpty(data.getPipno())) {
             return AjaxResult.error("请添加管道编号");
         }
-        BDataPipeline dataDataRoomById = pipelineMapper.getDataPipelineById(data.getPipNo());
+        BDataPipeline dataDataRoomById = pipelineMapper.getDataPipelineById(data.getPipno());
         if (dataDataRoomById != null) {
-            return AjaxResult.error("管道编号已存在");
+            return updateDataPipeline(data);
         }
         data.setLupTime(new Date());
         return AjaxResult.success(pipelineMapper.addBDataPipeline(data));
@@ -38,10 +38,10 @@ public class BDataPipelineServiceImpl implements BDataPipelineService {
 
     @Override
     public AjaxResult updateDataPipeline(BDataPipeline data) {
-        if (StringUtils.isEmpty(data.getPipNo())) {
+        if (StringUtils.isEmpty(data.getPipno())) {
             return AjaxResult.error("请选择管道编号");
         }
-        BDataPipeline dataDataPipelineById = pipelineMapper.getDataPipelineById(data.getPipNo());
+        BDataPipeline dataDataPipelineById = pipelineMapper.getDataPipelineById(data.getPipno());
         if (dataDataPipelineById == null) {
             return AjaxResult.error("管道编号不存在");
         }

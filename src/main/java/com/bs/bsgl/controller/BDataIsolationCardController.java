@@ -25,22 +25,26 @@ public class BDataIsolationCardController {
         return AjaxResult.success(cardService.getList(card));
     }
 
-    @GetMapping("selectById/{id}")
+    @PostMapping("selectById/{id}")
+    @ResponseBody
     public AjaxResult selectById(@PathVariable String id){
         return cardService.getById(id);
     }
 
-    @PostMapping("save")
-    public AjaxResult addData(@RequestBody BDataIsolationCard card){
+    @PostMapping("Add")
+    @ResponseBody
+    public AjaxResult addData(BDataIsolationCard card){
         return cardService.addCard(card);
     }
 
-    @PutMapping("update")
-    public AjaxResult updateData(@RequestBody BDataIsolationCard card){
+    @PostMapping("Update")
+    @ResponseBody
+    public AjaxResult updateData(BDataIsolationCard card){
         return cardService.updateCard(card);
     }
 
-    @DeleteMapping("delete/{id}")
+    @PostMapping("Delete/{id}")
+    @ResponseBody
     public AjaxResult delete(@PathVariable String id){
         return cardService.delete(id);
     }

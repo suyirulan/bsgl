@@ -25,22 +25,26 @@ public class BDataPipelineController {
         return AjaxResult.success(pipelineService.getBDataPipelineList(dataRoom));
     }
 
-    @GetMapping("selectById/{id}")
+    @PostMapping("selectById/{id}")
+    @ResponseBody
     public AjaxResult selectById(@PathVariable String id) {
         return pipelineService.selectById(id);
     }
 
-    @PostMapping("save")
-    public AjaxResult addDataPipeline(@RequestBody BDataPipeline dataRoom) {
+    @PostMapping("Add")
+    @ResponseBody
+    public AjaxResult addDataPipeline(BDataPipeline dataRoom) {
         return pipelineService.addDataPipeline(dataRoom);
     }
 
-    @PutMapping("update")
-    public AjaxResult updateDataPipeline(@RequestBody BDataPipeline dataRoom) {
+    @PutMapping("Update")
+    @ResponseBody
+    public AjaxResult updateDataPipeline(BDataPipeline dataRoom) {
         return pipelineService.updateDataPipeline(dataRoom);
     }
 
-    @DeleteMapping("delete/{id}")
+    @PostMapping("delete/{id}")
+    @ResponseBody
     public AjaxResult delete(@PathVariable String id) {
         return pipelineService.delete(id);
     }

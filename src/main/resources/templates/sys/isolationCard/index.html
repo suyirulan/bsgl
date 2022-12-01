@@ -155,7 +155,6 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h3 class="panel-title">
-                                    ${ ServiceUrl }
                                 </h3>
                             </div>
                             <div class="panel-body">
@@ -204,7 +203,133 @@
 </div>
 
 
-<%@ include file="add.jsp" %>
+<div id="con-close-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+     style="display: none" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">运行行政隔离牌-数据维护</h4>
+            </div>
+            <form action="" method="POST" id="RoomForm">
+                <input type="hidden" id="GID" name="gid" value="" />
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="kksno" class="control-label">KKS码：</label>
+                                <input type="text" class="form-control" name="kksno" placeholder="KKS码">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="deviceName" class="control-label">设备名称：</label>
+                                <input type="text" class="form-control" name="deviceName" placeholder="设备名称">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="isolationType" class="control-label">隔离类型：</label>
+                                <select id="isolationType" name="isolationType" class="form-control">
+                                    <option value="运行隔离">运行隔离</option>
+                                    <option value="行政隔离">行政隔离</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="unitNo" class="control-label">机组号：</label>
+                                <select id="unitNo" class="form-control" name="unitNo">
+                                    <option value="1">1#</option>
+                                    <option value="2">2#</option>
+                                    <option value="3">3#</option>
+                                    <option value="4">4#</option>
+                                    <option value="5">5#</option>
+                                    <option value="6">6#</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="cType" class="control-label">类型：</label>
+                                <select id="cType" class="form-control" name="cType">
+                                    <option value="A类">A类</option>
+                                    <option value="B类">B类</option>
+                                    <option value="F类">F类</option>
+                                    <option value="G类">G类</option>
+                                    <option value="H类">H类</option>
+                                    <option value="I类">I类</option>
+                                    <option value="J类">J类</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="dutyArea" class="control-label">所属责任区：</label>
+                                <select id="dutyArea" class="form-control" name="dutyArea">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="iState" class="control-label">状态：</label>
+                                <div>
+                                    <div class="radio radio-info radio-inline">
+                                        <input type="radio" id="iState1" value="0" name="iState" checked="checked">
+                                        <label for="iState1">0</label>
+                                    </div>
+                                    <div class="radio radio-inline">
+                                        <input type="radio" id="iState2" value="C" name="iState">
+                                        <label for="iState2">C</label>
+                                    </div>
+                                    <div class="radio radio-inline">
+                                        <input type="radio" id="iState3" value="LC" name="iState">
+                                        <label for="iState3">LC</label>
+                                    </div>
+                                    <div class="radio radio-inline">
+                                        <input type="radio" id="iState4" value="LD" name="iState">
+                                        <label for="iState4">LD</label>
+                                    </div>
+                                    <div class="radio radio-inline">
+                                        <input type="radio" id="iState5" value="L0" name="iState">
+                                        <label for="iState5">L0</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group no-margin">
+                                <label for="postion" class="control-label">位置</label>
+                                <textarea class="form-control autogrow" id="postion" placeholder="Write something about yourself"
+                                          style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 104px"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-info waves-effect waves-light" onclick="Save()">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 </body>
 
@@ -260,7 +385,7 @@
                 { "data": "isolationType", "width": "10%" },
                 { "data": "unitNo", "width": "10%" },
                 { "data": "cType", "width": "8%" },
-                { "data": "kksNo", "width": "15%" },
+                { "data": "kksno", "width": "15%" },
                 { "data": "deviceName", "width": "10%" },
                 { "data": "postion", "width": "10%" },
                 { "data": "iState", "width": "10%" },
@@ -268,10 +393,12 @@
                 {
                     "data": "gid", "width": "20%",
                     render: function (data, type, row) {
+                        console.log("row===",row)
+                        let newRow = JSON.stringify(row)
                         if (type === 'display') {
                             var html = "";
-                            html += '<button type="button" onclick="Edit(\'' + data + '\')" class="btn-primary btn-custom waves-effect waves-light btn-xs m-b-5"  data-target="#con-close-modal"  data-toggle="modal"><i class="fa fa-edit"></i>&nbsp;修改数据</button>&nbsp;&nbsp;'
-                            html += '<button type="button" onclick="Delete(\'' + data + '\')"  class="btn-primary btn-custom waves-effect waves-light btn-xs m-b-5" ><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</button>'
+                            html += `<button type="button" onclick='Edit(${newRow})' class="btn-primary btn-custom waves-effect waves-light btn-xs m-b-5"  data-target="#con-close-modal"  data-toggle="modal"><i class="fa fa-edit"></i>修改数据</button>&nbsp;&nbsp;`
+                            html += `<button type="button" onclick='Delete(${newRow})'  class="btn-primary btn-custom waves-effect waves-light btn-xs m-b-5" ><i class="glyphicon glyphicon-trash"></i>删除</button>`
                             return html;
                         }
                     }
@@ -302,52 +429,59 @@
         $("#datatable_paginate").css("text-align", "right");
         $("#datatable_info").css("text-align", "left");
 
-
         $("#btn_add").click(function () {
-            $("#RoomForm").clearForm();
+            $("input:radio[name='iState']").each( (i, item) => {
+                $(item).prop("checked", false)
+            })
+            $("input[name=gid]").val("");
+            $("#isolationType").val("运行隔离"); //隔离类型
+            $("#unitNo").val("1"); //机组号
+            $("#cType").val("A类"); //类型
+            $("input[name=kksno]").val(""); //KKS码
+            $("#postion").val(""); //位置
+            $(`input:radio[name='iState'][value='0']`).prop("checked",true);
+            $("input[name=deviceName]").val(""); //设备名称
+            $("#dutyArea").val("1") //所属责任区
         });
-
 
     });
 
     function Delete(gid) {
 
         //$("#RoomForm").clearForm();
-        $.post("${pageContext.request.contextPath}/sys/isolationCard/Delete", { GID: gid }, function (json) {
-            if (json.data) {
-                $.Notification.notify(
-                    'success',
-                    'top left',
-                    '系统消息',
-                    json.Message
-                );
+        $.post("/sys/isolationCard/Delete/"+gid.gid, function (result) {
+            if (result.code == "200") {
+
+                alert("删除成功")
             }
             else {
-                $.Notification.notify(
-                    'error',
-                    'top left',
-                    '系统消息',
-                    json.Message
-                );
-
+                alert("删除失败")
             }
+            window.location.reload()
         })
 
 
     }
 
     function Edit(gid) {
+        // $("#RoomForm").clearForm();
+        // 重置选中状态
+        $("input:radio[name='iState']").each( (i, item) => {
+            $(item).prop("checked", false)
+        })
 
-        //$("#RoomForm").clearForm();
-        $.post("${pageContext.request.contextPath}/sys/isolationCard/getModel", { GID: gid }, function (result) {
-            var jsond=eval("("+result+")");
-            var json={ data:jsond.bDataIsolationCard }
-            $("#DUTY_AREA").val(json.data.DUTY_AREA);
-            $("#ROOMDIS").val(json.data.ROOMDIS);
-            $("#EDITUSER").val(json.data.EDITUSER);
-            $("#ROOMNAME").val(json.data.ROOMNAME);
-            $("#GID").val(json.data.GID);
-            $("#ROOMNO").val(json.data.ROOMNO);
+        $.post("/sys/isolationCard/selectById/"+gid.gid, function (result) {
+            console.log('33333', result)
+            $("input[name=gid]").val(result.data.gid);
+            $("#isolationType").val(result.data.isolationType); //隔离类型
+            $("#unitNo").val(result.data.unitNo); //机组号
+            $("#cType").val(result.data.cType); //类型
+            $("input[name=kksno]").val(result.data.kksno); //KKS码
+            $("#postion").val(result.data.postion); //位置
+            // $("input[name=iState]").val(result.data.iState); //状态
+            $(`input:radio[name='iState'][value='${result.data.iState}']`).prop("checked",true);
+            $("input[name=deviceName]").val(result.data.deviceName); //设备名称
+            $("#dutyArea").val(result.data.dutyArea) //所属责任区
 
         });
     }
@@ -359,39 +493,30 @@
 
         var model = {
             gid:$("input[name=gid]").val(),
-            isolationType:$("input[name=isolationType]").val(), //隔离类型
-            unitNo:$("input[name=unitNo]").val(), //机组号
-            cType:$("input[name=cType]").val(), //类型
+            isolationType:$("#isolationType").val(), //隔离类型
+            unitNo:$("#unitNo").val(), //机组号
+            cType:$("#cType").val(), //类型
             kksno:$("input[name=kksno]").val(), //KKS码
-            postion:$("input[name=postion]").val(), //位置
-            iState:$("input[name=iState]").val(), //状态
+            postion:$("#postion").val(), //位置
+            iState:$("input[name='iState']:checked").val(), //状态
             deviceName:$("input[name=deviceName]").val(), //设备名称
-            dutyArea:$("input[name=dutyArea]").val() //所属责任区
+            dutyArea:$("#dutyArea").val() //所属责任区
         };
 
-        var actrul = "${pageContext.request.contextPath}/sys/isolationCard/Add";
+        var actrul = "/sys/isolationCard/Add";
 
-        if (model.GID != "") {
-            actrul = "${pageContext.request.contextPath}/sys/isolationCard/Update";
+        if (model.gid != "") {
+            actrul = "/sys/isolationCard/Update";
         }
-        $.post(actrul, model, function (json) {
-            if (json.data) {
-                $.Notification.notify(
-                    'success',
-                    'top left',
-                    '系统消息',
-                    json.Message
-                );
+        $.post(actrul, model, function (result) {
+            if (result.code == "200") {
+
+                alert("保存成功")
             }
             else {
-                $.Notification.notify(
-                    'error',
-                    'top left',
-                    '系统消息',
-                    json.Message
-                );
+                alert("保存失败")
             }
-
+            window.location.reload()
 
         })
     }

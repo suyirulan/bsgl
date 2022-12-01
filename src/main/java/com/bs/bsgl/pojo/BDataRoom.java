@@ -9,11 +9,11 @@ public class BDataRoom {
 
     private static final long serialVersionUID = 1L;
 
-    private String roomNo;
+    private String roomno;
 
-    private String roomDis;
+    private String roomdis;
 
-    private String roomName;
+    private String roomname;
 
     private String dutyArea;
 
@@ -23,28 +23,28 @@ public class BDataRoom {
 
     private String editUser;
 
-    public String getRoomNo() {
-        return roomNo;
+    public String getRoomno() {
+        return roomno;
     }
 
-    public void setRoomNo(String roomNo) {
-        this.roomNo = roomNo;
+    public void setRoomno(String roomno) {
+        this.roomno = roomno;
     }
 
-    public String getRoomDis() {
-        return roomDis;
+    public String getRoomdis() {
+        return roomdis;
     }
 
-    public void setRoomDis(String roomDis) {
-        this.roomDis = roomDis;
+    public void setRoomdis(String roomdis) {
+        this.roomdis = roomdis;
     }
 
-    public String getRoomName() {
-        return roomName;
+    public String getRoomname() {
+        return roomname;
     }
 
-    public void setRoomName(String roomName) {
-        this.roomName = roomName;
+    public void setRoomname(String roomname) {
+        this.roomname = roomname;
     }
 
     public String getDutyArea() {
@@ -73,6 +73,6 @@ public class BDataRoom {
 
     @Override
     public String toString() {
-        return "BDataRoom [roomNo=" + roomNo + ", roomDis=" + roomDis + ", roomName=" + roomName + ", dutyArea=" + dutyArea + ", lupTime=" + lupTime + ", editUser=" + editUser +  "]";
+        return "BDataRoom [roomno=" + roomno + ", roomdis=" + roomdis + ", roomname=" + roomname + ", dutyArea=" + dutyArea + ", lupTime=" + lupTime + ", editUser=" + editUser +  "]";
     }
 }
