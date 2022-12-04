@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title></title>
+    <!-- Dropzone css -->
+    <link href="/static/assets/js/plugins/dropzone/dist/dropzone.css" rel="stylesheet" type="text/css">
+    <!-- Plugins css -->
+    <link href="/static/assets/js/plugins/notifications/notification.css" rel="stylesheet">
+
+    <!-- Plugins css-->
+    <link href="/static/assets/js/plugins/tagsinput/jquery.tagsinput.css" rel="stylesheet">
+    <link href="/static/assets/js/plugins/toggles/toggles.css" rel="stylesheet">
+    <link href="/static/assets/js/plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
+    <link href="/static/assets/js/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css"
+          rel="stylesheet">
+    <link href="/static/assets/js/plugins/colorpicker/colorpicker.css" rel="stylesheet" type="text/css">
+    <link href="/static/assets/js/plugins/jquery-multi-select/multi-select.css" rel="stylesheet" type="text/css">
+    <link href="/static/assets/js/plugins/select2/dist/css/select2.css" rel="stylesheet" type="text/css">
+
+
+    <link href="/static/assets/js/plugins/select2/dist/css/select2-bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="/static/assets/js/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css"
+          rel="stylesheet" />
+
+    <!-- DataTables -->
+    <link href="/static/assets/js/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/assets/js/plugins/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/assets/js/plugins/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet"
+          type="text/css" />
+    <link href="/static/assets/js/plugins/datatables/responsive.bootstrap.min.css" rel="stylesheet"
+          type="text/css" />
+    <link href="/static/assets/js/plugins/datatables/scroller.bootstrap.min.css" rel="stylesheet"
+          type="text/css" />
+
+
+    <link href="/static/assets/js/plugins/sweetalert/dist/sweetalert.css" rel="stylesheet" type="text/css">
+    <link href="/static/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/assets/css/core.css" rel="stylesheet" type="text/css">
+    <link href="/static/assets/css/icons.css" rel="stylesheet" type="text/css">
+    <link href="/static/assets/css/components.css" rel="stylesheet" type="text/css">
+    <link href="/static/assets/css/pages.css" rel="stylesheet" type="text/css">
+    <link href="/static/assets/css/menu.css" rel="stylesheet" type="text/css">
+    <link href="/static/assets/css/responsive.css" rel="stylesheet" type="text/css">
+
+    <script src="/static/assets/js/modernizr.min.js"></script>
+
+    <link href="/signmanage/assets/css/select2.css" rel="stylesheet" type="text/css">
+    <link href="/signmanage/assets/css/select2_metro.css" rel="stylesheet" type="text/css" />
+    <link href="/signmanage/js/jquery-ui-1.12.1.custom/jquery-ui.min.css" rel="stylesheet" type="text/css">
+    <link href="/signmanage/js/jquery-ui-1.12.1.custom/jquery-ui.structure.min.css" rel="stylesheet"
+          type="text/css">
+    <link href="/signmanage/js/jquery-ui-1.12.1.custom/jquery-ui.theme.css" rel="stylesheet" type="text/css">
+    <style>
+        .select2 {
+            width: 100%;
+            border-radius: 0px;
+        }
+
+        .selected {
+            background-color: #fde97a !important;
+        }
+
+        tr.selected:hover {
+            background-color: #fde97a;
+        }
+
+        #Detail_table thead .sorting_asc:after {
+            content: "" !important;
+        }
+
+        .ui-front {
+            z-index: 2000 !important;
+        }
+
+
+        .ui-widget.ui-widget-content {
+            border: 1px solid #c5c5c5;
+            margin-left: -8px !important;
+        }
+    </style>
+</head>
+
+
+
+<body class="fixed-left widescreen">
+<!-- Begin page -->
+<div id="wrapper">
+    <!-- Top Bar Start -->
+    <div class="topbar">
+        <!-- LOGO -->
+        <div class="topbar-left">
+            <div class="text-center">
+                <a href="/signmanage/" class="logo"><span>标识管理系统 </span></a>
+            </div>
+        </div>
+        <!-- Button mobile view to collapse sidebar menu -->
+        <div class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <div class="">
+                    <form class="navbar-form pull-left" role="search">
+                        <button type="submit" class="btn btn-search"><i class="fa fa-search"></i></button>
+                    </form>
+                    <ul class="nav navbar-nav navbar-right pull-right">
+                        <li class="hidden-xs">
+                            <a href="#" id="btn-fullscreen" class="waves-effect"><i class="md md-crop-free"></i></a>
+                        </li>
+                        <li class="hidden-xs">
+                            <a href="${pageContext.request.contextPath}/login/loginOut.action"><i class="md md-settings-power"></i></a>
+                        </li>
+
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </div>
+    </div>
+    <!-- Top Bar End -->
+    <!-- ========== Left Sidebar Start ========== -->
+    <div class="left side-menu">
+        <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 521px;"><div class="sidebar-inner slimscrollleft" style="overflow: hidden; width: auto; height: 521px;">
+            <div class="user-details">
+                <!--
+                <div class="pull-left">
+                    <img src="assets/images/users/avatar-1.jpg" alt="" class="thumb-md img-circle">
+                </div>
+                 -->
+                <div class="user-info">
+                    <div class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">${RName}<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="javascript:void(0)"><i class="md md-settings-power"></i> 注销</a></li>
+                        </ul>
+                    </div>
+                    <p class="text-muted m-0">${USERNAME}</p>
+                </div>
+            </div>
+            <!--- Divider -->
+            <div id="sidebar-menu">
+                <ul>
+                    <li class="has_sub">
+                        <a href="#" class="waves-effect waves-light active"><i class="md md-palette"></i> <span> 标识管理</span> <span class="pull-right"><i class="md md-add"></i></span></a>
+                        <ul class="list-unstyled" style="display: block;">
+                            <li><a href="/signmanage/sign/FKks/index">设备标识维护</a></li>
+                            <li><a href="/signmanage/sign/FRoom/index">门牌标识维护</a></li>
+                            <li><a href="/signmanage/sign/FConduit/index">管道标识维护</a></li>
+                            <li><a href="/signmanage/sign/FIsolation/index">隔离标识维护</a></li>
+                            <li><a href="/signmanage/flow/Make_Add">标识悬挂流程发起</a></li>
+                        </ul>
+                    </li>
+                    <li class="has_sub">
+                        <a href="#" class="waves-effect waves-light"><i class="md md-redeem"></i> <span> 数据统计 </span> <span class="pull-right"><i class="md md-add"></i></span></a>
+                        <ul class="list-unstyled">
+                            <li><a href="/signmanage/Sign/SignSearch">标识查询</a></li>
+                        </ul>
+                    </li>
+                    <li class="has_sub">
+                        <a href="#" class="waves-effect waves-light"><i class="md md-mail"></i><span> 基础数据 </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                        <ul class="list-unstyled">
+                            <li><a href="/sys/room/index">标准化巡检分区</a></li>
+                            <li><a href="/sys/pipeline/index">管道数据</a></li>
+                            <li><a href="/sys/isolationCard/index">运行隔离牌数据</a></li>
+                            <li><a href="/sys/cba/index">KKS设备数据维护</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="http://it.jnpc.com.cn:9999/webdoc/real/Pub8a9790a478004655017800cd31530029.html?STATE=0&OPERATE=3" target="_blank" class="waves-effect waves-light"><i class="md md-home"></i><span> 操作手册 </span></a>
+                    </li>
+
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
+        </div><div class="slimScrollBar" style="background: rgb(122, 134, 143); width: 5px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 372.859px; visibility: visible;"></div><div class="slimScrollRail" style="width: 5px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
+    </div>
+    <!-- Left Sidebar End -->
+    <!-- Start right Content here -->
+    <div class="content-page">
+        <!-- Start content -->
+        <div class="content">
+
+            <div class="container">
+                <!-- Page-Title -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4 class="pull-left page-title">隔离标识数据管理</h4>
+                        <ol class="breadcrumb pull-right">
+                            <li><a href="#">基础数据</a></li>
+                            <li><a href="#">隔离标识数据管理</a></li>
+                            <li class="active">数据列表</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <table style="width:100%" id="Detail_table"
+                                           class="Detail-table table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th>序号</th>
+                                            <th>隔离类型</th>
+                                            <th>机组号</th>
+                                            <th>类型</th>
+                                            <th>标志(KKS码)</th>
+                                            <th>位置</th>
+                                            <th>状态</th>
+                                            <th>设备名称</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div> <!-- container -->
+
+
+
+        </div>
+    </div>
+</div>
+
+
+<div id="con-close-modal4" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true" style="display: none" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">隔离牌标识-数据维护</h4>
+            </div>
+
+            <form action="" method="Post" id="IsolationCardForm">
+                <input type="hidden" name="GID" value="" />
+                <input type="hidden" name="SIGNID" value="" />
+                <input type="hidden" name="signtype" value="D" id="sign_signtype"/>
+                <input type="hidden" name="opt" value=""/>
+                <input type="hidden" name="SIGNSTATE" value=""/>
+                <input type="hidden" name="CREATE_Z" value=""/>
+                <input type="hidden" name="CREATE_R" value=""/>
+                <input type="hidden" name="CREATE_TIME" value=""/>
+                <input type="hidden" name="DISTRIBUTE" value=""/>
+                <input type="hidden" name="SENDEE" value=""/>
+                <input type="hidden" name="SSENDEE" value=""/>
+                <input type="hidden" name="PROCESSING" value=""/>
+                <input type="hidden" name="PROCESSINGTIME" value=""/>
+                <input type="hidden" name="NOHANDLE" value=""/>
+                <input type="hidden" name="FLOWNO" value=""/>
+                <input type="hidden" name="SEQUENCE" value=""/>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label" style="color: red;">标志(KKS码）：</label>
+                                <input type="hidden" name="KKSNO" value="" />
+                                <input type="text" class="form-control" name="KKSNO1" id="KKSNO1" style="width:100%" />
+                                <!-- <SELECT class="form-control" name="KKSNO1" id="KKSNO1" style="width:100%" ></SELECT> -->
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" style="color: red;">设备名称:</label>
+                                <input type="text" class="form-control" name="DEVICE_NAME" placeholder="设备名称"/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" style="color: red;">位置:</label>
+                                <input type="text" class="form-control" name="POSITION" placeholder="位置">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label" style="color: red;">隔离类型:</label>
+                                <input type="text" class="form-control" name="QUARANTINETYPE"  />
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label" style="color: red;">机组号：</label>
+                                <input type="text" class="form-control" name="UNIT_NO"  />
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="ISOLATIONTYPE" class="control-label" style="color: red;">类型:</label>
+                                <input type="text" class="form-control" name="ISOLATIONTYPE"  />
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label" style="color: red;">状态:</label>
+                                <input type="text" class="form-control" name="STATE"  />
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" style="color: red;">缺陷类型：</label>
+                                <select class="form-control" name="DEFECTTYPE" style="width:100%">
+                                    <option value="1">01-标牌缺失</option>
+                                    <option value="2">02-标牌损坏</option>
+                                    <option value="3">03-支架损坏</option>
+                                    <option value="4">04-旧标牌需要换新标牌</option>
+                                    <option value="5">05-标牌信息错误</option>
+                                    <option value="6">06-其他</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label" style="color: red;">所属责任值：</label>
+                                <select name="LIABILITY_Z" class="form-control">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label" style="color: red;">所属责任区：</label>
+                                <select name="LIABILITY_Q" class="form-control">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="col-sm-7 control-label" style="padding-left: 0px;">是否需要搭脚手架</label>
+                                <div class="col-sm-5 control-label">
+                                    <div class="radio radio-info radio-inline">
+                                        <input type="radio"  value="1" name="ISSCAFFOLDING" id="ISSCAFFOLDING1"  checked="checked">
+                                        <label for="ISSCAFFOLDING1">是</label>
+                                    </div>
+                                    <div class="radio radio-inline">
+                                        <input type="radio" id="ISSCAFFOLDING2" value="0" name="ISSCAFFOLDING">
+                                        <label for="ISSCAFFOLDING2">否</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group no-margin">
+                                <label class="control-label">备注</label>
+                                <textarea class="form-control autogrow" name="REMARK"
+                                          style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 104px">                                                        </textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-info waves-effect waves-light"
+                            onclick="SaveIsolationCard()">保存</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+
+
+
+<script>
+    var resizefunc = [];
+</script>
+<!-- jQuery  -->
+<script src="/static/assets/js/jquery.min.js"></script>
+<script src="/static/assets/js/bootstrap.min.js"></script>
+<script src="/static/assets/js/detect.js"></script>
+<script src="/static/assets/js/fastclick.js"></script>
+<script src="/static/assets/js/jquery.slimscroll.js"></script>
+<script src="/static/assets/js/jquery.blockUI.js"></script>
+<script src="/static/assets/js/waves.js"></script>
+<script src="/static/assets/js/wow.min.js"></script>
+<script src="/static/assets/js/jquery.nicescroll.js"></script>
+<script src="/static/assets/js/jquery.scrollTo.min.js"></script>
+
+<!-- Datatables-->
+<script src="/static/assets/js/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/static/assets/js/plugins/datatables/dataTables.bootstrap.js"></script>
+<script src="/static/assets/js/plugins/datatables/dataTables.buttons.min.js"></script>
+<script src="/static/assets/js/plugins/datatables/buttons.bootstrap.min.js"></script>
+<script src="/static/assets/js/plugins/datatables/jszip.min.js"></script>
+<script src="/static/assets/js/plugins/datatables/pdfmake.min.js"></script>
+<script src="/static/assets/js/plugins/datatables/vfs_fonts.js"></script>
+<script src="/static/assets/js/plugins/datatables/buttons.html5.min.js"></script>
+<script src="/static/assets/js/plugins/datatables/buttons.print.min.js"></script>
+<script src="/static/assets/js/plugins/datatables/dataTables.fixedHeader.min.js"></script>
+<script src="/static/assets/js/plugins/datatables/dataTables.keyTable.min.js"></script>
+<script src="/static/assets/js/plugins/datatables/dataTables.responsive.min.js"></script>
+<script src="/static/assets/js/plugins/datatables/responsive.bootstrap.min.js"></script>
+<script src="/static/assets/js/plugins/datatables/dataTables.scroller.min.js"></script>
+
+<!-- Modal-Effect -->
+<script src="/static/assets/js/plugins/modal-effect/js/classie.js"></script>
+<script src="/static/assets/js/plugins/modal-effect/js/modalEffects.js"></script>
+
+<!-- Datatable init js -->
+<script src="/static/assets/pages/datatables.init.js"></script>
+<script src="/static/assets/js/jquery.app.js"></script>
+
+<!-- jquery init js -->
+
+<!-- Page Specific JS Libraries -->
+<script src="/static/assets/js/plugins/dropzone/dist/dropzone.js"></script>
+<script src="/signmanage/js/dropzone_init.js"></script>
+<script src="/static/assets/js/plugins/toggles/toggles.min.js"></script>
+
+
+
+
+<script src="/signmanage/assets/js/select2.full.js" type="text/javascript"></script>
+<script src="/signmanage/assets/js/jquery-form.js"></script>
+<script src="/assets/js/plugins/notifyjs/dist/notify.min.js"></script>
+<script src="/assets/js/plugins/notifications/notify-metro.js"></script>
+<script src="/assets/js/plugins/notifications/notifications.js"></script>
+<script src="/signmanage/js/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+
+<script src="/signmanage/js/flow/IsolatioCard_Sign/IsolatioCard_Sign.js"></script>
+<script src="/signmanage/js/ajaxfileupload.js"></script>
+<script src="/signmanage/js/flow/attachments_manage.js"></script>
+
+<script type="text/javascript">
+    // $.fn.modal.Constructor.prototype.enforceFocus = function () { };
+    jQuery(document).ready(function ($) {
+        $.fn.dataTable.ext.errMode = 'none';
+        t = $('#Detail_table').DataTable({
+            // "ajax": "/signmanage/Sign/GetSignListBySeach?signtype=D&signstate=10&defecttype=0&flowno=0&liabilityz=0",
+            "ajax": "/signmanage/sign/FIsolation/list",
+            "columnDefs": [{"defaultContent": "", "targets": "_all"}],
+            "columns": [
+                {
+                    "data": null,
+                    render: function(data, type, row, meta){
+                        console.log(meta);
+                        return meta.settings._iDisplayStart + meta.row + 1;
+                    },
+                    "width": "5%"
+                },  //行号，非业务数据的SEQUENCE
+                { "data": "quarantinetype", "width": "25%" },	//隔离类型
+                { "data": "unitNo", "width": "15%" },	//机组号
+                {
+                    "data": "isolationtype", "width": "5%",
+                    render: function (data, type, row) {
+                        if (type === 'display') {
+                            var html = "";
+                            switch (data) {
+                                case "1":
+                                    html = "01-不锈钢";
+                                    break;
+                                case "2":
+                                    html = "02-双色板";
+                                    break;
+                                case "3":
+                                    html = "03—其它";
+                                    break;
+                                default:
+                                    html = "其它";
+                                    break;
+                            }
+                            return html;
+                        }
+                    }
+                },	//类型             
+                { "data": "kksno", "width": "8%" },	//标志(KKS码)
+                { "data": "position", "width": "8%" },	//位置                
+                {
+                    "data": "state", "width": "10%"
+                },	//状态
+                { "data": "deviceName", "width": "10%" },	//设备名称                
+                {
+                    "data": "gid", "width": "10%",
+                    render: function (data, type, row) {
+                        // if (type === 'display' && 10 === row.signstate) {
+                        if (type === 'display' ) {
+                            var html = '';
+                            // if(10 ==  row.signstate){
+                                html += "<button type='button' onclick='EditCardSign(" + JSON.stringify(row) + ")' class='btn-primary btn-custom waves-effect waves-light btn-xs m-b-5'  data-target='#con-close-modal4'  data-toggle='modal'><i class='fa fa-edit'></i>&nbsp;修改</button>&nbsp;&nbsp;"
+                                html += "<button type='button' onclick='DeleteCardSign(" + JSON.stringify(row) + ")'  class='btn-primary btn-custom waves-effect waves-light btn-xs m-b-5' ><i class='glyphicon glyphicon-trash'></i>&nbsp;删除</button>"
+                            // }
+                            return html;
+                        } else {
+                            return '';
+                        }
+                    }
+                }
+            ],
+            "language": {
+                lengthMenu: "每页显示 _MENU_记录",
+                zeroRecords: "没有匹配的数据",
+                info: "第_PAGE_页/共 _PAGES_页  共_TOTAL_条记录",
+                infoEmpty: "没有符合条件的记录",
+                search: "查找",
+                infoFiltered: "(从 _MAX_条记录中过滤)",
+                paginate: { "first": "首页 ", "last": "末页", "next": "下一页", "previous": "上一页" }
+            },
+            dom: "Bfrtip",
+            buttons: [{ extend: "excel", className: "btn-sm", filename: "隔离标识数据.xlsx" }]
+
+        });
+
+        var html = "";
+        html += '<button id="addToTable2" style="margin-right: 8px;" class="btn btn-primary waves-effect waves-light btn-sm" data-toggle="modal" data-target="#con-close-modal4">隔离牌 标识新增 <i class="fa fa-plus"></i></button>';
+        $(".dt-buttons").append(html);
+
+        //设置分页位置靠右 .items>input:first
+        $("#datatable_wrapper > div:first > div:first").attr("class", "col-sm-12");
+        $("#datatable_wrapper > div:first > div:first").css("text-align", "right");
+        $("#datatable_paginate").css("text-align", "right");
+        $("#datatable_info").css("text-align", "left");
+
+
+        $("#addToTable2").click(function () {
+            $("#IsolationCardForm").clearForm();
+            $("#IsolationCardForm input[name=opt]").val('create');
+            $("#AttachmentsTable tbody").html('<tr><td colspan="3">无附件</td></tr>');// 空附件列表
+
+            //缺陷类型
+            $("#IsolationCardForm select[name='DEFECTTYPE']").select2({
+                tags: true
+            });
+            // 属性责任值 LIABILITY_Z
+            $('#IsolationCardForm select[name=LIABILITY_Z]').select2({
+                tags: true
+            });
+            // 所属责任区LIABILITY_Q
+            $('#IsolationCardForm select[name=LIABILITY_Q]').select2({
+                tags: true
+            });
+
+            // 获取GID
+            $.ajax({
+                async: true,
+                type: "POST",
+                url: "/signmanage/Sign/generateGid",
+                contentType: "application/x-www-form-urlencoded; charset=utf-8",//解决中文乱码问题
+                data: {},
+                dataType: "json",
+                success: function (data) {
+                    $("#IsolationCardForm input[name=GID]").val(data.gid);
+                    $("#Attachments_gid").val(data.gid || '');
+                }
+            });
+        });
+    });
+
+    function SaveIsolationCard() {
+
+        var model = {
+            gid:$("input[name=GID]").val(),
+            signid:$("input[name=SIGNID]").val(),   //
+            kksno:$("input[name=KKSNO1]").val(),   //
+            deviceName:$("input[name=DEVICE_NAME]").val(),   //
+            position:$("input[name=POSITION]").val(),   //
+            quarantinetype:$("input[name=QUARANTINETYPE]").val(),   //
+            unitNo:$("input[name=UNIT_NO]").val(),   //
+            isolationtype:$("input[name=ISOLATIONTYPE]").val(),   //
+            state:$("input[name=STATE]").val(),   //
+            defecttype:$("select[name=DEFECTTYPE]").val(),   //
+            liabilityZ:$("select[name=LIABILITY_Z]").val(),   //
+            liabilityQ:$("select[name=LIABILITY_Q]").val(),   //
+            isscaffolding:$("input[name=ISSCAFFOLDING]:checked").val(),   //
+            remark:$("textarea[name=REMARK]").val(),
+        };
+        var actrul = "/signmanage/sign/FIsolation/Add";
+        $.post(actrul, model, function (result) {
+            if (result.code == "200") {
+                alert("保存成功")
+            }
+            else {
+                alert("保存失败")
+            }
+            window.location.reload()
+
+        })
+    }
+
+    function EditCardSign(gid) {
+        $.post("/signmanage/sign/FIsolation/selectById/"+gid.gid, function (result) {
+            $("input[name=GID]").val(result.data.gid);
+            $("input[name=SIGNID]").val(result.data.signid);   //
+            $("input[name=KKSNO1]").val(result.data.kksno);   //
+            $("input[name=DEVICE_NAME]").val(result.data.deviceName);   //
+            $("input[name=POSITION]").val(result.data.position);   //
+            $("input[name=QUARANTINETYPE]").val(result.data.quarantinetype);   //
+            $("input[name=UNIT_NO]").val(result.data.unitNo);   //
+            $("input[name=ISOLATIONTYPE]").val(result.data.isolationtype);   //
+            $("input[name=STATE]").val(result.data.state);   //
+            $("select[name=DEFECTTYPE]").val(result.data.defecttype);   //
+            $("select[name=LIABILITY_Z]").val(result.data.liabilityZ);   //
+            $("select[name=LIABILITY_Q]").val(result.data.liabilityQ);   //
+            $("input[name=ISSCAFFOLDING]:checked").val(result.data.isscaffolding);   //
+            $("textarea[name=REMARK]").val(result.data.remark);
+        });
+    }
+
+    function DeleteCardSign(gid) {
+        $.post("/signmanage/sign/FIsolation/delete/"+gid.gid, function (result) {
+            if (result.code == "200") {
+                alert("删除成功")
+            }
+            else {
+                alert("删除失败")
+            }
+            window.location.reload()
+        })
+    }
+</script>
+</html>

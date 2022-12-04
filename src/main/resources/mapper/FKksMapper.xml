@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bs.bsgl.mapper.FKksMapper">
+
+    <resultMap id="Result" type="com.bs.bsgl.pojo.FKks">
+        <id column="GID" property="gid"/>
+        <result column="SEQUENCE" property="sequence"/>
+        <result column="SIGNID" property="signid"/>
+        <result column="LENGTH" property="length"/>
+        <result column="WIDTH" property="width"/>
+        <result column="COLOR" property="color"/>
+        <result column="O_COLOR" property="oColor"/>
+        <result column="SIGNANGE_CONTENT" property="signangeContent"/>
+        <result column="POSITION" property="position"/>
+        <result column="S_COUNT" property="sCount"/>
+        <result column="REMARK" property="remark"/>
+        <result column="ISCC1" property="iscc1"/>
+    </resultMap>
+
+    <select id="getFKksList" parameterType="com.bs.bsgl.pojo.FKks" resultMap="Result">
+        select * from jnpc_bsgl_f_kks_signange
+        order by SEQUENCE desc
+    </select>
+
+    <select id="getFKksById" resultMap="Result">
+        select * from jnpc_bsgl_f_kks_signange where GID = #{gid}
+    </select>
+
+    <insert id="addFKks" parameterType="com.bs.bsgl.pojo.FKks">
+        insert into jnpc_bsgl_f_kks_signange (GID, SEQUENCE, SIGNID, LENGTH, WIDTH, COLOR, O_COLOR, SIGNANGE_CONTENT, POSITION, S_COUNT, REMARK, ISCC1)
+        values(#{gid}, #{sequence},#{signid},#{length},#{width},#{color},#{oColor}, #{signangeContent}, #{position},#{sCount}, #{remark}, #{iscc1})
+    </insert>
+
+    <update id="updateFKksById" parameterType="com.bs.bsgl.pojo.FKks">
+        update jnpc_bsgl_f_kks_signange
+        <set>
+            <if test="sequence != null and sequence!=''">SEQUENCE = #{sequence},</if>
+            <if test="signid != null and signid!=''">SIGNID = #{signid},</if>
+            <if test="length != null and length!=''">LENGTH = #{length},</if>
+            <if test="width != null and width!=''">WIDTH = #{width},</if>
+            <if test="color != null and color!=''">COLOR = #{color},</if>
+            <if test="oColor != null and oColor!=''">O_COLOR = #{oColor},</if>
+            <if test="signangeContent != null and signangeContent!=''">SIGNANGE_CONTENT = #{signangeContent},</if>
+            <if test="position != null and position!=''">POSITION = #{position},</if>
+            <if test="sCount != null and sCount!=''">S_COUNT = #{sCount},</if>
+            <if test="remark != null and remark!=''">REMARK = #{remark},</if>
+            <if test="iscc1 != null and iscc1!=''">ISCC1 = #{iscc1},</if>
+        </set>
+        where GID = #{gid}
+    </update>
+
+    <delete id="deleteById">
+        delete from jnpc_bsgl_f_kks_signange where GID = #{gid}
+    </delete>
+
+</mapper>

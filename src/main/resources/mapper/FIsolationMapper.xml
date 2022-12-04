@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bs.bsgl.mapper.FIsolationMapper">
+
+    <resultMap id="Result" type="com.bs.bsgl.pojo.FIsolation">
+        <id column="GID" property="gid"/>
+        <result column="SEQUENCE" property="sequence"/>
+        <result column="SIGNID" property="signid"/>
+        <result column="QUARANTINETYPE" property="quarantinetype"/>
+        <result column="UNIT_NO" property="unitNo"/>
+        <result column="ISOLATIONTYPE" property="isolationtype"/>
+        <result column="KKSNO" property="kksno"/>
+        <result column="POSITION" property="position"/>
+        <result column="DEVICE_NAME" property="deviceName"/>
+    </resultMap>
+
+    <select id="getFIsolationList" parameterType="com.bs.bsgl.pojo.FIsolation" resultMap="Result">
+        select * from jnpc_bsgl_f_isolation_signange
+        order by SEQUENCE desc
+    </select>
+
+    <select id="getFIsolationById" resultMap="Result">
+        select * from jnpc_bsgl_f_isolation_signange where GID = #{gid}
+    </select>
+
+    <insert id="addFIsolation" parameterType="com.bs.bsgl.pojo.FIsolation">
+        insert into jnpc_bsgl_f_isolation_signange (GID, SEQUENCE, SIGNID, QUARANTINETYPE, UNIT_NO, ISOLATIONTYPE, KKSNO, POSITION, DEVICE_NAME)
+        values(#{gid}, #{sequence},#{signid},#{quarantinetype},#{unitNo},#{isolationtype},#{kksno}, #{position}, #{deviceName})
+    </insert>
+
+    <update id="updateFIsolationById" parameterType="com.bs.bsgl.pojo.FIsolation">
+        update jnpc_bsgl_f_isolation_signange
+        <set>
+            <if test="sequence != null and sequence!=''">SEQUENCE = #{sequence},</if>
+            <if test="signid != null and signid!=''">SIGNID = #{signid},</if>
+            <if test="quarantinetype != null and quarantinetype!=''">QUARANTINETYPE = #{quarantinetype},</if>
+            <if test="unitNo != null and unitNo!=''">UNIT_NO = #{unitNo},</if>
+            <if test="isolationtype != null and isolationtype!=''">ISOLATIONTYPE = #{isolationtype},</if>
+            <if test="kksno != null and kksno!=''">KKSNO = #{kksno},</if>
+            <if test="position != null and position!=''">POSITION = #{position},</if>
+            <if test="deviceName != null and deviceName!=''">DEVICE_NAME = #{deviceName},</if>
+        </set>
+        where GID = #{gid}
+    </update>
+
+    <delete id="deleteById">
+        delete from jnpc_bsgl_f_isolation_signange where GID = #{gid}
+    </delete>
+
+</mapper>
