@@ -1,11 +1,17 @@
 package com.bs.bsgl.controller;
 
 import com.bs.bsgl.core.domain.AjaxResult;
+import com.bs.bsgl.core.domain.poi.ExcelUtil;
 import com.bs.bsgl.pojo.FConduit;
+import com.bs.bsgl.pojo.FIsolation;
 import com.bs.bsgl.service.FConduitService;
+import com.bs.bsgl.service.FIsolationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @Controller
 @RequestMapping("/signmanage/sign/FConduit")
@@ -47,6 +53,14 @@ public class FConduitController {
     @ResponseBody
     public AjaxResult delete(@PathVariable String id) {
         return FConduitService.delete(id);
+    }
+
+    @GetMapping("/export")
+    public void downloadUser(HttpServletResponse response, FConduit fConduit){
+        //获取导出数据
+        List<FConduit> list = FConduitService.getFConduitList(fConduit);
+        ExcelUtil<FConduit> util = new ExcelUtil<FConduit>(FConduit.class);
+        util.exportExcel(response, list, "管道标识数据管理");
     }
 
 }

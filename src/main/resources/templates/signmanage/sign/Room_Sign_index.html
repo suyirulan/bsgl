@@ -191,6 +191,16 @@
             </ol>
           </div>
         </div>
+
+        <div>
+          <button type="button" id="addToTable4" data-toggle="modal" data-target="#con-close-modal2" class="btn btn-primary">
+            <i class="fa fa-plus"></i>新增数据
+          </button>
+          <button type="button" id="ToExcelBtn" class="btn btn-primary">
+            <i class="fa fa-download"></i>导出excel
+          </button>
+        </div>
+
         <div class="row">
           <div class="col-md-12">
             <div class="panel panel-default">
@@ -200,9 +210,9 @@
               <div class="panel-body">
                 <div class="row">
                   <table style="width:100%" id="Detail_table"
-                         class="Detail-table table table-bordered">
+                         class="table table-striped table-bordered">
                     <thead>
-                    <tr>
+                    <tr bgcolor="#90b2e1">
                       <th>序号</th>
                       <th>长（mm）</th>
                       <th>宽（mm）</th>
@@ -481,7 +491,7 @@
   jQuery(document).ready(function ($) {
     $.fn.dataTable.ext.errMode = 'none';
 
-    t = $('#Detail_table').DataTable({
+    var t = $('#Detail_table').DataTable({
       // "ajax": "/signmanage/Sign/GetSignListBySeach?signtype=B&signstate=10&defecttype=0&flowno=0&liabilityz=0",
       "ajax": "/signmanage/sign/FRoom/list",
       "columnDefs": [{"defaultContent": "", "targets": "_all"}],
@@ -536,7 +546,7 @@
             // if (type === 'display' && 10 === row.signstate) {
             if (type === 'display' ) {
               var html = '';
-              html += "<button type='button' onclick='EditRoomSign(" + JSON.stringify(row) + ")' class='btn-primary btn-custom waves-effect waves-light btn-xs m-b-5'  data-target='#con-close-modal2'  data-toggle='modal'><i class='ion-arrow-down-a'></i>&nbsp;修改</button>&nbsp;&nbsp;";
+              html += "<button type='button' onclick='EditRoomSign(" + JSON.stringify(row) + ")' class='btn-primary btn-custom waves-effect waves-light btn-xs m-b-5'  data-target='#con-close-modal2'  data-toggle='modal'><i class='fa fa-edit'></i>&nbsp;修改</button>&nbsp;&nbsp;";
               html += "<button type='button' onclick='DeleteRoomSign(" + JSON.stringify(row) + ")'  class='btn-primary btn-custom waves-effect waves-light btn-xs m-b-5' ><i class='glyphicon glyphicon-trash'></i>&nbsp;删除</button>";
               return html;
             } else {
@@ -555,20 +565,64 @@
         paginate: { "first": "首页 ", "last": "末页", "next": "下一页", "previous": "上一页" }
       },
       dom: "Bfrtip",
-      buttons: [{ extend: "excel", className: "btn-sm", filename: "门牌标识数据.xlsx" }]
+      buttons: []
 
     });
 
-    var html = "";
+    /*var html = "";
     html += '<button id="addToTable4" style="margin-right: 16px;" class="btn btn-primary waves-effect waves-light btn-sm" data-toggle="modal" data-target="#con-close-modal2">门牌 标识新增 <i class="fa fa-plus"></i></button>';
 
-    $(".dt-buttons").append(html);
+    $(".dt-buttons").append(html);*/
 
     //设置分页位置靠右 .items>input:first
     $("#datatable_wrapper > div:first > div:first").attr("class", "col-sm-12");
     $("#datatable_wrapper > div:first > div:first").css("text-align", "right");
     $("#datatable_paginate").css("text-align", "right");
     $("#datatable_info").css("text-align", "left");
+
+    t.on('draw', function () {
+      var html = "";
+
+      //html += '<a href="javascript:void(0)" id="ToExcelBtn" class="btn green"><i class="icon-download-alt"></i> Excel导出</a>';
+
+      $(".dt-buttons").html(html);
+
+      $("#ToExcelBtn").click(function(){
+        const xhr = new XMLHttpRequest();
+        //xhr.open('POST', "http://swagger.xjcec.com/system/sysUser/userListExport", true);
+        //xhr.open('POST', "http://localhost:9999/system/sysUser/userListExport", true);
+        xhr.open('GET', "export", true);
+
+        xhr.responseType = "blob";
+
+        xhr.onload = () => {
+          console.log(xhr);
+          console.log(xhr.response);
+          const blob = xhr.response;
+          const blobUrl = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.style.display = 'none';
+          a.download="隔离标识数据管理.xlsx"
+          a.href = blobUrl;
+          a.target = '_blank';
+          a.click();
+        }
+
+        var params={
+          "pageNum": 1,
+          "pageSize": 11,
+          "userType": 2,
+          "keyWord": "15111111"
+        }
+
+        var params2 = {"flowType":3,"pageNum":1,"pageSize":10}
+
+        xhr.setRequestHeader("Content-Type","application/json;charset=UTF-8");
+        xhr.setRequestHeader("Xjcec-Auth","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbiIsInRlbGVwaG9uZSI6ImFkbWluIiwidXNlck5hbWUiOiJhZG1pbiIsInR5cGUiOjEsInVzZXJJZCI6IjEiLCJhdXRob3JpdGllcyI6WyJkZWZhdWx0Il0sInBhcmVudElkIjoibnVsbCIsImNsaWVudF9pZCI6InhqY2VjIiwicmVhbE5hbWUiOiJhZG1pbiIsInNjb3BlIjpbImFsbCJdLCJwbGF0Zm9ybV9pZCI6MTAwMDAsImV4cCI6MTY0ODY5NzUxNywianRpIjoiOGZmMGRmYTYtMGJjZC00OTVmLTk1ZTctY2U0NzM2YzkyZWI3In0.7gPbOjtYoWEGqF-Zq5BOok_oEYTc62QHOo7GsN2vhZI");
+        xhr.setRequestHeader("client-type","trade_back");
+        xhr.send(JSON.stringify(params2));
+      });
+    });
 
 
     $("#addToTable4").click(function () {

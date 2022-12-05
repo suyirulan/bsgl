@@ -1,11 +1,16 @@
 package com.bs.bsgl.controller;
 
 import com.bs.bsgl.core.domain.AjaxResult;
+import com.bs.bsgl.core.domain.poi.ExcelUtil;
 import com.bs.bsgl.pojo.FIsolation;
+import com.bs.bsgl.pojo.FKks;
 import com.bs.bsgl.service.FIsolationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @Controller
 @RequestMapping("/signmanage/sign/FIsolation")
@@ -47,6 +52,14 @@ public class FIsolationController {
     @ResponseBody
     public AjaxResult delete(@PathVariable String id) {
         return FIsolationService.delete(id);
+    }
+
+    @GetMapping("/export")
+    public void downloadUser(HttpServletResponse response, FIsolation fIsolation){
+        //获取导出数据
+        List<FIsolation> list = FIsolationService.getFIsolationList(fIsolation);
+        ExcelUtil<FIsolation> util = new ExcelUtil<FIsolation>(FIsolation.class);
+        util.exportExcel(response, list, "隔离标识数据管理");
     }
 
 }

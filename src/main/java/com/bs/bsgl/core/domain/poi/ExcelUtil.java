@@ -448,14 +448,8 @@ public class ExcelUtil<T>
                 }
             }
         }*/
-        /*int rowNum = sheet.getLastRowNum();
-        if (rowNum % 2 == 0) {
-            style.setFillForegroundColor(IndexedColors.GREEN.getIndex());
-            style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-        } else {
-            style.setFillForegroundColor(IndexedColors.GREY_50_PERCENT.getIndex());
-            style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-        }*/
+
+
 
 
         Font dataFont = wb.createFont();

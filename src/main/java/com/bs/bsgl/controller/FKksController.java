@@ -1,11 +1,16 @@
 package com.bs.bsgl.controller;
 
 import com.bs.bsgl.core.domain.AjaxResult;
+import com.bs.bsgl.core.domain.poi.ExcelUtil;
+import com.bs.bsgl.pojo.BDataCba;
 import com.bs.bsgl.pojo.FKks;
 import com.bs.bsgl.service.FKksService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @Controller
 @RequestMapping("/signmanage/sign/FKks")
@@ -53,5 +58,14 @@ public class FKksController {
     public AjaxResult delete(@PathVariable String id) {
         return fKksService.delete(id);
     }
+
+    @GetMapping("/export")
+    public void downloadUser(HttpServletResponse response, FKks fKks){
+        //获取导出数据
+        List<FKks> list = fKksService.getFKksList(fKks);
+        ExcelUtil<FKks> util = new ExcelUtil<FKks>(FKks.class);
+        util.exportExcel(response, list, "设备标识数据管理");
+    }
+
 
 }

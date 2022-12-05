@@ -93,10 +93,10 @@
                     <li class="has_sub">
                         <a href="#" class="waves-effect waves-light"><i class="md md-palette"></i> <span> 标识管理</span> <span class="pull-right"><i class="md md-add"></i></span></a>
                         <ul class="list-unstyled" >
-                            <li><a href="/signmanage/Sign/SignIndex_CBA">设备标识维护</a></li>
-                            <li><a href="/signmanage/Sign/SignIndex_Room">门牌标识维护</a></li>
-                            <li><a href="/signmanage/Sign/SignIndex_Pipeline">管道标识维护</a></li>
-                            <li><a href="/signmanage/Sign/SignIndex_IsolatioCard">隔离标识维护</a></li>
+                            <li><a href="/signmanage/sign/FKks/index">设备标识维护</a></li>
+                            <li><a href="/signmanage/sign/FRoom/index">门牌标识维护</a></li>
+                            <li><a href="/signmanage/sign/FConduit/index">管道标识维护</a></li>
+                            <li><a href="/signmanage/sign/FIsolation/index">隔离标识维护</a></li>
                             <li><a href="/signmanage/flow/Make_Add">标识悬挂流程发起</a></li>
                         </ul>
                     </li>
@@ -449,9 +449,41 @@
 
             $(".dt-buttons").html(html);
 
-            $("#ToExcelBtn").on("click", function () {
-                window.open("export")
-            })
+            $("#ToExcelBtn").click(function(){
+                const xhr = new XMLHttpRequest();
+                //xhr.open('POST', "http://swagger.xjcec.com/system/sysUser/userListExport", true);
+                //xhr.open('POST', "http://localhost:9999/system/sysUser/userListExport", true);
+                xhr.open('GET', "export", true);
+
+                xhr.responseType = "blob";
+
+                xhr.onload = () => {
+                    console.log(xhr);
+                    console.log(xhr.response);
+                    const blob = xhr.response;
+                    const blobUrl = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.download="运行行政隔离牌管理.xlsx"
+                    a.href = blobUrl;
+                    a.target = '_blank';
+                    a.click();
+                }
+
+                var params={
+                    "pageNum": 1,
+                    "pageSize": 11,
+                    "userType": 2,
+                    "keyWord": "15111111"
+                }
+
+                var params2 = {"flowType":3,"pageNum":1,"pageSize":10}
+
+                xhr.setRequestHeader("Content-Type","application/json;charset=UTF-8");
+                xhr.setRequestHeader("Xjcec-Auth","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbiIsInRlbGVwaG9uZSI6ImFkbWluIiwidXNlck5hbWUiOiJhZG1pbiIsInR5cGUiOjEsInVzZXJJZCI6IjEiLCJhdXRob3JpdGllcyI6WyJkZWZhdWx0Il0sInBhcmVudElkIjoibnVsbCIsImNsaWVudF9pZCI6InhqY2VjIiwicmVhbE5hbWUiOiJhZG1pbiIsInNjb3BlIjpbImFsbCJdLCJwbGF0Zm9ybV9pZCI6MTAwMDAsImV4cCI6MTY0ODY5NzUxNywianRpIjoiOGZmMGRmYTYtMGJjZC00OTVmLTk1ZTctY2U0NzM2YzkyZWI3In0.7gPbOjtYoWEGqF-Zq5BOok_oEYTc62QHOo7GsN2vhZI");
+                xhr.setRequestHeader("client-type","trade_back");
+                xhr.send(JSON.stringify(params2));
+            });
         });
     });
 

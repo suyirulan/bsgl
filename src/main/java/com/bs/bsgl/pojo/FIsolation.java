@@ -1,25 +1,27 @@
 package com.bs.bsgl.pojo;
 
+import com.bs.bsgl.core.domain.poi.Excel;
+
 public class FIsolation {
 
     private static final long serialVersionUID = 1L;
 
     private String gid;
-
+    @Excel(name = "序号",width = 10,height = 20)
     private Integer sequence;
 
     private String signid;
-
+    @Excel(name = "隔离类型",width = 20,height = 20)
     private String quarantinetype;
-
+    @Excel(name = "机组号",width = 10,height = 20)
     private String unitNo;
-
+    @Excel(name = "类型",width = 20,height = 20)
     private String isolationtype;
-
+    @Excel(name = "标志(KKS码）",width = 15,height = 20)
     private String kksno;
-
+    @Excel(name = "位置",width = 15,height = 20)
     private String position;
-
+    @Excel(name = "设备名称",width = 40,height = 20)
     private String deviceName;
 
     public String getGid() {
