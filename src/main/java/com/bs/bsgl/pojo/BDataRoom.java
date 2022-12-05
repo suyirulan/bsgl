@@ -9,20 +9,20 @@ import java.util.Date;
 public class BDataRoom {
 
     private static final long serialVersionUID = 1L;
-    @Excel(name = "房间编号")
+    @Excel(name = "房间编号",width = 20,height = 20)
     private String roomno;
-    @Excel(name = "房间说明")
+    @Excel(name = "房间说明",width = 40,height = 20)
     private String roomdis;
-    @Excel(name = "房间名称")
+    @Excel(name = "房间名称",width = 20,height = 20)
     private String roomname;
-    @Excel(name = "职责区")
+    @Excel(name = "职责区",width = 10,height = 20)
     private String dutyArea;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+08:00")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @Excel(name = "最后修改时间",dateFormat = "yyyy-MM-dd HH:mm:ss")
+    //@Excel(name = "最后修改时间",dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date lupTime;
-    @Excel(name = "最后修改人")
+    //@Excel(name = "最后修改人")
     private String editUser;
 
     public String getRoomno() {

@@ -8,30 +8,30 @@ import java.util.Date;
 
 public class BDataIsolationCard {
     private static final long serialVersionUID = 1L;
-    @Excel(name = "id")
+    //@Excel(name = "id")
     private String gid;
-    @Excel(name = "隔离类型")
+    @Excel(name = "隔离类型",width = 20,height = 20)
     private String isolationType;
-    @Excel(name = "机组号")
+    @Excel(name = "机组号",width = 10,height = 20)
     private String unitNo;
-    @Excel(name = "类型")
+    @Excel(name = "类型",width = 10,height = 20)
     private String cType;
-    @Excel(name = "KKS码")
+    @Excel(name = "KKS码",width = 20,height = 20)
     private String kksno;
-    @Excel(name = "位置")
+    @Excel(name = "位置",width = 20,height = 20)
     private String postion;
-    @Excel(name = "状态")
+    @Excel(name = "状态",width = 10,height = 20)
     private String iState;
-    @Excel(name = "设备名称")
+    @Excel(name = "设备名称",width = 20,height = 20)
     private String deviceName;
-    @Excel(name = "所属责任区")
+    @Excel(name = "所属责任区",width = 10,height = 20)
     private String dutyArea;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+08:00")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @Excel(name = "最后修改时间",dateFormat = "yyyy-MM-dd HH:mm:ss")
+    //@Excel(name = "最后修改时间",dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date lupTime;
-    @Excel(name = "最后修改人")
+    //@Excel(name = "最后修改人")
     private String editUser;
 
     public String getGid() {
