@@ -432,19 +432,21 @@ public class ExcelUtil<T>
         style.setTopBorderColor(IndexedColors.GREY_50_PERCENT.getIndex());
         style.setBorderBottom(BorderStyle.THIN);
         style.setBottomBorderColor(IndexedColors.GREY_50_PERCENT.getIndex());
-       /* Sheet sheet1 = wb.getSheetAt(0);
 
-        int physicalNumberOfRows = sheet1.getPhysicalNumberOfRows();
-
-        for(int i = 0; i <= sheet1.getLastRowNum() ; i ++) {
-            Row row = sheet1.getRow(i);
-            if (i%2==0 && i>0){
-                for(int j = 0; j < row.getPhysicalNumberOfCells(); j ++) {
-
-                style.setFillForegroundColor(IndexedColors.GREY_50_PERCENT.getIndex());
-                style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-                    Cell cell = row.getCell(j);
-                    cell.setCellStyle(style);
+        /**
+         * 隔行换色
+         * */
+        /*int totalRows = sheet.getLastRowNum();
+        int totalCells;
+        Row row;
+        for (int i = 2; i <= totalRows; i++) {
+            if (i % 2 == 0) {
+                row = sheet.getRow(i);
+                totalCells = row.getPhysicalNumberOfCells();
+                for (int j = 0; j < totalCells; j++) {
+                    style.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
+                    style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+                    row.getCell(j).setCellStyle(style);
                 }
             }
         }*/

@@ -7,9 +7,7 @@ public class FIsolation {
     private static final long serialVersionUID = 1L;
 
     private String gid;
-    @Excel(name = "序号",width = 10,height = 20)
     private Integer sequence;
-
     private String signid;
     @Excel(name = "隔离类型",width = 20,height = 20)
     private String quarantinetype;

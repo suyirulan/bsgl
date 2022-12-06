@@ -7,9 +7,7 @@ public class FRoom {
     private static final long serialVersionUID = 1L;
 
     private String gid;
-    @Excel(name = "序号",width = 10,height = 20)
     private Integer sequence;
-    @Excel(name = "序号",width = 10,height = 20)
     private String signid;
     @Excel(name = "长（mm）",width = 10,height = 20)
     private Integer length;

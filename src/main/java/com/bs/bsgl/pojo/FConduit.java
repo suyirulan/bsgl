@@ -11,7 +11,6 @@ public class FConduit {
     private static final long serialVersionUID = 1L;
 
     private String gid;
-    @Excel(name = "序号",width = 10,height = 20)
     private Integer sequence;
     private String signid;
     @Excel(name = "管道编号",width = 10,height = 20)
