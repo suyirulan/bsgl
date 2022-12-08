@@ -3,6 +3,7 @@ package com.bs.bsgl.controller;
 import com.bs.bsgl.core.domain.AjaxResult;
 import com.bs.bsgl.core.domain.poi.ExcelUtil;
 import com.bs.bsgl.pojo.FIsolation;
+import com.bs.bsgl.pojo.FIsolationReq;
 import com.bs.bsgl.pojo.FKks;
 import com.bs.bsgl.service.FIsolationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,13 +39,13 @@ public class FIsolationController {
 
     @PostMapping("Add")
     @ResponseBody
-    public AjaxResult addFIsolation(FIsolation FIsolation) {
+    public AjaxResult addFIsolation(FIsolationReq FIsolation) {
         return FIsolationService.addFIsolation(FIsolation);
     }
 
     @PutMapping("Update")
     @ResponseBody
-    public AjaxResult updateFIsolation(FIsolation FIsolation) {
+    public AjaxResult updateFIsolation(FIsolationReq FIsolation) {
         return FIsolationService.updateFIsolationById(FIsolation);
     }
 

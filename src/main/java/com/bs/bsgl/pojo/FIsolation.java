@@ -24,6 +24,26 @@ public class FIsolation {
     @Excel(name = "设备名称",width = 40,height = 20)
     private String deviceName;
 
+    private String state;
+
+    private String remark;
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
     public String getGid() {
         return gid;
     }

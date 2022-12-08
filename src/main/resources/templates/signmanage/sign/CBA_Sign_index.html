@@ -427,12 +427,49 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-info waves-effect waves-light"
-                            onclick="saveKksSign()">保存</button>
-                </div>
+
             </form>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">附件列表</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="form-group AttachmentsForm">
+                            <input type="hidden" name="gid" value="" id="Attachments_gid"/>
+                            <input type="hidden" name="sign_signtype" value="" id="sign_signtypeA"/>
+                            <p>
+                                1. 单个文件大小不能超过：<code>3MB</code>；<br/>
+                                2. 支持的文件扩展名为：<code>jpg, jpeg, png, doc, docx, ppt, pptx, txt, pdf, zip</code>
+                            </p>
+                            <div class="form-group form-inline">
+                                <label for="attachmentFile">文件：</label>
+                                <input type="file" name="file" class="form-control" id="attachmentFile" placeholder="选择文件" />
+                                <button type="button" class="btn-primary btn-custom waves-effect waves-light btn-xs m-b-5" onclick="uploadFile()"><i class="ion-arrow-up-a"></i>&nbsp;上&nbsp;传&nbsp;</button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <table class="table table-bordered table-hover" id="AttachmentsTable" >
+                                <thead>
+                                <tr>
+                                    <th class="text-center col-md-2">序号</th>
+                                    <th class="text-center">文件名</th>
+                                    <th class="text-center">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-info waves-effect waves-light"
+                        onclick="saveKksSign()">保存</button>
+            </div>
 
 
         </div>
@@ -592,7 +629,7 @@
                         "data": "gid", "width": "10%",
                         render: function (data, type, row) {
                             // if (type === 'display' && 10 === row.signstate) {
-                            if (type === 'display' ) {
+                            if (type === 'display' ) {69
                                 var html = '';
                                 html += "<button type='button' onclick='EditKksSign("+JSON.stringify(row)+")' class='btn-primary btn-custom waves-effect waves-light btn-xs m-b-5' data-target='#con-close-modal1'  data-toggle='modal'><i class='fa fa-edit'></i>&nbsp;修改</button>&nbsp;&nbsp;";
                                 html += "<button type='button' onclick='DeleteKksSign(" + JSON.stringify(row) + ")'  class='btn-primary btn-custom waves-effect waves-light btn-xs m-b-5' ><i class='glyphicon glyphicon-trash'></i>&nbsp;删除</button>";
@@ -788,6 +825,18 @@
                 }
                 else {
                     alert("删除失败")
+                }
+                window.location.reload()
+            })
+        }
+
+        function uploadFile(){
+            $.post("/signmanage/sign/FKks/uploadFile/"+gid.gid, function (result) {
+                if (result.code == "200") {
+                    alert("上传成功")
+                }
+                else {
+                    alert("上传失败")
                 }
                 window.location.reload()
             })

@@ -14,6 +14,8 @@
         <result column="KKSNO" property="kksno"/>
         <result column="POSITION" property="position"/>
         <result column="DEVICE_NAME" property="deviceName"/>
+        <result column="REMARK" property="remark"/>
+        <result column="STATE" property="state"/>
     </resultMap>
 
     <select id="getFIsolationList" parameterType="com.bs.bsgl.pojo.FIsolation" resultMap="Result">
@@ -26,8 +28,8 @@
     </select>
 
     <insert id="addFIsolation" parameterType="com.bs.bsgl.pojo.FIsolation">
-        insert into jnpc_bsgl_f_isolation_signange (GID, SEQUENCE, SIGNID, QUARANTINETYPE, UNIT_NO, ISOLATIONTYPE, KKSNO, POSITION, DEVICE_NAME)
-        values(#{gid}, #{sequence},#{signid},#{quarantinetype},#{unitNo},#{isolationtype},#{kksno}, #{position}, #{deviceName})
+        insert into jnpc_bsgl_f_isolation_signange (GID, SEQUENCE, SIGNID, QUARANTINETYPE, UNIT_NO, ISOLATIONTYPE, KKSNO, POSITION, DEVICE_NAME,REMARK,STATE)
+        values(#{gid}, #{sequence},#{signid},#{quarantinetype},#{unitNo},#{isolationtype},#{kksno}, #{position}, #{deviceName}, #{remark}, #{state})
     </insert>
 
     <update id="updateFIsolationById" parameterType="com.bs.bsgl.pojo.FIsolation">
@@ -41,6 +43,8 @@
             <if test="kksno != null and kksno!=''">KKSNO = #{kksno},</if>
             <if test="position != null and position!=''">POSITION = #{position},</if>
             <if test="deviceName != null and deviceName!=''">DEVICE_NAME = #{deviceName},</if>
+            <if test="remark != null and remark!=''">REMARK = #{remark},</if>
+            <if test="state != null and state!=''">STATE = #{state},</if>
         </set>
         where GID = #{gid}
     </update>

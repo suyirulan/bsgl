@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bs.bsgl.mapper.FSignangeMapper">
+
+    <resultMap id="Result" type="com.bs.bsgl.pojo.FSignange">
+        <id column="GID" property="gid"/>
+        <result column="SIGNID" property="signid"/>
+        <result column="SIGNTYPE" property="signtype"/>
+        <result column="SIGNSTATE" property="signstate"/>
+        <result column="ISSCAFFOLDING" property="isscaffolding"/>
+        <result column="DEFECTTYPE" property="defecttype"/>
+        <result column="MATERIAL" property="material"/>
+        <result column="CREATE_Z" property="createZ"/>
+        <result column="CREATE_R" property="createR"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="LIABILITY_Z" property="liabilityZ"/>
+        <result column="LIABILITY_Q" property="liabilityQ"/>
+        <result column="DISTRIBUTE" property="distribute"/>
+        <result column="SENDEE" property="sendee"/>
+        <result column="SSENDEE" property="ssendee"/>
+        <result column="PROCESSING" property="processing"/>
+        <result column="PROCESSINGTIME" property="processingtime"/>
+        <result column="NOHANDLE" property="nohandle"/>
+        <result column="REMARK" property="remark"/>
+        <result column="FLOWNO" property="flowno"/>
+    </resultMap>
+
+    <select id="getList" parameterType="com.bs.bsgl.pojo.FSignange" resultMap="Result">
+        select * from jnpc_bsgl_f_signange
+        order by CREATE_TIME desc
+    </select>
+
+    <select id="getById" resultMap="Result">
+        select * from jnpc_bsgl_f_signange where GID = #{gid}
+    </select>
+
+    <select id="getBySignid" resultMap="Result">
+        select * from jnpc_bsgl_f_signange where SIGNID = #{signid}
+    </select>
+
+    <insert id="addFSignange" parameterType="com.bs.bsgl.pojo.FSignange">
+        insert into jnpc_bsgl_f_signange (GID, SIGNID, SIGNTYPE, SIGNSTATE, ISSCAFFOLDING, DEFECTTYPE, MATERIAL, CREATE_Z, CREATE_R, CREATE_TIME, LIABILITY_Z, LIABILITY_Q,
+                                          DISTRIBUTE, SENDEE,SSENDEE,PROCESSING,PROCESSINGTIME,NOHANDLE,REMARK,FLOWNO)
+        values(#{gid}, #{signid},#{signtype},#{signstate},#{isscaffolding},#{defecttype},#{material}, #{createZ}, #{createR},#{createTime}, #{liabilityZ}, #{liabilityQ},
+               #{distribute},#{sendee},#{ssendee},#{processing},#{processingtime},#{nohandle},#{remark},#{flowno})
+    </insert>
+
+    <update id="updateFSignangeBySignid" parameterType="com.bs.bsgl.pojo.FSignange">
+        update jnpc_bsgl_f_signange
+        <set>
+            <if test="signstate != null and signstate!=''">SIGNSTATE = #{signstate},</if>
+            <if test="isscaffolding != null and isscaffolding!=''">ISSCAFFOLDING = #{isscaffolding},</if>
+            <if test="defecttype != null and defecttype!=''">DEFECTTYPE = #{defecttype},</if>
+            <if test="material != null and material!=''">MATERIAL = #{material},</if>
+            <if test="createZ != null and createZ!=''">CREATE_Z = #{createZ},</if>
+            <if test="createR != null and createR!=''">CREATE_R = #{createR},</if>
+            <if test="createTime != null and createTime!=''">CREATE_TIME = #{createTime},</if>
+            <if test="liabilityZ != null and liabilityZ!=''">LIABILITY_Z = #{liabilityZ},</if>
+            <if test="liabilityQ != null and liabilityQ!=''">LIABILITY_Q = #{liabilityQ},</if>
+            <if test="distribute != null and distribute!=''">DISTRIBUTE = #{distribute},</if>
+            <if test="sendee != null and sendee!=''">SENDEE = #{sendee},</if>
+            <if test="ssendee != null and ssendee!=''">SSENDEE = #{ssendee},</if>
+            <if test="processing != null and processing!=''">PROCESSING = #{processing},</if>
+            <if test="processingtime != null and processingtime!=''">PROCESSINGTIME = #{processingtime},</if>
+            <if test="nohandle != null and nohandle!=''">NOHANDLE = #{nohandle},</if>
+            <if test="remark != null and remark!=''">REMARK = #{remark},</if>
+            <if test="flowno != null and flowno!=''">FLOWNO = #{flowno},</if>
+        </set>
+        where SIGNID = #{signid}
+    </update>
+
+    <delete id="deleteById">
+        delete from jnpc_bsgl_f_signange where GID = #{gid}
+    </delete>
+
+</mapper>
