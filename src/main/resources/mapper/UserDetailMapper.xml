@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bs.bsgl.mapper.UserDetailMapper">
+
+    <resultMap id="Result" type="com.bs.bsgl.pojo.dto.UserDetailDto">
+        <id column="ID" property="id"></id>
+        <result column="USER_ID" property="userId"></result>
+        <result column="ROLE_ID" property="roleId"></result>
+        <result column="DEPARTMENT_ID" property="departmentId"></result>
+    </resultMap>
+    <insert id="saveUser" parameterType="com.bs.bsgl.pojo.dto.UserDetailDto">
+        insert into user_detail (ID,USER_ID,ROLE_ID,DEPARTMENT_ID)
+        values(#{id},#{userId},#{roleId},#{departmentId})
+    </insert>
+    <delete id="deleteById">
+        delete from user_detail where ID=#{id}
+    </delete>
+    <select id="getUserList" resultMap="Result">
+        select ID, USER_ID,DEPARTMENT_ID,ROLE_ID from user_detail
+        <where>
+
+            ROLE_ID = #{roleId}
+
+        </where>
+
+    </select>
+    <select id="selUserId" resultMap="Result">
+        select * from user_detail where  ID=#{id}
+    </select>
+
+
+</mapper>

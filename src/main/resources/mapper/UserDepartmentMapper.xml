@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bs.bsgl.mapper.UserDepartmentMapper">
+
+    <resultMap id="Result" type="com.bs.bsgl.pojo.vo.UserDepartmentVo">
+        <id column="ID" property="departmentId"></id>
+        <result column="ORGANIZATION_ID" property="organizationId"></result>
+        <result column="DEPARTMENT_NAME" property="departmentName"></result>
+
+
+    </resultMap>
+    <select id="getDepartmentList" resultMap="Result">
+        select ID,ORGANIZATION_ID,DEPARTMENT_NAME from department
+        <where>
+            <if test="departmentName != null and departmentName!=''">and DEPARTMENT_NAME like concat('%', #{departmentName},'%') </if>
+        </where>
+    </select>
+    <select id="getDepartmentById" resultMap="Result">
+        select DEPARTMENT_NAME from department where ID=#{departmentId}
+    </select>
+
+
+</mapper>
