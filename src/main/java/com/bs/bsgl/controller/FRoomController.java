@@ -4,6 +4,7 @@ import com.bs.bsgl.core.domain.AjaxResult;
 import com.bs.bsgl.core.domain.poi.ExcelUtil;
 import com.bs.bsgl.pojo.FKks;
 import com.bs.bsgl.pojo.FRoom;
+import com.bs.bsgl.pojo.FRoomReq;
 import com.bs.bsgl.service.FRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,13 +39,13 @@ public class FRoomController {
 
     @PostMapping("Add")
     @ResponseBody
-    public AjaxResult addFRoom(FRoom FRoom) {
+    public AjaxResult addFRoom(FRoomReq FRoom) {
         return FRoomService.addFRoom(FRoom);
     }
 
     @PutMapping("Update")
     @ResponseBody
-    public AjaxResult updateFRoom(FRoom FRoom) {
+    public AjaxResult updateFRoom(FRoomReq FRoom) {
         return FRoomService.updateFRoomById(FRoom);
     }
 

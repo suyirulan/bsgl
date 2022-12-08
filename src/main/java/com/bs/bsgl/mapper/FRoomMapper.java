@@ -1,6 +1,7 @@
 package com.bs.bsgl.mapper;
 
 import com.bs.bsgl.pojo.FRoom;
+import com.bs.bsgl.pojo.FRoomReq;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -12,9 +13,9 @@ public interface FRoomMapper {
 
     FRoom getFRoomById(String gid);
 
-    int addFRoom(FRoom FRoom);
+    int addFRoom(FRoomReq FRoom);
 
-    int updateFRoomById(FRoom FRoom);
+    int updateFRoomById(FRoomReq FRoom);
 
     int deleteById(String gid);
 }

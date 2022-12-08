@@ -1,6 +1,7 @@
 package com.bs.bsgl.mapper;
 
 import com.bs.bsgl.pojo.FIsolation;
+import com.bs.bsgl.pojo.FIsolationReq;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -12,9 +13,9 @@ public interface FIsolationMapper {
 
     FIsolation getFIsolationById(String gid);
 
-    int addFIsolation(FIsolation FIsolation);
+    int addFIsolation(FIsolationReq FIsolation);
 
-    int updateFIsolationById(FIsolation FIsolation);
+    int updateFIsolationById(FIsolationReq FIsolation);
 
     int deleteById(String gid);
 }

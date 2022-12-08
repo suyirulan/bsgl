@@ -1,6 +1,7 @@
 package com.bs.bsgl.mapper;
 
 import com.bs.bsgl.pojo.FConduit;
+import com.bs.bsgl.pojo.FConduitReq;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -12,9 +13,9 @@ public interface FConduitMapper {
 
     FConduit getFConduitById(String gid);
 
-    int addFConduit(FConduit FConduit);
+    int addFConduit(FConduitReq FConduit);
 
-    int updateFConduitById(FConduit FConduit);
+    int updateFConduitById(FConduitReq FConduit);
 
     int deleteById(String gid);
 }

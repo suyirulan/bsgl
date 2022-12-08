@@ -397,6 +397,41 @@
                     </div>
                 </div>
 
+                <div class="panel panel-default">
+                    <div class="panel-heading">附件列表</div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="form-group AttachmentsForm">
+                                <input type="hidden" name="gid" value="" id="Attachments_gid"/>
+                                <input type="hidden" name="sign_signtype" value="" id="sign_signtypeA"/>
+                                <p>
+                                    1. 单个文件大小不能超过：<code>3MB</code>；<br/>
+                                    2. 支持的文件扩展名为：<code>jpg, jpeg, png, doc, docx, ppt, pptx, txt, pdf, zip</code>
+                                </p>
+                                <div class="form-group form-inline">
+                                    <label for="attachmentFile">文件：</label>
+                                    <input type="file" name="file" class="form-control" id="attachmentFile" placeholder="选择文件" />
+                                    <button type="button" class="btn-primary btn-custom waves-effect waves-light btn-xs m-b-5" onclick="uploadFile()"><i class="ion-arrow-up-a"></i>&nbsp;上&nbsp;传&nbsp;</button>
+                                </div>
+                            </div>
+
+                            <div>
+                                <table class="table table-bordered table-hover" id="AttachmentsTable" >
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center col-md-2">序号</th>
+                                        <th class="text-center">文件名</th>
+                                        <th class="text-center">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">取消</button>
                     <button type="button" class="btn btn-info waves-effect waves-light"

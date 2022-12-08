@@ -3,6 +3,7 @@ package com.bs.bsgl.controller;
 import com.bs.bsgl.core.domain.AjaxResult;
 import com.bs.bsgl.core.domain.poi.ExcelUtil;
 import com.bs.bsgl.pojo.FConduit;
+import com.bs.bsgl.pojo.FConduitReq;
 import com.bs.bsgl.pojo.FIsolation;
 import com.bs.bsgl.service.FConduitService;
 import com.bs.bsgl.service.FIsolationService;
@@ -39,13 +40,13 @@ public class FConduitController {
 
     @PostMapping("Add")
     @ResponseBody
-    public AjaxResult addFConduit(FConduit FConduit) {
+    public AjaxResult addFConduit(FConduitReq FConduit) {
         return FConduitService.addFConduit(FConduit);
     }
 
     @PutMapping("Update")
     @ResponseBody
-    public AjaxResult updateFConduit(FConduit FConduit) {
+    public AjaxResult updateFConduit(FConduitReq FConduit) {
         return FConduitService.updateFConduitById(FConduit);
     }
 
