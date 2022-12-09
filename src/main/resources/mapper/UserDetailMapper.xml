@@ -17,6 +17,9 @@
     <delete id="deleteById">
         delete from user_detail where ID=#{id}
     </delete>
+    <delete id="deleteByRoleId">
+        delete from user_detail where ROLE_ID =#{id}
+    </delete>
     <select id="getUserList" resultMap="Result">
         select ID, USER_ID,DEPARTMENT_ID,ROLE_ID from user_detail
         <where>
@@ -28,6 +31,9 @@
     </select>
     <select id="selUserId" resultMap="Result">
         select * from user_detail where  ID=#{id}
+    </select>
+    <select id="selDetail" resultMap="Result">
+        select * from user_detail where ROLE_ID=#{id}
     </select>
 
 

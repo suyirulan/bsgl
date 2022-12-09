@@ -16,4 +16,8 @@ public interface UserDetailMapper {
     int deleteById(String id);
 
     UserDetailDto selUserId(String id);
+
+    int deleteByRoleId(String id);
+
+    List<UserDetailDto> selDetail(String id);
 }

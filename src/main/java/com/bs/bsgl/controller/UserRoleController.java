@@ -41,7 +41,7 @@ public class UserRoleController {
 
     @RequestMapping("index")
     public String index() {
-        return "/sys/cba/index";
+        return "/signmanage/sign/Role_index";
     }
 
     @GetMapping("list")
@@ -91,7 +91,7 @@ public class UserRoleController {
     //关联用户
     @PostMapping("BindingUser")
     @ResponseBody
-    public AjaxResult BindingUser(@RequestBody  List<UserDetailDto> detailDto){
+    public AjaxResult BindingUser(  List<UserDetailDto> detailDto){
         userDetailService.saveUser(detailDto);
         return AjaxResult.success() ;
     }

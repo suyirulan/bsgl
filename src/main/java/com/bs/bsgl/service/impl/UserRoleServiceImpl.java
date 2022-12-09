@@ -4,15 +4,20 @@ import com.bs.bsgl.core.domain.AjaxResult;
 import com.bs.bsgl.core.domain.IdUtils;
 import com.bs.bsgl.core.domain.UUID;
 import com.bs.bsgl.mapper.FRoomMapper;
+import com.bs.bsgl.mapper.UserDetailMapper;
+import com.bs.bsgl.mapper.UserMapper;
 import com.bs.bsgl.mapper.UserRoleMapper;
 import com.bs.bsgl.pojo.FRoom;
 import com.bs.bsgl.pojo.UserRole;
+import com.bs.bsgl.pojo.dto.UserDetailDto;
 import com.bs.bsgl.pojo.vo.UserRoleVo;
 import com.bs.bsgl.service.FRoomService;
 import com.bs.bsgl.service.UserRoleService;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,6 +26,12 @@ public class UserRoleServiceImpl implements UserRoleService {
 
     @Autowired
     UserRoleMapper userRoleMapper;
+
+    @Autowired
+    UserDetailMapper userDetailMapper;
+
+    @Autowired
+    UserMapper userMapper;
 
     @Override
     public List<UserRole> getRoleList(UserRole role) {
@@ -61,10 +72,19 @@ public class UserRoleServiceImpl implements UserRoleService {
     }
 
     @Override
+    @Transactional
     public AjaxResult delete(String id) {
         if (StringUtils.isEmpty(id)) {
             return AjaxResult.error("请选择删除ID");
         }
+
+        List<UserDetailDto> userDetailDtos = userDetailMapper.selDetail(id);
+        for (UserDetailDto userDetailDto:userDetailDtos){
+            userMapper.deleteBinding(userDetailDto);
+        }
+
+        userDetailMapper.deleteByRoleId(id);
+
         return AjaxResult.success(userRoleMapper.deleteById(id));
     }
 }
