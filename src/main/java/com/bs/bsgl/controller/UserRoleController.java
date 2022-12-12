@@ -62,7 +62,7 @@ public class UserRoleController {
         return userRoleService.addRole(role);
     }
 
-    @PutMapping("Update")
+    @PostMapping("Update")
     @ResponseBody
     public AjaxResult updateRole(UserRoleVo role) {
         return userRoleService.updateRoleById(role);

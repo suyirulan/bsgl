@@ -188,8 +188,8 @@
                 </div>
 
                 <div>
-                    <button type="button" id="addToTable3" data-toggle="modal" data-target="#con-close-modal3" class="btn btn-primary">
-                        <i class="fa fa-plus"></i>新增数据
+                    <button type="button" id="btn_add" data-toggle="modal" data-target="#con-close-modal" class="btn btn-primary">
+                        <i class="fa fa-plus"></i>新增角色
                     </button>
                 </div>
 
@@ -220,13 +220,55 @@
                 </div>
 
             </div> <!-- container -->
-
-
-
         </div>
     </div>
 </div>
 
+
+<div id="con-close-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+     style="display: none" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">角色新增</h4>
+            </div>
+            <form action="" method="POST" id="CbaForm">
+                <input type="hidden" id="roleId"  value="" />
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="roleCode" class="control-label">角色编码：</label>
+                                <input type="text" class="form-control" id="roleCode" placeholder="请输入角色编码">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="roleName" class="control-label">角色名称：</label>
+                                <input type="text" class="form-control" id="roleName" placeholder="请输入角色名称">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group no-margin">
+                                <label for="remark" class="control-label">备注</label>
+                                <textarea class="form-control autogrow" id="remark" placeholder="角色备注"
+                                          style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 104px"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-info waves-effect waves-light" onclick="Save()">保存</button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 </body>
 
@@ -289,12 +331,13 @@
                 { "data": "roleName", "width": "20%" },	//管道名称
                 { "data": "remark", "width": "40%" },	//介质
                 {
-                    "data": "roleId", "width": "10%", render: function (data, type, row) {
+                    "data": "roleId", "width": "20%", render: function (data, type, row) {
                         // if (type === 'display' && 10 === row.signstate) {
                         if (type === 'display' ) {
                             var html = '';
-                            html += "<button type='button' onclick='EditPipeSign(" + JSON.stringify(row) + ")' class='btn-primary btn-custom waves-effect waves-light btn-xs m-b-5'  data-target='#con-close-modal3'  data-toggle='modal'><i class='fa fa-edit'></i>&nbsp;修改</button>&nbsp;"
-                            html += "<button type='button' onclick='DeletePipeSign(" + JSON.stringify(row) + ")'  class='btn-primary btn-custom waves-effect waves-light btn-xs m-b-5' ><i class='glyphicon glyphicon-trash'></i>&nbsp;删除</button>"
+                            html += '<button type="button" onclick=" Edit(\'' + data + '\')" class="btn-primary btn-custom waves-effect waves-light btn-xs m-b-5"  data-target="#con-close-modal"  data-toggle="modal"><i class="fa fa-edit"></i>&nbsp;修改</button>&nbsp;&nbsp;'
+                            html += '<button type="button" onclick=" Delete(\'' + data + '\')"  class="btn-primary btn-custom waves-effect waves-light btn-xs m-b-5"  ><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</button>&nbsp;&nbsp;'
+                            html += '<button type="button"  class="btn-primary btn-custom waves-effect waves-light btn-xs m-b-5"  ><i class="fa fa-plus"></i>&nbsp;添加用户</button>'
                             return html;
                         } else {
                             return data;
@@ -328,10 +371,16 @@
 
     });
 
+    $("#btn_add").click(function () {
+        $("#CbaForm").clearForm();
+    });
 
-    function DeletePipeSign(gid) {
-        $.post("/signmanage/sign/FConduit/delete/"+gid.gid, function (result) {
-            if (result.code == "200") {
+
+    function Delete(roleId) {
+        //$("#RoomForm").clearForm();
+        $.post("delete/"+roleId, function (json) {
+            if (json.code == "200") {
+
                 alert("删除成功")
             }
             else {
@@ -339,6 +388,56 @@
             }
             window.location.reload()
         })
+
+
+    }
+
+    function Edit(roleId) {
+        $.ajax({
+            type: "get",
+            url: "getById/" + roleId,
+            dateType: "json",
+            contentType: 'application/json',
+            success: function (result) {
+
+                console.log(result )
+                //var json = eval("(" + result + ")");
+
+                $("#roleCode").val(result.data.roleCode);
+                $("#roleName").val(result.data.roleName);
+                $("#remark").val(result.data.remark);
+                $("#roleId").val(result.data.roleId);
+            }
+        });
+    }
+
+    function Save() {
+
+
+        var model = {
+            roleCode: $("#roleCode").val(),
+            roleName: $("#roleName").val(),
+            remark: $("#remark").val(),
+            roleId: $("#roleId").val()
+        };
+        var actrul = "Add";
+        if (model.roleId != "") {
+            actrul = "Update";
+        }
+        $.post(actrul,model,function (result) {
+            if (result.code == "200") {
+
+                alert("保存成功")
+            }else if (result.msg=""){
+
+            }
+            else {
+                alert("保存失败")
+            }
+            window.location.reload()
+        })
+
+
     }
 </script>
 </html>
