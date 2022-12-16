@@ -35,3 +35,10 @@ mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+cas:
+  #cas服务端的登录地址
+  server-login-url: https://www.cainiao.com:8443/cas/login
+  #cas服务端的地址
+  server-url-prefix: https://www.cainiao.com:8443/cas
+  #客户端访问地址
+  client-host-url: http://192.168.1.173:8484/
