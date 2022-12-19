@@ -19,14 +19,19 @@ spring:
   application:
     name: bsgl
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://121.229.4.16:3306/signage?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true&allowMultiQueries=true
-    username: dcom
-    password: Dcom123456
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://121.229.4.16:3306/signage?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true&allowMultiQueries=true
+#    username: dcom
+#    password: Dcom123456
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@121.229.4.16:1521:orcl
+    username: SIGN
+    password: SIGN
     hikari:
       max-lifetime: 500000
       minimum-idle: 10
       maximum-pool-size: 100
+
   mvc:
     view:
       prefix: /
@@ -35,10 +40,16 @@ mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-cas:
-  #cas服务端的登录地址
-  server-login-url: https://www.cainiao.com:8443/cas/login
-  #cas服务端的地址
-  server-url-prefix: https://www.cainiao.com:8443/cas
-  #客户端访问地址
-  client-host-url: http://192.168.1.173:8484/
+#cas:
+#  #cas服务端的登录地址
+#  server-login-url: http://localhost:8443/cas/login
+#  #cas服务端的地址
+#  server-url-prefix: http://localhost:8443/cas
+#  #客户端访问地址
+#  client-host-url: http://localhost:8484/
+
+
+#  #cas服务端的登录地址
+#  server-login-url: https://sso.casuat.jnpc.com.cn/cas/login
+#  #cas服务端的地址
+#  server-url-prefix: https://sso.casuat.jnpc.com.cn/cas/

@@ -28,7 +28,6 @@ public class BDataIsolationCard {
     private String dutyArea;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+08:00")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     //@Excel(name = "最后修改时间",dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date lupTime;
     //@Excel(name = "最后修改人")

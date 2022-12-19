@@ -30,23 +30,23 @@
 
     <insert id="addFKks" parameterType="com.bs.bsgl.pojo.FKks">
         insert into jnpc_bsgl_f_kks_signange (GID, SEQUENCE, SIGNID, LENGTH, WIDTH, COLOR, O_COLOR, SIGNANGE_CONTENT, POSITION, S_COUNT, REMARK, ISCC1)
-        values(#{gid}, #{sequence},#{signid},#{length},#{width},#{color},#{oColor}, #{signangeContent}, #{position},#{sCount}, #{remark}, #{iscc1})
+        values(#{gid,jdbcType=VARCHAR}, #{sequence,jdbcType=INTEGER},#{signid,jdbcType=VARCHAR},#{length,jdbcType=INTEGER},#{width,jdbcType=INTEGER},#{color,jdbcType=VARCHAR},#{oColor,jdbcType=VARCHAR}, #{signangeContent,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR},#{sCount,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{iscc1,jdbcType=INTEGER})
     </insert>
 
     <update id="updateFKksById" parameterType="com.bs.bsgl.pojo.FKks">
         update jnpc_bsgl_f_kks_signange
         <set>
-            <if test="sequence != null and sequence!=''">SEQUENCE = #{sequence},</if>
-            <if test="signid != null and signid!=''">SIGNID = #{signid},</if>
-            <if test="length != null and length!=''">LENGTH = #{length},</if>
-            <if test="width != null and width!=''">WIDTH = #{width},</if>
-            <if test="color != null and color!=''">COLOR = #{color},</if>
-            <if test="oColor != null and oColor!=''">O_COLOR = #{oColor},</if>
-            <if test="signangeContent != null and signangeContent!=''">SIGNANGE_CONTENT = #{signangeContent},</if>
-            <if test="position != null and position!=''">POSITION = #{position},</if>
-            <if test="sCount != null and sCount!=''">S_COUNT = #{sCount},</if>
-            <if test="remark != null and remark!=''">REMARK = #{remark},</if>
-            <if test="iscc1 != null and iscc1!=''">ISCC1 = #{iscc1},</if>
+            <if test="sequence != null and sequence!=''">SEQUENCE = #{sequence,jdbcType=INTEGER},</if>
+            <if test="signid != null and signid!=''">SIGNID = #{signid,jdbcType=VARCHAR},</if>
+            <if test="length != null and length!=''">LENGTH = #{length,jdbcType=INTEGER},</if>
+            <if test="width != null and width!=''">WIDTH = #{width,jdbcType=INTEGER},</if>
+            <if test="color != null and color!=''">COLOR = #{color,jdbcType=VARCHAR},</if>
+            <if test="oColor != null and oColor!=''">O_COLOR = #{oColor,jdbcType=VARCHAR},</if>
+            <if test="signangeContent != null and signangeContent!=''">SIGNANGE_CONTENT = #{signangeContent,jdbcType=VARCHAR},</if>
+            <if test="position != null and position!=''">POSITION = #{position,jdbcType=VARCHAR},</if>
+            <if test="sCount != null and sCount!=''">S_COUNT = #{sCount,jdbcType=INTEGER},</if>
+            <if test="remark != null and remark!=''">REMARK = #{remark,jdbcType=VARCHAR},</if>
+            <if test="iscc1 != null and iscc1!=''">ISCC1 = #{iscc1,jdbcType=INTEGER},</if>
         </set>
         where GID = #{gid}
     </update>

@@ -32,6 +32,10 @@
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
+
+
+
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -49,6 +53,14 @@
             <artifactId>cas-client-autoconfig-support</artifactId>
             <version>2.3.0-GA</version>
         </dependency>
+
+        <!--oracle驱动-->
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+            <version>11.2.0.1.0</version>
+        </dependency>
+
 
         <!--easyExcel-->
         <dependency>
@@ -77,6 +89,8 @@
             <artifactId>easypoi-annotation</artifactId>
             <version>4.4.0</version>
         </dependency>
+
+
 
         <!--poi 导入导出-->
         <dependency>
@@ -132,6 +146,18 @@
         </dependencies>
     </dependencyManagement>
 
+    <repositories>
+        <!-- oracle驱动没有发布到中央仓库，只能从此仓库下载 -->
+        <repository>
+            <id>jeecg</id>
+            <name>jeecg Repository</name>
+            <url>http://maven.jeewx.com/nexus/content/repositories/jeecg</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
     <build>
         <resources>
             <resource>
@@ -183,6 +209,25 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <!--maven-jar-plugin，默认的打包插件，用来打普通的project JAR包；
+               maven-shade-plugin，用来打可执行JAR包，也就是所谓的fat JAR包；
+               maven-assembly-plugin，支持自定义的打包结构，也可以定制依赖项等-->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                    <compilerArgs>
+                        <arg>-XDignore.symbol.file</arg>
+                    </compilerArgs>
+                    <fork>true</fork>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -202,7 +247,7 @@
         </plugins>
     </build>
 
-    
+
 
 
 </project>

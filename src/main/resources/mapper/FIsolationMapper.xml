@@ -29,22 +29,22 @@
 
     <insert id="addFIsolation" parameterType="com.bs.bsgl.pojo.FIsolation">
         insert into jnpc_bsgl_f_isolation_signange (GID, SEQUENCE, SIGNID, QUARANTINETYPE, UNIT_NO, ISOLATIONTYPE, KKSNO, POSITION, DEVICE_NAME,REMARK,STATE)
-        values(#{gid}, #{sequence},#{signid},#{quarantinetype},#{unitNo},#{isolationtype},#{kksno}, #{position}, #{deviceName}, #{remark}, #{state})
+        values(#{gid,jdbcType=VARCHAR}, #{sequence,jdbcType=INTEGER},#{signid,jdbcType=VARCHAR},#{quarantinetype,jdbcType=VARCHAR},#{unitNo,jdbcType=VARCHAR},#{isolationtype,jdbcType=VARCHAR},#{kksno,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, #{deviceName,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR})
     </insert>
 
     <update id="updateFIsolationById" parameterType="com.bs.bsgl.pojo.FIsolation">
         update jnpc_bsgl_f_isolation_signange
         <set>
-            <if test="sequence != null and sequence!=''">SEQUENCE = #{sequence},</if>
-            <if test="signid != null and signid!=''">SIGNID = #{signid},</if>
-            <if test="quarantinetype != null and quarantinetype!=''">QUARANTINETYPE = #{quarantinetype},</if>
-            <if test="unitNo != null and unitNo!=''">UNIT_NO = #{unitNo},</if>
-            <if test="isolationtype != null and isolationtype!=''">ISOLATIONTYPE = #{isolationtype},</if>
-            <if test="kksno != null and kksno!=''">KKSNO = #{kksno},</if>
-            <if test="position != null and position!=''">POSITION = #{position},</if>
-            <if test="deviceName != null and deviceName!=''">DEVICE_NAME = #{deviceName},</if>
-            <if test="remark != null and remark!=''">REMARK = #{remark},</if>
-            <if test="state != null and state!=''">STATE = #{state},</if>
+            <if test="sequence != null and sequence!=''">SEQUENCE = #{sequence,jdbcType=INTEGER},</if>
+            <if test="signid != null and signid!=''">SIGNID = #{signid,jdbcType=VARCHAR},</if>
+            <if test="quarantinetype != null and quarantinetype!=''">QUARANTINETYPE = #{quarantinetype,jdbcType=VARCHAR},</if>
+            <if test="unitNo != null and unitNo!=''">UNIT_NO = #{unitNo,jdbcType=VARCHAR},</if>
+            <if test="isolationtype != null and isolationtype!=''">ISOLATIONTYPE = #{isolationtype,jdbcType=VARCHAR},</if>
+            <if test="kksno != null and kksno!=''">KKSNO = #{kksno,jdbcType=VARCHAR},</if>
+            <if test="position != null and position!=''">POSITION = #{position,jdbcType=VARCHAR},</if>
+            <if test="deviceName != null and deviceName!=''">DEVICE_NAME = #{deviceName,jdbcType=VARCHAR},</if>
+            <if test="remark != null and remark!=''">REMARK = #{remark,jdbcType=VARCHAR},</if>
+            <if test="state != null and state!=''">STATE = #{state,jdbcType=VARCHAR},</if>
         </set>
         where GID = #{gid}
     </update>

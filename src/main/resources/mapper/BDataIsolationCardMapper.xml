@@ -19,7 +19,7 @@
     </resultMap>
 
     <select id="getDataIsolationCardAll"  parameterType="com.bs.bsgl.pojo.BDataIsolationCard" resultMap="Result">
-        select * from jnpc_bsgl_b_data_isolation_card
+        select * from jnpc_bsgl_b_data_isolation
         <where>
             <if test="kksno != null and kksno!=''">and KKSNO like concat('%', #{kksno},'%') </if>
             <if test="unitNo != null and unitNo!=''">and UNIT_NO like concat('%', #{unitNo},'%') </if>
@@ -30,33 +30,33 @@
     </select>
 
     <select id="getIsolationCardById" resultMap="Result">
-        select * from jnpc_bsgl_b_data_isolation_card where GID = #{gid}
+        select * from jnpc_bsgl_b_data_isolation where GID = #{gid}
     </select>
 
     <insert id="addBDataIsolationCard" parameterType="com.bs.bsgl.pojo.BDataIsolationCard">
-        insert into jnpc_bsgl_b_data_isolation_card (GID, ISOLATION_TYPE, UNIT_NO, C_TYPE, KKSNO, POSTION, I_STATE, DEVICE_NAME, DUTY_AREA, LUPTIME, EDITUSER)
-        values(#{gid}, #{isolationType},#{unitNo},#{cType},#{kksno},#{postion},#{iState}, #{deviceName}, #{dutyArea}, #{lupTime}, #{editUser})
+        insert into jnpc_bsgl_b_data_isolation (GID, ISOLATION_TYPE, UNIT_NO, C_TYPE, KKSNO, POSTION, I_STATE, DEVICE_NAME, DUTY_AREA, LUPTIME, EDITUSER)
+        values(#{gid}, #{isolationType,jdbcType=VARCHAR},#{unitNo,jdbcType=VARCHAR},#{cType,jdbcType=VARCHAR},#{kksno,jdbcType=VARCHAR},#{postion,jdbcType=VARCHAR},#{iState,jdbcType=VARCHAR}, #{deviceName,jdbcType=VARCHAR}, #{dutyArea,jdbcType=VARCHAR}, #{lupTime,jdbcType=DATE}, #{editUser,jdbcType=VARCHAR})
     </insert>
 
     <update id="updateBDataIsolationCardById" parameterType="com.bs.bsgl.pojo.BDataIsolationCard">
-        update jnpc_bsgl_b_data_isolation_card
+        update jnpc_bsgl_b_data_isolation
         <set>
-            <if test="isolationType != null and isolationType!=''">ISOLATION_TYPE = #{isolationType},</if>
-            <if test="unitNo != null and unitNo!=''">UNIT_NO = #{unitNo},</if>
-            <if test="cType != null and cType!=''">C_TYPE = #{cType},</if>
-            <if test="kksno != null and kksno!=''">KKSNO = #{kksno},</if>
-            <if test="postion != null and postion!=''">POSTION = #{postion},</if>
-            <if test="iState != null and iState!=''">I_STATE = #{iState},</if>
-            <if test="deviceName != null and deviceName!=''">DEVICE_NAME = #{deviceName},</if>
-            <if test="dutyArea != null and dutyArea!=''">DUTY_AREA = #{dutyArea},</if>
-            <if test="lupTime != null">LUPTIME = #{lupTime},</if>
-            <if test="editUser != null and editUser!=''">EDITUSER = #{editUser},</if>
+            <if test="isolationType != null and isolationType!=''">ISOLATION_TYPE = #{isolationType,jdbcType=VARCHAR},</if>
+            <if test="unitNo != null and unitNo!=''">UNIT_NO = #{unitNo,jdbcType=VARCHAR},</if>
+            <if test="cType != null and cType!=''">C_TYPE = #{cType,jdbcType=VARCHAR},</if>
+            <if test="kksno != null and kksno!=''">KKSNO = #{kksno,jdbcType=VARCHAR},</if>
+            <if test="postion != null and postion!=''">POSTION = #{postion,jdbcType=VARCHAR},</if>
+            <if test="iState != null and iState!=''">I_STATE = #{iState,jdbcType=VARCHAR},</if>
+            <if test="deviceName != null and deviceName!=''">DEVICE_NAME = #{deviceName,jdbcType=VARCHAR},</if>
+            <if test="dutyArea != null and dutyArea!=''">DUTY_AREA = #{dutyArea,jdbcType=VARCHAR},</if>
+            <if test="lupTime != null">LUPTIME = #{lupTime,jdbcType=DATE},</if>
+            <if test="editUser != null and editUser!=''">EDITUSER = #{editUser,jdbcType=VARCHAR},</if>
         </set>
         where GID = #{gid}
     </update>
 
     <delete id="deleteById">
-        delete from jnpc_bsgl_b_data_isolation_card where GID = #{gid}
+        delete from jnpc_bsgl_b_data_isolation where GID = #{gid}
     </delete>
 
 </mapper>
