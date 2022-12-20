@@ -48,8 +48,10 @@ mybatis:
 #  #客户端访问地址
 #  client-host-url: http://localhost:8484/
 
-
+cas:
 #  #cas服务端的登录地址
-#  server-login-url: https://sso.casuat.jnpc.com.cn/cas/login
+  server-login-url: https://sso.casuat.jnpc.com.cn/cas/login
 #  #cas服务端的地址
-#  server-url-prefix: https://sso.casuat.jnpc.com.cn/cas/
+  server-url-prefix: https://sso.casuat.jnpc.com.cn/cas/
+#  #客户端访问地址
+  client-host-url: http://localhost:8484/
