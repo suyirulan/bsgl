@@ -12,7 +12,7 @@
     </resultMap>
 
     <insert id="addRole" parameterType="com.bs.bsgl.pojo.vo.UserRoleVo">
-        insert into user_role (ID,ROLE_CODE,ROLE_NAME,REMARK)
+        insert into BSGL_USER_ROLE (ID,ROLE_CODE,ROLE_NAME,REMARK)
         values
                <trim prefix="(" suffix=")" suffixOverrides=",">
                    #{roleId},#{roleCode},#{roleName},#{remark}
@@ -21,7 +21,7 @@
     </insert>
 
     <update id="updateRoleById" parameterType="com.bs.bsgl.pojo.vo.UserRoleVo">
-        update user_role
+        update BSGL_USER_ROLE
         <set>
             <if test="roleId != null and roleId!=''">ID = #{roleId},</if>
             <if test="roleCode != null and roleCode!=''">ROLE_CODE = #{roleCode},</if>
@@ -31,16 +31,16 @@
         where ID = #{roleId}
     </update>
     <delete id="deleteById">
-        delete from user_role where ID = #{roleId}
+        delete from BSGL_USER_ROLE where ID = #{roleId}
     </delete>
     <select id="getRoleList" resultMap="Result">
-        select ID,ROLE_CODE,ROLE_NAME,REMARK from user_role
+        select ID,ROLE_CODE,ROLE_NAME,REMARK from BSGL_USER_ROLE
         <where>
             <if test="roleName != null and roleName!=''">and ROLE_NAME like concat('%', #{roleName},'%') </if>
         </where>
     </select>
     <select id="getRoleById" resultMap="Result">
-        select ID ,ROLE_CODE,ROLE_NAME,REMARK from user_role where ID=#{roleId}
+        select ID ,ROLE_CODE,ROLE_NAME,REMARK from BSGL_USER_ROLE where ID=#{roleId}
     </select>
 
 

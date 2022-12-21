@@ -55,3 +55,4 @@ cas:
   server-url-prefix: https://sso.casuat.jnpc.com.cn/cas/
 #  #客户端访问地址
   client-host-url: http://localhost:8484/
+
