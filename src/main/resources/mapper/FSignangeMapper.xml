@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bs.bsgl.mapper.FSignangeMapper">
+
+    <resultMap id="Result" type="com.bs.bsgl.pojo.FSignange">
+        <id column="GID" property="gid"/>
+        <result column="SIGNID" property="signid"/>
+        <result column="SIGNTYPE" property="signtype"/>
+        <result column="SIGNSTATE" property="signstate"/>
+        <result column="ISSCAFFOLDING" property="isscaffolding"/>
+        <result column="DEFECTTYPE" property="defecttype"/>
+        <result column="MATERIAL" property="material"/>
+        <result column="CREATE_Z" property="createZ"/>
+        <result column="CREATE_R" property="createR"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="LIABILITY_Z" property="liabilityZ"/>
+        <result column="LIABILITY_Q" property="liabilityQ"/>
+        <result column="DISTRIBUTE" property="distribute"/>
+        <result column="SENDEE" property="sendee"/>
+        <result column="SSENDEE" property="ssendee"/>
+        <result column="PROCESSING" property="processing"/>
+        <result column="PROCESSINGTIME" property="processingtime"/>
+        <result column="NOHANDLE" property="nohandle"/>
+        <result column="REMARK" property="remark"/>
+        <result column="FLOWNO" property="flowno"/>
+    </resultMap>
+
+    <select id="getList" parameterType="com.bs.bsgl.pojo.FSignange" resultMap="Result">
+        select * from jnpc_bsgl_f_signange
+        order by CREATE_TIME desc
+    </select>
+
+    <select id="getById" resultMap="Result">
+        select * from jnpc_bsgl_f_signange where GID = #{gid}
+    </select>
+
+    <select id="getBySignid" resultMap="Result">
+        select * from jnpc_bsgl_f_signange where SIGNID = #{signid}
+    </select>
+
+    <insert id="addFSignange" parameterType="com.bs.bsgl.pojo.FSignange">
+        insert into jnpc_bsgl_f_signange (GID, SIGNID, SIGNTYPE, SIGNSTATE, ISSCAFFOLDING, DEFECTTYPE, MATERIAL, CREATE_Z, CREATE_R, CREATE_TIME, LIABILITY_Z, LIABILITY_Q,
+                                          DISTRIBUTE, SENDEE,SSENDEE,PROCESSING,PROCESSINGTIME,NOHANDLE,REMARK,FLOWNO)
+        values(#{gid,jdbcType=VARCHAR}, #{signid,jdbcType=VARCHAR},#{signtype,jdbcType=VARCHAR},#{signstate,jdbcType=VARCHAR},#{isscaffolding,jdbcType=INTEGER},#{defecttype,jdbcType=VARCHAR},#{material,jdbcType=VARCHAR}, #{createZ,jdbcType=VARCHAR}, #{createR,jdbcType=VARCHAR},#{createTime,jdbcType=VARCHAR}, #{liabilityZ,jdbcType=VARCHAR}, #{liabilityQ,jdbcType=VARCHAR},
+               #{distribute,jdbcType=VARCHAR},#{sendee,jdbcType=VARCHAR},#{ssendee,jdbcType=VARCHAR},#{processing,jdbcType=VARCHAR},#{processingtime,jdbcType=DATE},#{nohandle,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR},#{flowno,jdbcType=VARCHAR})
+    </insert>
+
+    <update id="updateFSignangeBySignid" parameterType="com.bs.bsgl.pojo.FSignange">
+        update jnpc_bsgl_f_signange
+        <set>
+            <if test="signstate != null and signstate!=''">SIGNSTATE = #{signstate,jdbcType=VARCHAR},</if>
+            <if test="isscaffolding != null and isscaffolding!=''">ISSCAFFOLDING = #{isscaffolding,jdbcType=INTEGER},</if>
+            <if test="defecttype != null and defecttype!=''">DEFECTTYPE = #{defecttype,jdbcType=VARCHAR},</if>
+            <if test="material != null and material!=''">MATERIAL = #{material,jdbcType=VARCHAR},</if>
+            <if test="createZ != null and createZ!=''">CREATE_Z = #{createZ,jdbcType=VARCHAR},</if>
+            <if test="createR != null and createR!=''">CREATE_R = #{createR,jdbcType=VARCHAR},</if>
+            <if test="createTime != null and createTime!=''">CREATE_TIME = #{createTime,jdbcType=VARCHAR},</if>
+            <if test="liabilityZ != null and liabilityZ!=''">LIABILITY_Z = #{liabilityZ,jdbcType=VARCHAR},</if>
+            <if test="liabilityQ != null and liabilityQ!=''">LIABILITY_Q = #{liabilityQ,jdbcType=VARCHAR},</if>
+            <if test="distribute != null and distribute!=''">DISTRIBUTE = #{distribute,jdbcType=VARCHAR},</if>
+            <if test="sendee != null and sendee!=''">SENDEE = #{sendee,jdbcType=VARCHAR},</if>
+            <if test="ssendee != null and ssendee!=''">SSENDEE = #{ssendee,jdbcType=VARCHAR},</if>
+            <if test="processing != null and processing!=''">PROCESSING = #{processing,jdbcType=VARCHAR},</if>
+            <if test="processingtime != null and processingtime!=''">PROCESSINGTIME = #{processingtime,jdbcType=DATE},</if>
+            <if test="nohandle != null and nohandle!=''">NOHANDLE = #{nohandle,jdbcType=VARCHAR},</if>
+            <if test="remark != null and remark!=''">REMARK = #{remark,jdbcType=VARCHAR},</if>
+            <if test="flowno != null and flowno!=''">FLOWNO = #{flowno,jdbcType=VARCHAR},</if>
+        </set>
+        where SIGNID = #{signid}
+    </update>
+
+    <delete id="deleteById">
+        delete from jnpc_bsgl_f_signange where GID = #{gid}
+    </delete>
+
+</mapper>

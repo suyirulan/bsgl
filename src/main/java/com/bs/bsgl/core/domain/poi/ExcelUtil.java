@@ -2,10 +2,9 @@ package com.bs.bsgl.core.domain.poi;
 
 import com.bs.bsgl.core.domain.AjaxResult;
 import com.sun.xml.internal.ws.util.UtilException;
-//import org.apache.poi.POIXMLDocumentPart;
 import org.apache.poi.POIXMLDocumentPart;
 import org.apache.poi.hssf.usermodel.*;
-//import org.apache.poi.ooxml.POIXMLDocumentPart;
+import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.CellRangeAddressList;
@@ -17,10 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
@@ -413,6 +409,9 @@ public class ExcelUtil<T>
         // 写入各条记录,每条记录对应excel表中的一行
         Map<String, CellStyle> styles = new HashMap<String, CellStyle>();
         CellStyle style = wb.createCellStyle();
+        int numberOfSheets = wb.getNumberOfSheets();
+        Sheet sheetAt = wb.getSheetAt(0);
+
         style.setAlignment(HorizontalAlignment.CENTER);
         style.setVerticalAlignment(VerticalAlignment.CENTER);
         Font titleFont = wb.createFont();
@@ -433,9 +432,31 @@ public class ExcelUtil<T>
         style.setTopBorderColor(IndexedColors.GREY_50_PERCENT.getIndex());
         style.setBorderBottom(BorderStyle.THIN);
         style.setBottomBorderColor(IndexedColors.GREY_50_PERCENT.getIndex());
+
+        /**
+         * 隔行换色
+         * */
+        /*int totalRows = sheet.getLastRowNum();
+        int totalCells;
+        Row row;
+        for (int i = 2; i <= totalRows; i++) {
+            if (i % 2 == 0) {
+                row = sheet.getRow(i);
+                totalCells = row.getPhysicalNumberOfCells();
+                for (int j = 0; j < totalCells; j++) {
+                    style.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
+                    style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+                    row.getCell(j).setCellStyle(style);
+                }
+            }
+        }*/
+
+
+
+
         Font dataFont = wb.createFont();
-        dataFont.setFontName("Arial");
-        dataFont.setFontHeightInPoints((short) 10);
+        dataFont.setFontName("宋体");
+        dataFont.setFontHeightInPoints((short) 12);
         style.setFont(dataFont);
         styles.put("data", style);
 
@@ -443,13 +464,13 @@ public class ExcelUtil<T>
         style.cloneStyleFrom(styles.get("data"));
         style.setAlignment(HorizontalAlignment.CENTER);
         style.setVerticalAlignment(VerticalAlignment.CENTER);
-        style.setFillForegroundColor(IndexedColors.GREY_50_PERCENT.getIndex());
+        style.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
         style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
         Font headerFont = wb.createFont();
-        headerFont.setFontName("Arial");
-        headerFont.setFontHeightInPoints((short) 10);
+        headerFont.setFontName("宋体");
+        headerFont.setFontHeightInPoints((short) 12);
         headerFont.setBold(true);
-        headerFont.setColor(IndexedColors.WHITE.getIndex());
+        headerFont.setColor(IndexedColors.BLACK.getIndex());
         style.setFont(headerFont);
         styles.put("header", style);
 
@@ -465,6 +486,7 @@ public class ExcelUtil<T>
         style = wb.createCellStyle();
         style.cloneStyleFrom(styles.get("data"));
         style.setAlignment(HorizontalAlignment.LEFT);
+
         styles.put("data1", style);
 
         style = wb.createCellStyle();

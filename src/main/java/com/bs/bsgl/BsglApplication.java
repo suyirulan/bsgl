@@ -1,5 +1,7 @@
 package com.bs.bsgl;
 
+
+import net.unicon.cas.client.configuration.EnableCasClient;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.util.ResourceUtils;
@@ -18,5 +20,4 @@ public class BsglApplication extends WebMvcConfigurationSupport {
         registry.addResourceHandler("/static/assets/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX + "/static/assets/");
         super.addResourceHandlers(registry);
     }
-
 }

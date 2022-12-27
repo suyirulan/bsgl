@@ -14,9 +14,9 @@ public interface BDataCbaMapper {
 
     BDataCba selectAllByGidAfter(String gid);
 
-    List<BDataCba> getBDataCbaById(String gid);
+    BDataCba getBDataCbaById(String gid);
 
     int updateDataCba(BDataCba dataCba);
 
-    int deleteByGids(String[] gids);
+    int deleteByGids(String gid);
 }

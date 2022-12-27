@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bs.bsgl.mapper.UserMapper">
+
+    <resultMap id="Result" type="com.bs.bsgl.pojo.vo.UserVo">
+        <id column="ID" property="userId"></id>
+        <result column="USER_CODE" property="userCode"></result>
+        <result column="USER_NAME" property="userName"></result>
+        <result column="DEPARTMENT_ID" property="departmentId"></result>
+    </resultMap>
+    <update id="updateBinding" parameterType="com.bs.bsgl.pojo.User">
+        update user set IS_BINDING = 1 where ID=#{userId}
+    </update>
+    <update id="deleteBinding" parameterType="com.bs.bsgl.pojo.User">
+        update user set IS_BINDING = 0 where ID=#{userId}
+    </update>
+
+    <select id="getUserList" resultMap="Result">
+        select ID ,USER_CODE,USER_NAME,DEPARTMENT_ID from user
+
+        <where>
+            <if test="departmentId != null and departmentId!=''">DEPARTMENT_ID=#{departmentId}</if>
+            <if test="userName != null and userName!=''">and USER_NAME like concat('%', #{userName},'%')</if>
+            and IS_BINDING = 0
+        </where>
+    </select>
+    <select id="getUserById" resultMap="Result">
+        select USER_CODE,USER_NAME from user where ID=#{userId}
+    </select>
+
+
+</mapper>

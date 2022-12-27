@@ -11,6 +11,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Date;
 import java.util.List;
@@ -21,10 +22,8 @@ public class BDataCbaServiceImpl implements BDataCbaService {
     private BDataCbaMapper bDataCbaMapper;
 
     @Override
-    public PageInfo getBDataCbaList(BDataCba dataCba) {
-        PageHelper.startPage(dataCba.getPageNum(), dataCba.getPageSize());
-        List<BDataCba> list = bDataCbaMapper.selectBDataCbaList(dataCba);
-        return new PageInfo<>(list);
+    public List<BDataCba> getBDataCbaList(BDataCba dataCba) {
+           return bDataCbaMapper.selectBDataCbaList(dataCba);
     }
 
 
@@ -39,9 +38,9 @@ public class BDataCbaServiceImpl implements BDataCbaService {
             return  AjaxResult.error("请输入KKS码");
         }
         BDataCba bDataCba = bDataCbaMapper.selectByKjsno(dataCba.getKksno());
-        if (bDataCba!= null){
+        /*if (bDataCba!= null){
             return  AjaxResult.error("KKS码已存在");
-        }
+        }*/
         String uuid = IdUtils.simpleUUID();
         dataCba.setGid(uuid);
         dataCba.setLuptime(new Date());
@@ -64,8 +63,8 @@ public class BDataCbaServiceImpl implements BDataCbaService {
     }
 
     @Override
-    public int deleteUserByIds(String[] gids) {
-        return bDataCbaMapper.deleteByGids(gids);
+    public int deleteUserByIds(String gid) {
+        return bDataCbaMapper.deleteByGids(gid);
     }
 
     @Override

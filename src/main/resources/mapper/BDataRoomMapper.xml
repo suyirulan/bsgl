@@ -28,17 +28,17 @@
 
     <insert id="addBDataRoom" parameterType="com.bs.bsgl.pojo.BDataRoom">
         insert into jnpc_bsgl_b_data_room (ROOMNO, ROOMDIS, ROOMNAME, DUTY_AREA, LUPTIME, EDITUSER)
-        values(#{roomno}, #{roomdis}, #{roomname}, #{dutyArea}, #{lupTime}, #{editUser})
+        values(#{roomno,jdbcType=VARCHAR}, #{roomdis,jdbcType=VARCHAR}, #{roomname,jdbcType=VARCHAR}, #{dutyArea,jdbcType=VARCHAR}, #{lupTime,jdbcType=DATE}, #{editUser,jdbcType=VARCHAR})
     </insert>
 
     <update id="updateBDataRoomById" parameterType="com.bs.bsgl.pojo.BDataRoom">
         update jnpc_bsgl_b_data_room
         <set>
-            <if test="roomdis != null and roomdis!=''">ROOMDIS = #{roomdis},</if>
-            <if test="roomname != null and roomname!=''">ROOMNAME = #{roomname},</if>
-            <if test="dutyArea != null and dutyArea!=''">DUTY_AREA = #{dutyArea},</if>
-            <if test="lupTime != null">LUPTIME = #{lupTime},</if>
-            <if test="editUser != null and editUser!=''">EDITUSER = #{editUser},</if>
+            <if test="roomdis != null and roomdis!=''">ROOMDIS = #{roomdis,jdbcType=VARCHAR},</if>
+            <if test="roomname != null and roomname!=''">ROOMNAME = #{roomname,jdbcType=VARCHAR},</if>
+            <if test="dutyArea != null and dutyArea!=''">DUTY_AREA = #{dutyArea,jdbcType=VARCHAR},</if>
+            <if test="lupTime != null">LUPTIME = #{lupTime,jdbcType=DATE},</if>
+            <if test="editUser != null and editUser!=''">EDITUSER = #{editUser,jdbcType=VARCHAR},</if>
         </set>
         where ROOMNO = #{roomno}
     </update>

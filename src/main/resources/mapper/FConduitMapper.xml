@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bs.bsgl.mapper.FConduitMapper">
+
+    <resultMap id="Result" type="com.bs.bsgl.pojo.FConduit">
+        <id column="GID" property="gid"/>
+        <result column="SEQUENCE" property="sequence"/>
+        <result column="SIGNID" property="signid"/>
+        <result column="CONDUITID" property="conduitid"/>
+        <result column="CONDUITNAME" property="conduitname"/>
+        <result column="MEDIUM" property="medium"/>
+        <result column="FLOW_TO" property="flowTo"/>
+        <result column="PIPE_DIAMETER" property="pipeDiameter"/>
+        <result column="HEAT_PRESERVATION" property="heatPreservation"/>
+        <result column="HANG_LENGTH" property="hangLength"/>
+        <result column="WORKSHOP" property="workshop"/>
+        <result column="AZIMUTH_SYMBOLIC" property="azimuthSymbolic"/>
+        <result column="AZIMUTH_LATELY" property="azimuthLately"/>
+        <result column="LUPTIME" property="luptime"/>
+        <result column="EDITUSER" property="edituser"/>
+    </resultMap>
+
+    <select id="getFConduitList" parameterType="com.bs.bsgl.pojo.FConduit" resultMap="Result">
+        select * from jnpc_bsgl_f_conduit_signange
+        order by SEQUENCE desc
+    </select>
+
+    <select id="getFConduitById" resultMap="Result">
+        select * from jnpc_bsgl_f_conduit_signange where GID = #{gid}
+    </select>
+
+    <insert id="addFConduit" parameterType="com.bs.bsgl.pojo.FConduit">
+        insert into jnpc_bsgl_f_conduit_signange (GID, SEQUENCE, SIGNID, CONDUITID, CONDUITNAME, MEDIUM, FLOW_TO, PIPE_DIAMETER, HEAT_PRESERVATION, HANG_LENGTH, WORKSHOP, AZIMUTH_SYMBOLIC,AZIMUTH_LATELY,LUPTIME,EDITUSER)
+        values(#{gid,jdbcType=VARCHAR}, #{sequence,jdbcType=INTEGER},#{signid,jdbcType=VARCHAR},#{conduitid,jdbcType=VARCHAR},#{conduitname,jdbcType=VARCHAR},#{medium,jdbcType=VARCHAR},#{flowTo,jdbcType=INTEGER}, #{pipeDiameter,jdbcType=INTEGER}, #{heatPreservation,jdbcType=VARCHAR},#{hangLength,jdbcType=INTEGER}, #{workshop,jdbcType=VARCHAR}, #{azimuthSymbolic,jdbcType=VARCHAR}, #{azimuthLately,jdbcType=VARCHAR}, #{luptime,jdbcType=DATE}, #{edituser,jdbcType=VARCHAR})
+    </insert>
+
+    <update id="updateFConduitById" parameterType="com.bs.bsgl.pojo.FConduit">
+        update jnpc_bsgl_f_conduit_signange
+        <set>
+            <if test="sequence != null and sequence!=''">SEQUENCE = #{sequence,jdbcType=INTEGER},</if>
+            <if test="signid != null and signid!=''">SIGNID = #{signid,jdbcType=VARCHAR},</if>
+            <if test="conduitid != null and conduitid!=''">CONDUITID = #{conduitid,jdbcType=VARCHAR},</if>
+            <if test="conduitname != null and conduitname!=''">CONDUITNAME = #{conduitname,jdbcType=VARCHAR},</if>
+            <if test="medium != null and medium!=''">MEDIUM = #{medium,jdbcType=VARCHAR},</if>
+            <if test="flowTo != null and flowTo!=''">FLOW_TO = #{flowTo,jdbcType=INTEGER},</if>
+            <if test="pipeDiameter != null and pipeDiameter!=''">PIPE_DIAMETER = #{pipeDiameter,jdbcType=INTEGER},</if>
+            <if test="heatPreservation != null and heatPreservation!=''">HEAT_PRESERVATION = #{heatPreservation,jdbcType=VARCHAR},</if>
+            <if test="hangLength != null and hangLength!=''">HANG_LENGTH = #{hangLength,jdbcType=INTEGER},</if>
+            <if test="workshop != null and workshop!=''">WORKSHOP = #{workshop,jdbcType=VARCHAR},</if>
+            <if test="azimuthSymbolic != null and azimuthSymbolic!=''">AZIMUTH_SYMBOLIC = #{azimuthSymbolic,jdbcType=VARCHAR},</if>
+            <if test="azimuthLately != null and azimuthLately!=''">AZIMUTH_LATELY = #{azimuthLately,jdbcType=VARCHAR},</if>
+            <if test="luptime != null and luptime!=''">LUPTIME = #{luptime,jdbcType=DATE},</if>
+            <if test="edituser != null and edituser!=''">EDITUSER = #{edituser,jdbcType=VARCHAR},</if>
+        </set>
+        where GID = #{gid}
+    </update>
+
+    <delete id="deleteById">
+        delete from jnpc_bsgl_f_conduit_signange where GID = #{gid}
+    </delete>
+
+</mapper>

@@ -16,22 +16,22 @@
         update jnpc_bsgl_b_data_cba
         <set>
             <trim suffixOverrides=",">
-                <if test="kksno != null and kksno !=''">KKSNO = #{kksno},</if>
-                <if test="dtname != null and dtname !=''">DTNAME = #{dtname},</if>
-                <if test="postion != null and postion !=''">POSTION = #{postion},</if>
-                <if test="remark != null and remark !=''">REMARK = #{remark},</if>
-                <if test="luptime != null">LUPTIME = #{luptime},</if>
-                <if test="edituser != null and edituser !=''">EDITUSER = #{edituser} </if>
+                <if test="kksno != null and kksno !=''">KKSNO = #{kksno,jdbcType=VARCHAR},</if>
+                <if test="dtname != null and dtname !=''">DTNAME = #{dtname,jdbcType=VARCHAR},</if>
+                <if test="postion != null and postion !=''">POSTION = #{postion,jdbcType=VARCHAR},</if>
+                <if test="remark != null and remark !=''">REMARK = #{remark,jdbcType=VARCHAR},</if>
+                <if test="luptime != null">LUPTIME = #{luptime,jdbcType=DATE},</if>
+                <if test="edituser != null and edituser !=''">EDITUSER = #{edituser,jdbcType=VARCHAR} </if>
             </trim>
-
         </set>
         where GID = #{gid}
     </update>
-    <delete id="deleteByGids" parameterType="Long">
-        delete from jnpc_bsgl_b_data_cba where GID in
-        <foreach collection="array" item="gid" open="(" separator="," close=")">
+
+    <delete id="deleteByGids" >
+        delete from jnpc_bsgl_b_data_cba where GID =
+
             #{gid}
-        </foreach>
+
     </delete>
 
 
@@ -70,13 +70,13 @@
         </trim>
         )values(
         <trim suffixOverrides=",">
-            <if test="gid != null and gid !=''">#{gid},</if>
-            <if test="kksno != null and kksno !=''">#{kksno},</if>
-            <if test="dtname != null and dtname !=''">#{dtname},</if>
-            <if test="postion != null and postion !=''">#{postion},</if>
-            <if test="remark != null and remark !=''">#{remark},</if>
-            <if test="luptime != null">#{luptime},</if>
-            <if test="edituser != null and edituser !=''">#{edituser}</if>
+            <if test="gid != null and gid !=''">#{gid,jdbcType=VARCHAR},</if>
+            <if test="kksno != null and kksno !=''">#{kksno,jdbcType=VARCHAR},</if>
+            <if test="dtname != null and dtname !=''">#{dtname,jdbcType=VARCHAR},</if>
+            <if test="postion != null and postion !=''">#{postion,jdbcType=VARCHAR},</if>
+            <if test="remark != null and remark !=''">#{remark,jdbcType=VARCHAR},</if>
+            <if test="luptime != null">#{luptime,jdbcType=DATE},</if>
+            <if test="edituser != null and edituser !=''">#{edituser,jdbcType=VARCHAR}</if>
         </trim>
 
         )

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bs.bsgl.mapper.UserRoleMapper">
+
+    <resultMap id="Result" type="com.bs.bsgl.pojo.vo.UserRoleVo">
+        <id column="ID" property="roleId"></id>
+        <result column="ROLE_CODE" property="roleCode"></result>
+        <result column="ROLE_NAME" property="roleName"></result>
+        <result column="REMARK" property="remark"></result>
+    </resultMap>
+
+    <insert id="addRole" parameterType="com.bs.bsgl.pojo.vo.UserRoleVo">
+        insert into user_role (ID,ROLE_CODE,ROLE_NAME,REMARK)
+        values
+               <trim prefix="(" suffix=")" suffixOverrides=",">
+                   #{roleId},#{roleCode},#{roleName},#{remark}
+               </trim>
+
+    </insert>
+
+    <update id="updateRoleById" parameterType="com.bs.bsgl.pojo.vo.UserRoleVo">
+        update user_role
+        <set>
+            <if test="roleId != null and roleId!=''">ID = #{roleId},</if>
+            <if test="roleCode != null and roleCode!=''">ROLE_CODE = #{roleCode},</if>
+            <if test="roleName != null and roleName!=''">ROLE_NAME = #{roleName},</if>
+            <if test="remark != null and remark!=''">REMARK = #{remark},</if>
+        </set>
+        where ID = #{roleId}
+    </update>
+    <delete id="deleteById">
+        delete from user_role where ID = #{roleId}
+    </delete>
+    <select id="getRoleList" resultMap="Result">
+        select ID,ROLE_CODE,ROLE_NAME,REMARK from user_role
+        <where>
+            <if test="roleName != null and roleName!=''">and ROLE_NAME like concat('%', #{roleName},'%') </if>
+        </where>
+    </select>
+    <select id="getRoleById" resultMap="Result">
+        select ID ,ROLE_CODE,ROLE_NAME,REMARK from user_role where ID=#{roleId}
+    </select>
+
+
+</mapper>

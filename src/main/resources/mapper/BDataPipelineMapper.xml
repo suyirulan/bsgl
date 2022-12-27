@@ -34,23 +34,23 @@
 
     <insert id="addBDataPipeline" parameterType="com.bs.bsgl.pojo.BDataPipeline">
         insert into jnpc_bsgl_b_data_pipeline (PIPNO, PIPNAME, MEDIUM, FLOW_TO, PIPE_DIAMETER, EAT_PRESERVATION, HANG_LENGTH, WORKSHOP, AZIMUTH_SYMBOLIC, AZIMUTH_LATELY, LUPTIME, EDITUSER)
-        values(#{pipno}, #{pipname},#{medium},#{flowTo},#{pipeDiameter},#{heatPreservation},#{hangLength}, #{workshop}, #{azimuthSymbolic},#{azimuthLately}, #{lupTime}, #{editUser})
+        values(#{pipno,jdbcType=VARCHAR}, #{pipname,jdbcType=VARCHAR},#{medium,jdbcType=VARCHAR},#{flowTo,jdbcType=INTEGER},#{pipeDiameter,jdbcType=INTEGER},#{heatPreservation,jdbcType=VARCHAR},#{hangLength,jdbcType=INTEGER}, #{workshop,jdbcType=VARCHAR}, #{azimuthSymbolic,jdbcType=VARCHAR},#{azimuthLately,jdbcType=VARCHAR,jdbcType=DATE}, #{lupTime,jdbcType=VARCHAR}, #{editUser,jdbcType=VARCHAR})
     </insert>
 
     <update id="updateBDataPipelineById" parameterType="com.bs.bsgl.pojo.BDataPipeline">
         update jnpc_bsgl_b_data_pipeline
         <set>
-            <if test="pipname != null and pipname!=''">PIPNAME = #{pipname},</if>
-            <if test="medium != null and medium!=''">MEDIUM = #{medium},</if>
-            <if test="flowTo != null">FLOW_TO = #{flowTo},</if>
-            <if test="pipeDiameter != null">PIPE_DIAMETER = #{pipeDiameter},</if>
-            <if test="heatPreservation != null and heatPreservation!=''">EAT_PRESERVATION = #{heatPreservation},</if>
-            <if test="hangLength != null">HANG_LENGTH = #{hangLength},</if>
-            <if test="workshop != null and workshop!=''">WORKSHOP = #{workshop},</if>
-            <if test="azimuthSymbolic != null and azimuthSymbolic!=''">AZIMUTH_SYMBOLIC = #{azimuthSymbolic},</if>
-            <if test="azimuthLately != null and azimuthLately!=''">AZIMUTH_LATELY = #{azimuthLately},</if>
-            <if test="lupTime != null">LUPTIME = #{lupTime},</if>
-            <if test="editUser != null and editUser!=''">EDITUSER = #{editUser},</if>
+            <if test="pipname != null and pipname!=''">PIPNAME = #{pipname,jdbcType=VARCHAR},</if>
+            <if test="medium != null and medium!=''">MEDIUM = #{medium,jdbcType=VARCHAR},</if>
+            <if test="flowTo != null">FLOW_TO = #{flowTo,jdbcType=INTEGER},</if>
+            <if test="pipeDiameter != null">PIPE_DIAMETER = #{pipeDiameter,jdbcType=INTEGER},</if>
+            <if test="heatPreservation != null and heatPreservation!=''">EAT_PRESERVATION = #{heatPreservation,jdbcType=VARCHAR},</if>
+            <if test="hangLength != null">HANG_LENGTH = #{hangLength,jdbcType=INTEGER},</if>
+            <if test="workshop != null and workshop!=''">WORKSHOP = #{workshop,jdbcType=VARCHAR},</if>
+            <if test="azimuthSymbolic != null and azimuthSymbolic!=''">AZIMUTH_SYMBOLIC = #{azimuthSymbolic,jdbcType=VARCHAR},</if>
+            <if test="azimuthLately != null and azimuthLately!=''">AZIMUTH_LATELY = #{azimuthLately,jdbcType=VARCHAR},</if>
+            <if test="lupTime != null">LUPTIME = #{lupTime,jdbcType=DATE},</if>
+            <if test="editUser != null and editUser!=''">EDITUSER = #{editUser,jdbcType=VARCHAR},</if>
         </set>
         where PIPNO = #{pipno}
     </update>

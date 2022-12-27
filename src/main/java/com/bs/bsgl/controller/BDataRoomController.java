@@ -1,11 +1,16 @@
 package com.bs.bsgl.controller;
 
 import com.bs.bsgl.core.domain.AjaxResult;
+import com.bs.bsgl.core.domain.poi.ExcelUtil;
+import com.bs.bsgl.pojo.BDataPipeline;
 import com.bs.bsgl.pojo.BDataRoom;
 import com.bs.bsgl.service.BDataRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @Controller
 @RequestMapping("/sys/room")
@@ -46,6 +51,14 @@ public class BDataRoomController {
     @ResponseBody
     public AjaxResult delete(@PathVariable(name = "id") String id){
         return roomService.delete(id);
+    }
+
+    @GetMapping("/export")
+    public void downloadUser(HttpServletResponse response, BDataRoom dataRoom){
+        //获取导出数据
+        List<BDataRoom> list = roomService.getBDataRoomList(dataRoom);
+        ExcelUtil<BDataRoom> util = new ExcelUtil<BDataRoom>(BDataRoom.class);
+        util.exportExcel(response, list, "门牌基础数据");
     }
 
 }

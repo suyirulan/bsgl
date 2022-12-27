@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface BDataCbaService {
 
-    PageInfo getBDataCbaList(BDataCba dataCba);
+    List<BDataCba> getBDataCbaList(BDataCba dataCba);
 
     Boolean delete(BDataRoom dataRoom);
 
@@ -19,7 +19,7 @@ public interface BDataCbaService {
 
     AjaxResult updateDataCba(BDataCba dataCba);
 
-    int deleteUserByIds(String[] gids);
+    int deleteUserByIds(String gid);
 
     List<BDataCba> getList(BDataCba dataCba);
 }
