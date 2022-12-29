@@ -11,14 +11,14 @@
         <result column="DEPARTMENT_ID" property="departmentId"></result>
     </resultMap>
     <update id="updateBinding" parameterType="com.bs.bsgl.pojo.User">
-        update user set IS_BINDING = 1 where ID=#{userId}
+        update bsgl_user set IS_BINDING = 1 where ID=#{userId}
     </update>
     <update id="deleteBinding" parameterType="com.bs.bsgl.pojo.User">
-        update user set IS_BINDING = 0 where ID=#{userId}
+        update bsgl_user set IS_BINDING = 0 where ID=#{userId}
     </update>
 
     <select id="getUserList" resultMap="Result">
-        select ID ,USER_CODE,USER_NAME,DEPARTMENT_ID from user
+        select ID ,USER_CODE,USER_NAME,DEPARTMENT_ID from bsgl_user
 
         <where>
             <if test="departmentId != null and departmentId!=''">DEPARTMENT_ID=#{departmentId}</if>
@@ -27,7 +27,7 @@
         </where>
     </select>
     <select id="getUserById" resultMap="Result">
-        select USER_CODE,USER_NAME from user where ID=#{userId}
+        select USER_CODE,USER_NAME from bsgl_user where ID=#{userId}
     </select>
 
 

@@ -12,13 +12,13 @@
 
     </resultMap>
     <select id="getDepartmentList" resultMap="Result">
-        select ID,ORGANIZATION_ID,DEPARTMENT_NAME from department
+        select ID,ORGANIZATION_ID,DEPARTMENT_NAME from bsgl_department
         <where>
             <if test="departmentName != null and departmentName!=''">and DEPARTMENT_NAME like concat('%', #{departmentName},'%') </if>
         </where>
     </select>
     <select id="getDepartmentById" resultMap="Result">
-        select DEPARTMENT_NAME from department where ID=#{departmentId}
+        select DEPARTMENT_NAME from bsgl_department where ID=#{departmentId}
     </select>
 
 
