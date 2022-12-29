@@ -5,12 +5,14 @@ import com.bs.bsgl.pojo.FRoom;
 import com.bs.bsgl.pojo.User;
 import com.bs.bsgl.pojo.UserDepartment;
 import com.bs.bsgl.pojo.UserRole;
+import com.bs.bsgl.pojo.dto.UserAddDto;
 import com.bs.bsgl.pojo.dto.UserDetailDto;
 import com.bs.bsgl.pojo.vo.UserDepartmentVo;
 import com.bs.bsgl.pojo.vo.UserListVo;
 import com.bs.bsgl.pojo.vo.UserRoleVo;
 import com.bs.bsgl.pojo.vo.UserVo;
 import com.bs.bsgl.service.*;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -91,7 +93,18 @@ public class UserRoleController {
     //关联用户
     @PostMapping("BindingUser")
     @ResponseBody
-    public AjaxResult BindingUser(  List<UserDetailDto> detailDto){
+    public AjaxResult BindingUser(@RequestBody UserAddDto userAddDto){
+        if (StringUtils.isEmpty(userAddDto.getRoleId())) {
+            return AjaxResult.error("请选择角色");
+        }
+        List<UserDetailDto> detailDto =  new ArrayList<>();
+        userAddDto.getUserIds().forEach(item->{
+            UserDetailDto userDetailDto = new UserDetailDto();
+            userDetailDto.setRoleId(userAddDto.getRoleId());
+            userDetailDto.setUserId(item);
+            userDetailDto.setDepartmentId(userAddDto.getDepartmentId());
+            detailDto.add(userDetailDto);
+        });
         userDetailService.saveUser(detailDto);
         return AjaxResult.success() ;
     }

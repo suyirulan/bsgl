@@ -11,17 +11,17 @@
         <result column="DEPARTMENT_ID" property="departmentId"></result>
     </resultMap>
     <insert id="saveUser" parameterType="com.bs.bsgl.pojo.dto.UserDetailDto">
-        insert into BSGL_USER_DETAIL (ID,USER_ID,ROLE_ID,DEPARTMENT_ID)
+        insert into bsgl_user_detail (ID,USER_ID,ROLE_ID,DEPARTMENT_ID)
         values(#{id},#{userId},#{roleId},#{departmentId})
     </insert>
     <delete id="deleteById">
-        delete from BSGL_USER_DETAIL where ID=#{id}
+        delete from bsgl_user_detail where ID=#{id}
     </delete>
     <delete id="deleteByRoleId">
-        delete from BSGL_USER_DETAIL where ROLE_ID =#{id}
+        delete from bsgl_user_detail where ROLE_ID =#{id}
     </delete>
     <select id="getUserList" resultMap="Result">
-        select ID, USER_ID,DEPARTMENT_ID,ROLE_ID from BSGL_USER_DETAIL
+        select ID, USER_ID,DEPARTMENT_ID,ROLE_ID from bsgl_user_detail
         <where>
 
             ROLE_ID = #{roleId}
@@ -30,10 +30,10 @@
 
     </select>
     <select id="selUserId" resultMap="Result">
-        select * from BSGL_USER_DETAIL where  ID=#{id}
+        select * from bsgl_user_detail where  ID=#{id}
     </select>
     <select id="selDetail" resultMap="Result">
-        select * from BSGL_USER_DETAIL where ROLE_ID=#{id}
+        select * from bsgl_user_detail where ROLE_ID=#{id}
     </select>
 
 

@@ -75,6 +75,21 @@
             border: 1px solid #c5c5c5;
             margin-left: -8px !important;
         }
+        .addUser-modal-dialog{
+            width: 1000px;
+            margin: 30px auto;
+            max-height : 600px;
+            overflow-y:auto
+        }
+        .select-modal-dialog {
+            width: 800px;
+            margin: 30px auto
+        }
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
     </style>
 </head>
 
@@ -191,6 +206,7 @@
                     <button type="button" id="btn_add" data-toggle="modal" data-target="#con-close-modal" class="btn btn-primary">
                         <i class="fa fa-plus"></i>新增角色
                     </button>
+                    <a class="btn btn-primary" data-toggle="modal" data-target="#exampleModalToggle" role="button">Open first modal</a>
                 </div>
 
                 <div class="row">
@@ -270,6 +286,83 @@
     </div>
 </div>
 
+
+<div id="con-addUser-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+     style="display: none">
+    <div class="addUser-modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">角色用户添加</h4>
+            </div>
+            <button type="button" data-toggle="modal" class="btn btn-primary" style="margin-right: 10px" data-target="#con-select-modal" onclick="getDepartment()">
+                <i class="fa fa-plus"></i>添加用户
+            </button>
+            <div class="panel-body">
+                <div class="row">
+                    <table style="width:100%" id="role_user_table"
+                           class="table table-striped table-bordered">
+                        <thead>
+                        <tr bgcolor="#90b2e1">
+                            <th class="sorting_asc">用户编号</th>
+                            <th class="sorting">用户名称</th>
+                            <th class="sorting">部门</th>
+                            <th class="sorting">所属责任值</th>
+                            <th class="sorting">操作</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="con-select-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+     style="display: none" data-backdrop="static" data-keyboard="false">
+    <div class="select-modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">角色添加</h4>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <table>
+                        <td  width="25%" valign="top" align="left">
+                            <input type="text" id="departmentNameValue" onchange="filterDepartment()"/>
+                            <ul class="nav navbar-nav navbar-left pull-left" id="departmentUl" style="height: 100%">
+
+
+                            </ul>
+                        </td>
+                        <td>
+                            <table style="width:100%" id="user_table"
+                                   class="table table-striped table-bordered">
+                                <thead>
+                                <tr bgcolor="#90b2e1">
+                                    <th><input type="checkbox" id="allValue" onclick="selectAll()"></th>
+                                    <th class="sorting_asc">用户编号</th>
+                                    <th class="sorting">用户姓名</th>
+                                    <th class="sorting">所属责任值</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </td>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal" onclick="showModel1()">取消</button>
+                <button type="button" class="btn btn-info waves-effect waves-light" onclick="saveUserList()">提交</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 </body>
 
 <script>
@@ -317,6 +410,7 @@
 <script src="/static/assets/js/plugins/notifications/notify-metro.js"></script>
 <script src="/static/assets/js/plugins/notifications/notifications.js"></script>
 <script type="text/javascript">
+    var selectRoleId = "";
     // $.fn.modal.Constructor.prototype.enforceFocus = function () { };
     jQuery(document).ready(function ($) {
 
@@ -337,7 +431,7 @@
                             var html = '';
                             html += '<button type="button" onclick=" Edit(\'' + data + '\')" class="btn-primary btn-custom waves-effect waves-light btn-xs m-b-5"  data-target="#con-close-modal"  data-toggle="modal"><i class="fa fa-edit"></i>&nbsp;修改</button>&nbsp;&nbsp;'
                             html += '<button type="button" onclick=" Delete(\'' + data + '\')"  class="btn-primary btn-custom waves-effect waves-light btn-xs m-b-5"  ><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</button>&nbsp;&nbsp;'
-                            html += '<button type="button" class="btn-primary btn-custom waves-effect waves-light btn-xs m-b-5"  ><i class="fa fa-plus"></i>&nbsp;添加用户</button>'
+                            html += '<button type="button" onclick=" addUser(\'' + data + '\')" class="btn-primary btn-custom waves-effect waves-light btn-xs m-b-5" data-target="#con-addUser-modal" data-toggle="modal"><i class="fa fa-plus"></i>&nbsp;添加用户</button>'
                             return html;
                         } else {
                             return data;
@@ -368,6 +462,7 @@
         $("#datatable_wrapper > div:first > div:first").css("text-align", "right");
         $("#datatable_paginate").css("text-align", "right");
         $("#datatable_info").css("text-align", "left");
+
 
     });
 
@@ -411,6 +506,62 @@
         });
     }
 
+    function addUser(roleId) {
+        selectRoleId =  roleId;
+
+        $('#role_user_table').DataTable({
+            // "ajax": "/signmanage/Sign/GetSignListBySeach?signtype=C&signstate=10&defecttype=0&flowno=0&liabilityz=0",
+            "ajax": "/signmanage/sign/UserRole/Associated_Users?roleId=" + roleId,
+            "columns": [
+                //行号，非业务数据的SEQUENCE
+                {"data": "userCode", "width": "20%"},	//用户编号
+                {"data": "userName", "width": "20%"},	//用户姓名
+                {"data": "departmentName", "width": "20%"},	//部门
+                {"data": "id", "width": "40%"},	//介质
+                {
+                    "data": "id", "width": "20%", render: function (data, type, row) {
+                        // if (type === 'display' && 10 === row.signstate) {
+                        if (type === 'display') {
+                            var html = '';
+                            html += '<button type="button" onclick=" DeleteUser(\'' + row.id + '\')"  class="btn-primary btn-custom waves-effect waves-light btn-xs m-b-5"  ><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</button>&nbsp;&nbsp;'
+                            return html;
+                        } else {
+                            return data;
+                        }
+                    }
+                }
+            ],
+            "destroy": true,
+            "language": {
+                lengthMenu: "每页显示 _MENU_记录",
+                zeroRecords: "没有匹配的数据",
+                info: "第_PAGE_页/共 _PAGES_页  共_TOTAL_条记录",
+                infoEmpty: "没有符合条件的记录",
+                search: "请输入用户姓名",
+                infoFiltered: "(从 _MAX_条记录中过滤)",
+                paginate: { "first": "首页 ", "last": "末页", "next": "下一页", "previous": "上一页" }
+            },
+            dom: "Bfrtip",
+            buttons: []
+        })
+    }
+
+    function DeleteUser(id) {
+        //$("#RoomForm").clearForm();
+        $.post("DeleteUser/"+id, function (json) {
+            if (json.code == "200") {
+
+                alert("删除成功")
+            }
+            else {
+                alert("删除失败")
+            }
+            window.location.reload()
+        })
+
+
+    }
+
     function Save() {
 
 
@@ -438,6 +589,106 @@
         })
 
 
+    }
+    var departmentList = [];
+    function getDepartment() {
+        $('#con-addUser-modal').modal('hide')
+        $.get("DepartmentList", function (json) {
+            if (json.code == "200") {
+                departmentList = json.data;
+                $("#departmentUl").html("")
+                for (var j in json.data) {
+                    $("#departmentUl").append("<li class='hidden-xs' onclick='liClick("+json.data[j].departmentId+")'>"+json.data[j].departmentName+"</li><br/>")
+                }
+                if (json.data.length > 0) {
+                    liClick(json.data[0].departmentId);
+                }
+            }
+        })
+    }
+
+    function filterDepartment() {
+        var value = $("#departmentNameValue").val();
+        $("#departmentUl").html("")
+        for (var j in departmentList) {
+            if (departmentList[j].departmentName && departmentList[j].departmentName.indexOf(value) !== -1) {
+                $("#departmentUl").append("<li class='hidden-xs' onclick='liClick("+departmentList[j].departmentId+")'>"+departmentList[j].departmentName+"</li><br/>")
+            }
+        }
+    }
+    var departmentId = '';
+    function liClick(id) {
+        departmentId = id;
+        $("#allValue").prop("checked", false)
+        $("#user_table").DataTable({
+            "ajax": "/signmanage/sign/UserRole/UserList?departmentId=" + id,
+            "columns": [
+                {
+                    "data": "userId", "width": "20%", render: function (data, type, row) {
+                        // if (type === 'display' && 10 === row.signstate) {
+                        if (type === 'display') {
+                            var html = '';
+                            html += "<input type='checkbox' name='userIds' value='"+row.userId+"'/>"
+                            return html;
+                        } else {
+                            return data;
+                        }
+                    }
+                },
+                //行号，非业务数据的SEQUENCE
+                {"data": "userCode", "width": "20%"},	//用户编号
+                {"data": "userName", "width": "20%"},	//用户姓名
+                {"data": "userId", "width": "20%"},	//所属责任值
+            ],
+            "bInfo": false,
+            "bPaginate": false, //翻页功能
+            "destroy": true,
+            "bLengthChange": false, //改变每页显示数据数量
+        })
+    }
+    function showModel1() {
+        $('#con-select-modal').modal('hide')
+        $('#con-addUser-modal').modal('show')
+    }
+    function saveUserList() {
+        var value = [];
+        $("input[name='userIds']:checked").each(function (i) {
+            value.push($(this).val())
+        })
+        var model = {
+            roleId: selectRoleId,
+            departmentId: departmentId,
+            userIds: value
+        };
+        $.ajax({
+            type: "post",
+            url: "BindingUser",
+            dateType: "json",
+            data : JSON.stringify(model),
+            contentType: 'application/json',
+            success : function (json) {
+                if (json.code == "200") {
+                    $('#con-select-modal').modal('hide');
+                    $('#con-addUser-modal').modal('show');
+                    addUser(selectRoleId);
+                }
+                else {
+                    alert("添加失败")
+                }
+            }
+        })
+    }
+
+    function selectAll() {
+        if ($("#allValue").prop("checked")) {
+           $("input[name='userIds']").each(function (){
+               $(this).prop('checked', true)
+           })
+        } else {
+            $("input[name='userIds']").each(function (){
+                $(this).prop('checked', false)
+            })
+        }
     }
 </script>
 </html>
