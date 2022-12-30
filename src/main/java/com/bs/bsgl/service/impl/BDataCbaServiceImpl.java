@@ -9,6 +9,7 @@ import com.bs.bsgl.pojo.BDataRoom;
 import com.bs.bsgl.service.BDataCbaService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,6 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
+@Slf4j
 public class BDataCbaServiceImpl implements BDataCbaService {
     @Autowired
     private BDataCbaMapper bDataCbaMapper;
@@ -24,6 +26,7 @@ public class BDataCbaServiceImpl implements BDataCbaService {
     @Override
     public List<BDataCba> getBDataCbaList(BDataCba dataCba) {
            return bDataCbaMapper.selectBDataCbaList(dataCba);
+
     }
 
 
