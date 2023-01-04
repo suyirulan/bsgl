@@ -515,7 +515,7 @@
                 {"data": "userCode", "width": "20%"},	//用户编号
                 {"data": "userName", "width": "30%"},	//用户姓名
                 {"data": "departmentName", "width": "30%"},	//部门
-                {"data": "id", "width": "10%"},	//介质
+                {"data": "responsibilityValues", "width": "10%"},	//介质
                 {
                     "data": "id", "width": "20%", render: function (data, type, row) {
                         // if (type === 'display' && 10 === row.signstate) {
@@ -617,7 +617,7 @@
         departmentId = id;
         $("#allValue").prop("checked", false)
         $("#user_table").DataTable({
-            "ajax": "/signmanage/sign/UserRole/UserList?departmentId=" + id,
+            "ajax": "/signmanage/sign/UserRole/UserList?departmentId=" + id+"&roleId="+selectRoleId,
             "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 0 ] }],
             "columns": [
                 {
@@ -635,7 +635,7 @@
                 //行号，非业务数据的SEQUENCE
                 {"data": "userCode", "width": "35%"},	//用户编号
                 {"data": "userName", "width": "35%"},	//用户姓名
-                {"data": "userId", "width": "20%"},	//所属责任值
+                {"data": "responsibilityValues", "width": "20%"},	//所属责任值
             ],
             "bInfo": false,
             "bPaginate": false, //翻页功能
