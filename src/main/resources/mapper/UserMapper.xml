@@ -22,9 +22,10 @@
 
         <where>
             <if test="departmentId != null and departmentId!=''">DEPARTMENT_ID=#{departmentId}</if>
-            <if test="userName != null and userName!=''">and USER_NAME like concat('%', #{userName},'%')</if>
-            and IS_BINDING = 0
+            <if test="userName != null and userName!=''">and USER_NAME like concat('%', #{userName,jdbcType=VARCHAR},'%')</if>
+
         </where>
+
     </select>
     <select id="getUserById" resultMap="Result">
         select USER_CODE,USER_NAME from bsgl_user where ID=#{userId}

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author yutongyu
@@ -28,4 +29,5 @@ public class UserVo {
 
     private String departmentId;
 
+    private List<Integer> responsibilityValues;
 }

@@ -29,11 +29,11 @@ import java.util.Map;
 //@Configuration
 //@EnableCasClient
 public class CASConfig extends CasClientConfigurerAdapter {
-//
-//
+
+
 //    private static final String CAS_SERVER_URL_LOGIN = "https://sso.casuat.jnpc.com.cn/cas/login";
 //    //private static final String CAS_SERVER_URL_LOGIN = "https://sso.casuat.jnpc.com.cn/cas/login";
-//    private static final String SERVER_NAME = "http://10.23.16.177:8484/";
+//    private static final String SERVER_NAME = "http://10.23.16.93:8484/";
 //
 //    private static final String AUTHENTICATION_REDIRECT_STRATEGY_CLASS  = "org.muses.jeeplatform.oa.cas.CustomAuthticationRedirectStrategy";
 //

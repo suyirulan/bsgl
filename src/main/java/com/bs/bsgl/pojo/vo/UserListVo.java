@@ -2,6 +2,8 @@ package com.bs.bsgl.pojo.vo;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @author yutongyu
  * @date 2022-12-08 15:34
@@ -25,4 +27,6 @@ public class UserListVo {
      * 部门名称
      */
     private String departmentName;
+
+    private List<Integer> responsibilityValues;
 }

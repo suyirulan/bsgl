@@ -23,9 +23,7 @@
     <select id="getUserList" resultMap="Result">
         select ID, USER_ID,DEPARTMENT_ID,ROLE_ID from bsgl_user_detail
         <where>
-
-            ROLE_ID = #{roleId}
-
+            ROLE_ID = #{roleId,jdbcType=VARCHAR}
         </where>
 
     </select>

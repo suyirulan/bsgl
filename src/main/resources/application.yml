@@ -19,10 +19,10 @@ spring:
   application:
     name: bsgl
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://121.229.4.16:3306/signage?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true&allowMultiQueries=true
-    username: dcom
-    password: Dcom123456
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@121.229.4.16:1521:orcl
+    username: SIGN
+    password: SIGN
 #    driver-class-name: oracle.jdbc.driver.OracleDriver
 #    url: jdbc:oracle:thin:@10.23.16.208:1521:dbdev05
 #    username: emeusr01
@@ -52,8 +52,11 @@ mybatis:
 ##  #cas服务端的登录地址
 #  server-login-url: https://sso.casuat.jnpc.com.cn/cas/login
 ##  #cas服务端的地址
-#  server-url-prefix: https://sso.casuat.jnpc.com.cn/cas/
+#  server-url-prefix: https://sso.casuat.jnpc.com.cn/cas
 ##  #客户端访问地址
-#  client-host-url: http://10.23.16.177:8484/
+#  client-host-url: http://10.23.16.93:8484
 #  #client-host-url: http://localhost:8484/
+#  validation-type: cas
+
+
 

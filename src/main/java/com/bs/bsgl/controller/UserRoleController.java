@@ -1,10 +1,7 @@
 package com.bs.bsgl.controller;
 
 import com.bs.bsgl.core.domain.AjaxResult;
-import com.bs.bsgl.pojo.FRoom;
-import com.bs.bsgl.pojo.User;
-import com.bs.bsgl.pojo.UserDepartment;
-import com.bs.bsgl.pojo.UserRole;
+import com.bs.bsgl.pojo.*;
 import com.bs.bsgl.pojo.dto.UserAddDto;
 import com.bs.bsgl.pojo.dto.UserDetailDto;
 import com.bs.bsgl.pojo.vo.UserDepartmentVo;
@@ -19,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @author yutongyu
@@ -40,6 +39,9 @@ public class UserRoleController {
 
     @Autowired
     UserDetailService userDetailService;
+
+    @Autowired
+    UserResService userResService;
 
     @RequestMapping("index")
     public String index() {
@@ -83,11 +85,41 @@ public class UserRoleController {
         return AjaxResult.success(userDeaprtmentService.getDepartmentList(department));
     }
 
+//    @GetMapping("ValueList")
+//    @ResponseBody
+//    public AjaxResult getUserList(User user){
+//
+//        List<UserVo> getlist = userResService.getlist(user);
+//        return AjaxResult.success(getlist);
+//    }
+
     //获取人员列表
     @GetMapping("UserList")
     @ResponseBody
-    public AjaxResult getUserList(User user){
-        return AjaxResult.success(userService.getUserList(user));
+    public AjaxResult getUserList(User user,String roleId){
+
+        List<UserDetailDto> list = userDetailService.getUserList(roleId);
+
+        List<UserVo> userList = new ArrayList<>();
+        for (UserDetailDto user1:list){
+            UserVo user2 = new UserVo();
+            user2.setUserId(user1.getUserId());
+            userList.add(user2);
+        }
+
+        List<UserVo> userList1 = userService.getUserList(user);
+
+        List<UserVo> result02 = userList1.stream()
+                .filter(d1 ->
+                        userList.stream().noneMatch(d2 -> Objects.equals(d1.getUserId(), d2.getUserId() ))
+                ).collect(Collectors.toList());
+        for (UserVo userVo : result02) {
+            List<Integer> getlist = userResService.getlist(userVo.getUserId());
+            userVo.setResponsibilityValues(getlist);
+        }
+
+
+        return AjaxResult.success(result02);
     }
 
     //关联用户
@@ -123,6 +155,9 @@ public class UserRoleController {
             userListVo.setUserCode(userById.getUserCode());
             userListVo.setUserName(userById.getUserName());
             userListVo.setDepartmentName(departmentById.getDepartmentName());
+
+            List<Integer> getlist = userResService.getlist(detailDto.getUserId());
+            userListVo.setResponsibilityValues(getlist);
             list.add(userListVo);
         }
 

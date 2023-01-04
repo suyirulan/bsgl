@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bs.bsgl.mapper.UserResMapper">
+
+    <resultMap id="Result" type="com.bs.bsgl.pojo.UserRes">
+        <id column="ID" property="id"></id>
+        <result column="USERID" property="userId"></result>
+        <result column="RESPONSIBILITY_VALUE" property="responsibilityValue"></result>
+    </resultMap>
+    <select id="getlist" resultType="integer">
+        select RESPONSIBILITY_VALUE from BSGL_USER_RESPONSIBILITY_VALUE where USERID = #{userId}
+    </select>
+
+
+</mapper>

@@ -33,8 +33,6 @@
         </dependency>
 
 
-
-
         <dependency>
             <groupId>net.unicon.cas</groupId>
             <artifactId>cas-client-autoconfig-support</artifactId>
@@ -129,17 +127,17 @@
         </dependencies>
     </dependencyManagement>
 
-    <repositories>
-        <!-- oracle驱动没有发布到中央仓库，只能从此仓库下载 -->
-        <repository>
-            <id>jeecg</id>
-            <name>jeecg Repository</name>
-            <url>http://maven.jeewx.com/nexus/content/repositories/jeecg</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
+<!--    <repositories>-->
+<!--        &lt;!&ndash; oracle驱动没有发布到中央仓库，只能从此仓库下载 &ndash;&gt;-->
+<!--        <repository>-->
+<!--            <id>jeecg</id>-->
+<!--            <name>jeecg Repository</name>-->
+<!--            <url>http://maven.jeewx.com/nexus/content/repositories/jeecg</url>-->
+<!--            <snapshots>-->
+<!--                <enabled>false</enabled>-->
+<!--            </snapshots>-->
+<!--        </repository>-->
+<!--    </repositories>-->
 
     <build>
         <resources>
@@ -169,6 +167,7 @@
                     <include>**/*.ico</include>
                 </includes>
             </resource>
+
 <!--            打包分离配置文件-->
 <!--            <resource>-->
 <!--                <directory>src/main/resources</directory>-->

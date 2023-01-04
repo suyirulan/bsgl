@@ -2,6 +2,7 @@ package com.bs.bsgl.service.impl;
 
 import com.bs.bsgl.core.domain.AjaxResult;
 import com.bs.bsgl.core.domain.IdUtils;
+import com.bs.bsgl.mapper.UserDetailMapper;
 import com.bs.bsgl.mapper.UserMapper;
 import com.bs.bsgl.mapper.UserRoleMapper;
 import com.bs.bsgl.pojo.User;
@@ -21,8 +22,11 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
 
+    @Autowired
+    UserDetailMapper userDetailMapper;
+
     @Override
-    public List<User> getUserList(User user) {
+    public List<UserVo> getUserList(User user) {
 
         return userMapper.getUserList(user);
     }

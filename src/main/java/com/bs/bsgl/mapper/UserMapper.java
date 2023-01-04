@@ -11,7 +11,7 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
 
-    List<User> getUserList(User user);
+    List<UserVo> getUserList(User user);
 
     int updateBinding(UserDetailDto userDetailDto);
 
