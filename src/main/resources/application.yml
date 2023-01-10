@@ -41,14 +41,14 @@ spring:
   application:
     name: bsgl
   datasource:
-#    driver-class-name: oracle.jdbc.driver.OracleDriver
-#    url: jdbc:oracle:thin:@121.229.4.16:1521:orcl
-#    username: SIGN
-#    password: SIGN
     driver-class-name: oracle.jdbc.driver.OracleDriver
-    url: jdbc:oracle:thin:@10.23.16.208:1521:dbdev05
-    username: emeusr01
-    password: Eme#1015
+    url: jdbc:oracle:thin:@121.229.4.16:1521:orcl
+    username: SIGN
+    password: SIGN
+#    driver-class-name: oracle.jdbc.driver.OracleDriver
+#    url: jdbc:oracle:thin:@10.23.16.208:1521:dbdev05
+#    username: emeusr01
+#    password: Eme#1015
     hikari:
       max-lifetime: 500000
       minimum-idle: 10
