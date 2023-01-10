@@ -47,6 +47,7 @@ public class FKksServiceImpl implements FKksService {
         fSignange.setGid(UUID.randomUUID().toString().replace("-",""));
         fSignange.setSignid(data.getGid());
         fSignange.setSigntype("A");
+        fSignange.setSignstate("0");
         fSignange.setIsscaffolding(data.getIsscaffolding());
         fSignange.setDefecttype(data.getDefecttype());
         fSignange.setMaterial(data.getMaterial());

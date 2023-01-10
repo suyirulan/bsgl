@@ -12,7 +12,7 @@ public interface FSignangeMapper {
 
     FSignange getById(String gid);
 
-    FSignange getBySignid(String gid);
+    FSignange getBySignid(String signid);
 
     int addFSignange(FSignange FSignange);
 
