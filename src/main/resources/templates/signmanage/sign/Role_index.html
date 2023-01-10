@@ -301,7 +301,7 @@
                     <table id="role_user_table"
                            class="table table-striped table-bordered">
                         <thead>
-                        <tr bgcolor="#90b2e1">
+                        <tr bgcolor="#90b2e1" >
                             <th class="sorting_asc">用户编号</th>
                             <th class="sorting">用户名称</th>
                             <th class="sorting">部门</th>
@@ -512,12 +512,12 @@
             "ajax": "/signmanage/sign/UserRole/Associated_Users?roleId=" + roleId,
             "columns": [
                 //行号，非业务数据的SEQUENCE
-                {"data": "userCode", "width": "20%"},	//用户编号
-                {"data": "userName", "width": "30%"},	//用户姓名
-                {"data": "departmentName", "width": "30%"},	//部门
-                {"data": "responsibilityValues", "width": "10%"},	//介质
+                {"data": "userCode", "width": "10%"},	//用户编号
+                {"data": "userName", "width": "25%"},	//用户姓名
+                {"data": "departmentName", "width": "25%"},	//部门
+                {"data": "responsibilityValues", "width": "30%"},	//介质
                 {
-                    "data": "id", "width": "20%", render: function (data, type, row) {
+                    "data": "id", "width": "10%", render: function (data, type, row) {
                         // if (type === 'display' && 10 === row.signstate) {
                         if (type === 'display') {
                             var html = '';
@@ -536,7 +536,9 @@
                 search: "<button type=\"button\" data-toggle=\"modal\" class=\"btn btn-primary\" style=\"margin-right: 10px\" data-target=\"#con-select-modal\" onclick=\"getDepartment()\">\n" +
                     "                        <i class=\"fa fa-plus\"></i>添加用户\n" +
                     "                    </button>请输入用户姓名",
+                zeroRecords: "暂无用户",
             },
+
             dom: "Bfrtip",
             buttons: []
         })
@@ -633,9 +635,9 @@
                     }
                 },
                 //行号，非业务数据的SEQUENCE
-                {"data": "userCode", "width": "35%"},	//用户编号
+                {"data": "userCode", "width": "20%"},	//用户编号
                 {"data": "userName", "width": "35%"},	//用户姓名
-                {"data": "responsibilityValues", "width": "20%"},	//所属责任值
+                {"data": "responsibilityValues", "width": "35%"},	//所属责任值
             ],
             "bInfo": false,
             "bPaginate": false, //翻页功能
@@ -643,6 +645,7 @@
             "bLengthChange": false, //改变每页显示数据数量
             "language": {
                 search: "请输入用户姓名",
+                zeroRecords: "暂无用户",
             }
         })
     }

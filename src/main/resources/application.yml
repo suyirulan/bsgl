@@ -7,6 +7,28 @@
 #server.port=8080
 server:
   port: 8484
+
+#  ssl:
+#    enabled: true
+#    key-store: classpath:tomcat_https.keystore
+#    key-store-type: JKS
+#    key-alias: tomcat_https
+#    key-password: 123456
+#    key-store-password: 123456
+
+
+#cas:
+## 认证中心登录页面地址
+#  server-url-prefix: https://sso.casuat.jnpc.com.cn/cas/login
+## 应用地址，也就是自己的系统地址。
+#  client-host-url: http://10.23.16.93:8484
+## 认证中心地址
+#  authentication-url: https://sso.casuat.jnpc.com.cn/cas
+## 动态开启 cas 单点登录
+#  loginType: cas
+## cas 验票拦截路径
+#  urlPattern: /*
+
 spring:
   resources:
     chain:
@@ -19,14 +41,14 @@ spring:
   application:
     name: bsgl
   datasource:
-    driver-class-name: oracle.jdbc.driver.OracleDriver
-    url: jdbc:oracle:thin:@121.229.4.16:1521:orcl
-    username: SIGN
-    password: SIGN
 #    driver-class-name: oracle.jdbc.driver.OracleDriver
-#    url: jdbc:oracle:thin:@10.23.16.208:1521:dbdev05
-#    username: emeusr01
-#    password: Eme#1015
+#    url: jdbc:oracle:thin:@121.229.4.16:1521:orcl
+#    username: SIGN
+#    password: SIGN
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@10.23.16.208:1521:dbdev05
+    username: emeusr01
+    password: Eme#1015
     hikari:
       max-lifetime: 500000
       minimum-idle: 10
@@ -40,23 +62,17 @@ mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-#cas:
-#  #cas服务端的登录地址
-#  server-login-url: http://localhost:8443/cas/login
-#  #cas服务端的地址
-#  server-url-prefix: http://localhost:8443/cas
-#  #客户端访问地址
-#  client-host-url: http://localhost:8484/
 
 #cas:
-##  #cas服务端的登录地址
-#  server-login-url: https://sso.casuat.jnpc.com.cn/cas/login
-##  #cas服务端的地址
+#  #  #cas服务端的地址
 #  server-url-prefix: https://sso.casuat.jnpc.com.cn/cas
-##  #客户端访问地址
+#  #  #cas服务端的登录地址
+#  server-login-url: https://sso.casuat.jnpc.com.cn/cas/login
+#  #  #客户端访问地址
 #  client-host-url: http://10.23.16.93:8484
 #  #client-host-url: http://localhost:8484/
-#  validation-type: cas
+#  validation-type: cas3
+
 
 
 
